@@ -10,11 +10,13 @@ public abstract class Account {
 	private String city = null;
 	private String country = null;
 	private Date birthDate = null;
+	private Date lastLogin = null;
 	private String dni = null;
 	private String name = null;
 	private String middleName = null;
 	private String surName = null;
 	private String accountType = null;
+	private Boolean isBloqued = null;
 
 	public int getId() {
 		return id;
@@ -54,6 +56,14 @@ public abstract class Account {
 
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
+	}
+
+	public Date getLastLogin() {
+		return lastLogin;
+	}
+
+	public void setLastLogin(Date lastLogin) {
+		this.lastLogin = lastLogin;
 	}
 
 	public String getDni() {
@@ -96,9 +106,18 @@ public abstract class Account {
 		this.accountType = accountType;
 	}
 
+	public Boolean getIsBloqued() {
+		return isBloqued;
+	}
+
+	public void setIsBloqued(Boolean isBloqued) {
+		this.isBloqued = isBloqued;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(accountType, birthDate, city, country, dni, id, middleName, name, postalCode, surName);
+		return Objects.hash(accountType, birthDate, city, country, dni, id, isBloqued, lastLogin, middleName, name,
+				postalCode, surName);
 	}
 
 	@Override
@@ -112,7 +131,8 @@ public abstract class Account {
 		Account other = (Account) obj;
 		return Objects.equals(accountType, other.accountType) && Objects.equals(birthDate, other.birthDate)
 				&& Objects.equals(city, other.city) && Objects.equals(country, other.country)
-				&& Objects.equals(dni, other.dni) && id == other.id && Objects.equals(middleName, other.middleName)
+				&& Objects.equals(dni, other.dni) && id == other.id && Objects.equals(isBloqued, other.isBloqued)
+				&& Objects.equals(lastLogin, other.lastLogin) && Objects.equals(middleName, other.middleName)
 				&& Objects.equals(name, other.name) && postalCode == other.postalCode
 				&& Objects.equals(surName, other.surName);
 	}
@@ -120,8 +140,9 @@ public abstract class Account {
 	@Override
 	public String toString() {
 		return "Account [id=" + id + ", postalCode=" + postalCode + ", city=" + city + ", country=" + country
-				+ ", birthDate=" + birthDate + ", dni=" + dni + ", name=" + name + ", middleName=" + middleName
-				+ ", surName=" + surName + ", accountType=" + accountType + "]";
+				+ ", birthDate=" + birthDate + ", lastLogin=" + lastLogin + ", dni=" + dni + ", name=" + name
+				+ ", middleName=" + middleName + ", surName=" + surName + ", accountType=" + accountType
+				+ ", isBloqued=" + isBloqued + "]";
 	}
 
 }
