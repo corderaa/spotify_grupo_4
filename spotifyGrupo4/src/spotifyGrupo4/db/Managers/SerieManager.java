@@ -2,7 +2,7 @@ package spotifyGrupo4.db.Managers;
 
 import java.util.List;
 
-import spotifyGrupo4.db.POJO.Serie;
+import spotifyGrupo4.db.pojo.Serie;
 
 public class SerieManager implements ContentInterface<Serie> {
 

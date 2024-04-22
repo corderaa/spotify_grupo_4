@@ -1,4 +1,4 @@
-package spotifyGrupo4.db.POJO;
+package spotifyGrupo4.db.pojo;
 
 public class Song extends Content {
 

@@ -2,7 +2,7 @@ package spotifyGrupo4.db.Managers;
 
 import java.util.List;
 
-import spotifyGrupo4.db.POJO.Podcaster;
+import spotifyGrupo4.db.pojo.Podcaster;
 
 public class PodcasterManager implements ContentInterface<Podcaster> {
 

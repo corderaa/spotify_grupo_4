@@ -3,7 +3,7 @@ package spotifyGrupo4.db.Managers;
 import java.util.Date;
 import java.util.List;
 
-import spotifyGrupo4.db.POJO.FreeAccount;
+import spotifyGrupo4.db.pojo.FreeAccount;
 
 public class FreeAccountManager implements AccountInterface<FreeAccount> {
 

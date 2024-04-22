@@ -2,7 +2,7 @@ package spotifyGrupo4.db.Managers;
 
 import java.util.List;
 
-import spotifyGrupo4.db.POJO.Band;
+import spotifyGrupo4.db.pojo.Band;
 
 public class BandManager implements ContentInterface<Band> {
 

@@ -2,9 +2,9 @@ package spotifyGrupo4.db.Managers;
 
 import java.util.List;
 
-import spotifyGrupo4.db.POJO.Playlist;
-import spotifyGrupo4.db.POJO.Podcast;
-import spotifyGrupo4.db.POJO.Song;
+import spotifyGrupo4.db.pojo.Playlist;
+import spotifyGrupo4.db.pojo.Podcast;
+import spotifyGrupo4.db.pojo.Song;
 
 public class PlayListManager implements InterfaceManager<Playlist> {
 

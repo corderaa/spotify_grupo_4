@@ -2,7 +2,7 @@ package spotifyGrupo4.db.Managers;
 
 import java.util.List;
 
-import spotifyGrupo4.db.POJO.Song;
+import spotifyGrupo4.db.pojo.Song;
 
 public class SongManager implements ContentInterface<Song> {
 
