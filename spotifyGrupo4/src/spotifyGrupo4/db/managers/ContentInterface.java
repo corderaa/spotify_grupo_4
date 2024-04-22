@@ -1,6 +1,6 @@
-package spotifyGrupo4.db.Managers;
+package spotifyGrupo4.db.managers;
 
-public interface ContentInterface<T> extends InterfaceManager<T> {
+public interface ContentInterface<T> {
 
 	/**
 	 * Modifies table from the database

@@ -1,11 +1,12 @@
-package spotifyGrupo4.db.Managers;
+package spotifyGrupo4.db.managers;
 
 import java.util.Date;
 import java.util.List;
 
+import spotifyGrupo4.db.pojo.FreeAccount;
 import spotifyGrupo4.db.pojo.PremiumAccount;
 
-public class PremiumAccountManager implements AccountInterface<PremiumAccount> {
+public class PremiumAccountManager implements AccountInterface<PremiumAccount>, InterfaceManager<PremiumAccount> {
 
 	@Override
 	public List<PremiumAccount> getAll() {
@@ -20,7 +21,7 @@ public class PremiumAccountManager implements AccountInterface<PremiumAccount> {
 	}
 
 	@Override
-	public PremiumAccount ByLogin(String login) {
+	public PremiumAccount getbyLogin(String login) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,15 +1,15 @@
-package spotifyGrupo4.db.Managers;
+package spotifyGrupo4.db.managers;
 
 import java.util.Date;
 
-public interface AccountInterface<T> extends InterfaceManager<T> {
+public interface AccountInterface<T> {
 
 	/**
 	 * Gets the account by the login
 	 * 
 	 * @param login
 	 */
-	public T ByLogin(String login);
+	public T getbyLogin(String login);
 
 	/**
 	 * Updates the last login of the account to database

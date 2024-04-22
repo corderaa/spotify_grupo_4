@@ -1,11 +1,11 @@
-package spotifyGrupo4.db.Managers;
+package spotifyGrupo4.db.managers;
 
 import java.util.Date;
 import java.util.List;
 
 import spotifyGrupo4.db.pojo.FreeAccount;
 
-public class FreeAccountManager implements AccountInterface<FreeAccount> {
+public class FreeAccountManager implements AccountInterface<FreeAccount>, InterfaceManager<FreeAccount> {
 
 	@Override
 	public List<FreeAccount> getAll() {
@@ -20,7 +20,7 @@ public class FreeAccountManager implements AccountInterface<FreeAccount> {
 	}
 
 	@Override
-	public FreeAccount ByLogin(String login) {
+	public FreeAccount getbyLogin(String login) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,10 +1,11 @@
-package spotifyGrupo4.db.Managers;
+package spotifyGrupo4.db.managers;
 
 import java.util.List;
 
+import spotifyGrupo4.db.pojo.Band;
 import spotifyGrupo4.db.pojo.Song;
 
-public class SongManager implements ContentInterface<Song> {
+public class SongManager implements ContentInterface<Song>, InterfaceManager<Song> {
 
 	@Override
 	public List<Song> getAll() {
