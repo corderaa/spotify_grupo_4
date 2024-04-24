@@ -4,9 +4,30 @@ import java.util.List;
 
 import spotifyGrupo4.db.pojo.Band;
 
-public class BandController {
+public class BandController implements ControllerInterface<Band> {
 
-	public List<Band> getBands() {
+	@Override
+	public List<Band> getAll() {
+		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void insert(Band t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(Band t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Band t) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

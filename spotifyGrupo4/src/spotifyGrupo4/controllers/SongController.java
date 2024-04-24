@@ -4,9 +4,30 @@ import java.util.List;
 
 import spotifyGrupo4.db.pojo.Song;
 
-public class SongController {
+public class SongController implements ControllerInterface<Song> {
 
-	public List<Song> getSongs(Record record) {
+	@Override
+	public List<Song> getAll() {
+		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void insert(Song t) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void update(Song t) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void delete(Song t) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

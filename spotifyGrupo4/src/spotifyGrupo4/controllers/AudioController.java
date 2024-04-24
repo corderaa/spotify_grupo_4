@@ -38,5 +38,4 @@ public class AudioController {
 	public void setContents(List<Content> contents) {
 		this.contents = contents;
 	}
-
 }

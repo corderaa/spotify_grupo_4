@@ -1,15 +1,34 @@
 package spotifyGrupo4.controllers;
 
+import java.util.List;
+
 import spotifyGrupo4.db.pojo.FreeAccount;
 import spotifyGrupo4.db.pojo.PremiumAccount;
 
-public class RegisterController {
+public class RegisterController<T> implements ControllerInterface<T> {
 
-	public void insertFreeAccount(FreeAccount freeAccount) {
+	@Override
+	public List<T> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insert(T t) {
+		// TODO Auto-generated method stub
 
 	}
 
-	public void insertPremiumAccount(PremiumAccount premiumAccount) {
+	@Override
+	public void update(T t) {
+		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public void delete(T t) {
+		// TODO Auto-generated method stub
+
+	}
+
 }
