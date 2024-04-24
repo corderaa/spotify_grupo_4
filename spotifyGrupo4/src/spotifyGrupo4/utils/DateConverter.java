@@ -8,7 +8,7 @@ public class DateConverter {
 	 * @param sqlDate
 	 * @return
 	 */
-	public java.util.Date sqlDateToUtilDate(java.sql.Date sqlDate) {
+	public static java.util.Date sqlDateToUtilDate(java.sql.Date sqlDate) {
 		return null;
 	}
 
@@ -18,7 +18,7 @@ public class DateConverter {
 	 * @param Date
 	 * @return
 	 */
-	public java.sql.Date utilDateToSqlDate(java.util.Date Date) {
+	public static java.sql.Date utilDateToSqlDate(java.util.Date Date) {
 		return null;
 	}
 }
