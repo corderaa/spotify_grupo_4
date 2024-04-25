@@ -37,4 +37,10 @@ public class LoginController<T> implements ControllerInterface<T> {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public List<T> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
