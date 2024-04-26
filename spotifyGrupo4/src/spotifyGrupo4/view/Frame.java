@@ -4,10 +4,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import spotifyGrupo4.db.pojo.Serie;
+import spotifyGrupo4.view.panels.AdvertPanel;
 import spotifyGrupo4.view.panels.AudioControlPanel;
 import spotifyGrupo4.view.panels.BandPanel;
 import spotifyGrupo4.view.panels.MenuPanel;
+import spotifyGrupo4.view.panels.PodcastPanel;
 import spotifyGrupo4.view.panels.PodcasterPanel;
+import spotifyGrupo4.view.panels.RecordPanel;
+import spotifyGrupo4.view.panels.SeriePanel;
+import spotifyGrupo4.view.panels.SongPanel;
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -65,14 +71,47 @@ public class Frame extends JFrame {
 		AudioControlPanel audioControlPanel = new AudioControlPanel();
 		contentPanel.add(audioControlPanel);
 
-		BandPanel bandPanel = new BandPanel();
+		// 0
+		BandPanel bandPanel = new BandPanel(panels);
 		bandPanel.setVisible(false);
 		contentPanel.add(bandPanel);
 		panels.add(bandPanel);
 
-		PodcasterPanel podcasterPanel = new PodcasterPanel();
+		// 1
+		PodcasterPanel podcasterPanel = new PodcasterPanel(panels);
 		podcasterPanel.setVisible(false);
 		contentPanel.add(podcasterPanel);
 		panels.add(podcasterPanel);
+
+		// 2
+		AdvertPanel advertPanel = new AdvertPanel();
+		advertPanel.setVisible(true);
+		contentPanel.add(advertPanel);
+		panels.add(advertPanel);
+
+		// 3
+		RecordPanel recordPanel = new RecordPanel(panels);
+		recordPanel.setVisible(false);
+		contentPanel.add(recordPanel);
+		panels.add(recordPanel);
+
+		// 4
+		SeriePanel seriePanel = new SeriePanel(panels);
+		seriePanel.setVisible(false);
+		contentPanel.add(seriePanel);
+		panels.add(seriePanel);
+
+		// 5
+		SongPanel songPanel = new SongPanel(panels);
+		songPanel.setVisible(false);
+		contentPanel.add(songPanel);
+		panels.add(songPanel);
+
+		// 6
+		PodcastPanel podcastPanel = new PodcastPanel(panels);
+		podcasterPanel.setVisible(false);
+		contentPanel.add(podcastPanel);
+		panels.add(podcastPanel);
+
 	}
 }

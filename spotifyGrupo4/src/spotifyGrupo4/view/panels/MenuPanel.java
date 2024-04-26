@@ -30,8 +30,13 @@ public class MenuPanel extends JPanel {
 		JButton btnGroups = new JButton("Descubre Grupos");
 		btnGroups.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				panels.get(1).setVisible(false);
 				panels.get(0).setVisible(true);
+				panels.get(1).setVisible(false);
+				panels.get(2).setVisible(false);
+				panels.get(3).setVisible(false);
+				panels.get(4).setVisible(false);
+				panels.get(5).setVisible(false);
+				panels.get(6).setVisible(false);
 			}
 		});
 		btnGroups.setBackground(new Color(255, 255, 255));
@@ -43,8 +48,13 @@ public class MenuPanel extends JPanel {
 		btnPodcasts.setBackground(new Color(255, 255, 255));
 		btnPodcasts.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				panels.get(1).setVisible(true);
 				panels.get(0).setVisible(false);
+				panels.get(1).setVisible(true);
+				panels.get(2).setVisible(false);
+				panels.get(3).setVisible(false);
+				panels.get(4).setVisible(false);
+				panels.get(5).setVisible(false);
+				panels.get(6).setVisible(false);
 			}
 		});
 		btnPodcasts.setFont(new Font("Segoe UI Semilight", Font.PLAIN, 11));

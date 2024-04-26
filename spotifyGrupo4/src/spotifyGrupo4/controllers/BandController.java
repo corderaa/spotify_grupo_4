@@ -8,7 +8,7 @@ public class BandController implements ControllerInterface<Band> {
 
 	@Override
 	public List<Band> getAll() {
-		// TODO Auto-generated method stub
+	
 		return null;
 	}
 
