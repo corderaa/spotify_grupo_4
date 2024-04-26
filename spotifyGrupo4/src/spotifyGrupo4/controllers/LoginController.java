@@ -4,7 +4,7 @@ import java.util.List;
 
 import spotifyGrupo4.db.pojo.Account;
 
-public class LoginController<T> implements ControllerInterface<T> {
+public class LoginController implements ControllerInterface<Account> {
 
 	/**
 	 * Method that validates the login, it takes the input for the password and the
@@ -21,25 +21,25 @@ public class LoginController<T> implements ControllerInterface<T> {
 	}
 
 	@Override
-	public void insert(T t) {
+	public void insert(Account t) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void update(T t) {
+	public void update(Account t) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void delete(T t) {
+	public void delete(Account t) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public List<T> getAll() {
+	public List<Account> getAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
