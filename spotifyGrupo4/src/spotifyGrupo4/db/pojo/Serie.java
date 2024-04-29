@@ -11,6 +11,8 @@ public class Serie {
 	private String title = null;
 	private String description = null;
 
+	private Podcaster podcaster = null;
+
 	public int getId() {
 		return id;
 	}
@@ -57,6 +59,14 @@ public class Serie {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Podcaster getPodcaster() {
+		return podcaster;
+	}
+
+	public void setPodcaster(Podcaster podcaster) {
+		this.podcaster = podcaster;
 	}
 
 	@Override
