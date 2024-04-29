@@ -1,14 +1,23 @@
 package spotifyGrupo4.view.panels;
 
 import javax.swing.JPanel;
+
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.util.List;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import spotifyGrupo4.controllers.AdvertController;
 
 public class AdvertPanel extends JPanel {
 
 	private static final long serialVersionUID = -8354352845486534109L;
 
 	public AdvertPanel() {
+
+		AdvertController advertController = new AdvertController();
 
 		setBounds(309, 0, 953, 618);
 		setLayout(null);
@@ -37,5 +46,38 @@ public class AdvertPanel extends JPanel {
 		lblGenre.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGenre.setBounds(350, 425, 253, 34);
 		add(lblGenre);
+
+		this.addComponentListener(new ComponentAdapter() {
+			public void componentShown(ComponentEvent e) {
+
+				spotifyGrupo4.db.pojo.Record record = advertController.chooseRandomAdvert(advertController.getAll());
+
+				changeGroupNameLbl(lblBandName, record);
+				changeRecordDateLbl(lblPublicationDate, record);
+				changeRecordGenreLbl(lblGenre, record);
+				changeRecordImageLbl(lblAdvertisementImage, record);
+				changeRecordTitleLbl(lblDiscTitle, record);
+			}
+		});
+	}
+
+	private void changeRecordTitleLbl(JLabel recordTitle, spotifyGrupo4.db.pojo.Record record) {
+		recordTitle.setText(record.getTitle());
+	}
+
+	private void changeRecordImageLbl(JLabel recordInage, spotifyGrupo4.db.pojo.Record record) {
+		recordInage.setText(record.getRecordCover());
+	}
+
+	private void changeRecordDateLbl(JLabel recordDate, spotifyGrupo4.db.pojo.Record record) {
+		recordDate.setText(record.getReleaseDate().toGMTString());
+	}
+
+	private void changeGroupNameLbl(JLabel groupName, spotifyGrupo4.db.pojo.Record record) {
+		groupName.setText(record.getBand().getName());
+	}
+
+	private void changeRecordGenreLbl(JLabel recordGenre, spotifyGrupo4.db.pojo.Record record) {
+		recordGenre.setText(record.getGenre());
 	}
 }

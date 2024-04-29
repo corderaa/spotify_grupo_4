@@ -1,5 +1,7 @@
 package spotifyGrupo4.utils;
 
+import java.util.Date;
+
 public class DateConverter {
 
 	/**
@@ -9,8 +11,9 @@ public class DateConverter {
 	 * @return
 	 */
 	public static java.util.Date sqlDateToUtilDate(java.sql.Date sqlDate) {
-		return null;
-	}
+		java.util.Date utilDate = new java.util.Date(sqlDate.getTime())
+		return utilDate;
+}
 
 	/**
 	 * Takes a util.Date and transforms it into a sql.Date
@@ -18,7 +21,8 @@ public class DateConverter {
 	 * @param Date
 	 * @return
 	 */
-	public static java.sql.Date utilDateToSqlDate(java.util.Date Date) {
-		return null;
+	public static java.sql.Date utilDateToSqlDate(java.util.Date date) {
+		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+		return sqlDate;
 	}
 }

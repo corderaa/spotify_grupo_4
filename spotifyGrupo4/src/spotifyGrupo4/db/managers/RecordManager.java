@@ -9,18 +9,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import spotifyGrupo4.db.pojo.Band;
+import spotifyGrupo4.db.pojo.Record;
 import spotifyGrupo4.db.utils.DBUtils;
+import spotifyGrupo4.utils.DateConverter;
 
-public class RecordManager
-		implements ContentInterface<spotifyGrupo4.db.pojo.Record>, InterfaceManager<spotifyGrupo4.db.pojo.Record> {
+public class RecordManager implements ContentInterface<Record>, InterfaceManager<Record> {
 
 	@Override
-	public List<spotifyGrupo4.db.pojo.Record> getAll() {
+	public List<Record> getAll() {
 		return null;
 	}
 
-	public List<spotifyGrupo4.db.pojo.Record> getAllWithBand() {
-		ArrayList<spotifyGrupo4.db.pojo.Record> ret = null;
+	public List<Record> getAllWithBand() {
+		ArrayList<Record> ret = null;
 
 		// SQL que queremos lanzar
 		String sql = "select * from record as r join band as b on r.bandId = b.contentCreatorId ";
@@ -50,7 +51,7 @@ public class RecordManager
 
 				// Si es necesario, inicializamos la lista
 				if (null == ret)
-					ret = new <spotifyGrupo4.db.pojo.Record>ArrayList();
+					ret = new ArrayList<Record>();
 
 				spotifyGrupo4.db.pojo.Record record = new spotifyGrupo4.db.pojo.Record();
 
@@ -64,7 +65,7 @@ public class RecordManager
 				record.setId(recordId);
 				record.setGenre(genre);
 				record.setRecordCover(cover);
-				record.setReleaseDate(null);
+				record.setReleaseDate(DateConverter.sqlDateToUtilDate(releaseDate));
 				record.setTitle(title);
 				record.setNumberReproductions(numberReproductions);
 
@@ -76,13 +77,14 @@ public class RecordManager
 				int contentCreatorReproductions = resultSet.getInt("contentCreatorReproductionNumber");
 				java.sql.Date contentCreatorRegistrationDate = resultSet.getDate("contentCreatorRegistrationDate");
 				String contentCreatorDescription = resultSet.getString("contentCreatorDescription");
+				String bandImage = resultSet.getString("contentCreatorImage");
 
 				band.setId(bandId);
 				band.setContentCreatorId(bandId);
 				band.setMembers(members);
-				band.setCreationDate(contentCreatorRegistrationDate);
+				band.setCreationDate(DateConverter.sqlDateToUtilDate(contentCreatorRegistrationDate));
 				band.setDescription(contentCreatorDescription);
-				band.setImage(null);
+				band.setImage(bandImage);
 				band.setName(contentCreatorName);
 				band.setReproduction(contentCreatorReproductions);
 
@@ -121,19 +123,19 @@ public class RecordManager
 	}
 
 	@Override
-	public void insert(spotifyGrupo4.db.pojo.Record t) {
+	public void insert(Record t) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void modify(spotifyGrupo4.db.pojo.Record t) {
+	public void modify(Record t) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void delete(spotifyGrupo4.db.pojo.Record t) {
+	public void delete(Record t) {
 		// TODO Auto-generated method stub
 
 	}
