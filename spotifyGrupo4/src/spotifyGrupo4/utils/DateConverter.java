@@ -9,7 +9,8 @@ public class DateConverter {
 	 * @return
 	 */
 	public static java.util.Date sqlDateToUtilDate(java.sql.Date sqlDate) {
-		return null;
+		java.util.Date utilDate = new java.util.Date(sqlDate.getTime());
+		return utilDate;
 	}
 
 	/**
@@ -19,6 +20,7 @@ public class DateConverter {
 	 * @return
 	 */
 	public static java.sql.Date utilDateToSqlDate(java.util.Date Date) {
-		return null;
+		java.sql.Date sqlDate = new java.sql.Date(Date.getTime());
+		return sqlDate;
 	}
 }
