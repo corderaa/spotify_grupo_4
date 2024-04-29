@@ -2,36 +2,41 @@ package spotifyGrupo4.controllers;
 
 import java.util.List;
 
-import spotifyGrupo4.db.pojo.Content;
+import spotifyGrupo4.db.managers.RecordManager;
 
-public class AdvertController implements ControllerInterface<Content> {
+public class AdvertController implements ControllerInterface<spotifyGrupo4.db.pojo.Record> {
 
-	@Override
-	public List<Content> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+	private RecordManager recordManager = null;
+
+	public AdvertController() {
+		recordManager = new RecordManager();
 	}
 
 	@Override
-	public void insert(Content t) {
-		// TODO Auto-generated method stub
-
+	public List<spotifyGrupo4.db.pojo.Record> getAll() {
+		return recordManager.getAllWithBand();
 	}
 
 	@Override
-	public void update(Content t) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void delete(Content t) {
+	public void insert(spotifyGrupo4.db.pojo.Record t) {
 		// TODO Auto-generated method stub
 
 	}
 
-	public Content chooseRandomAdvert(List<Content> contents) {
+	@Override
+	public void update(spotifyGrupo4.db.pojo.Record t) {
+		// TODO Auto-generated method stub
 
-		return contents.get((int) Math.random() * contents.size());
+	}
+
+	@Override
+	public void delete(spotifyGrupo4.db.pojo.Record t) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public spotifyGrupo4.db.pojo.Record chooseRandomAdvert(List<spotifyGrupo4.db.pojo.Record> records) {
+
+		return records.get((int) Math.random() * records.size());
 	}
 }

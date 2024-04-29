@@ -10,6 +10,9 @@ public class Record {
 	private Date releaseDate = null;
 	private String genre = null;
 	private String recordCover = null;
+	private int numberReproductions = null;
+
+	private Band band = null;
 
 	public int getId() {
 		return Id;
@@ -49,6 +52,22 @@ public class Record {
 
 	public void setRecordCover(String recordCover) {
 		this.recordCover = recordCover;
+	}
+
+	public Band getBand() {
+		return band;
+	}
+
+	public void setBand(Band band) {
+		this.band = band;
+	}
+
+	public int getNumberReproductions() {
+		return numberReproductions;
+	}
+
+	public void setNumberReproductions(int numberReproductions) {
+		this.numberReproductions = numberReproductions;
 	}
 
 	@Override

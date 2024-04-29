@@ -81,7 +81,7 @@ public class Frame extends JFrame {
 
 		// 2
 		AdvertPanel advertPanel = new AdvertPanel();
-		advertPanel.setVisible(false);
+		advertPanel.setVisible(true);
 		contentPanel.add(advertPanel);
 		panels.add(advertPanel);
 
@@ -112,20 +112,20 @@ public class Frame extends JFrame {
 		// 7
 		LoginPanel loginPanel = new LoginPanel(panels);
 		loginPanel.setLocation(0, 0);
-		loginPanel.setVisible(true);
+		loginPanel.setVisible(false);
 		contentPanel.add(loginPanel);
 		panels.add(loginPanel);
 
 		// 8
 		MenuPanel menuPanel = new MenuPanel(panels);
 		contentPanel.add(menuPanel);
-		menuPanel.setVisible(false);
+		menuPanel.setVisible(true);
 		panels.add(menuPanel);
 
 		// 9
 		AudioControlPanel audioControlPanel = new AudioControlPanel();
 		contentPanel.add(audioControlPanel);
-		audioControlPanel.setVisible(false);
+		audioControlPanel.setVisible(true);
 		panels.add(audioControlPanel);
 
 	}
