@@ -18,7 +18,7 @@ public class WelcomePanel extends JPanel {
 		setBackground(new Color(159, 203, 217));
 		setBounds(100, 100, 1278, 719);
 		setLayout(null);
-		
+
 	}
 
 }
