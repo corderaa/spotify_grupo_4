@@ -8,6 +8,7 @@ import spotifyGrupo4.db.pojo.Serie;
 import spotifyGrupo4.view.panels.AdvertPanel;
 import spotifyGrupo4.view.panels.AudioControlPanel;
 import spotifyGrupo4.view.panels.BandPanel;
+import spotifyGrupo4.view.panels.LoginPanel;
 import spotifyGrupo4.view.panels.MenuPanel;
 import spotifyGrupo4.view.panels.PodcastPanel;
 import spotifyGrupo4.view.panels.PodcasterPanel;
@@ -19,6 +20,7 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.management.loading.PrivateClassLoader;
+import javax.security.auth.login.LoginContext;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -65,12 +67,6 @@ public class Frame extends JFrame {
 		setContentPane(contentPanel);
 		contentPanel.setLayout(null);
 
-		MenuPanel menuPanel = new MenuPanel(panels);
-		contentPanel.add(menuPanel);
-
-		AudioControlPanel audioControlPanel = new AudioControlPanel();
-		contentPanel.add(audioControlPanel);
-
 		// 0
 		BandPanel bandPanel = new BandPanel(panels);
 		bandPanel.setVisible(false);
@@ -85,7 +81,7 @@ public class Frame extends JFrame {
 
 		// 2
 		AdvertPanel advertPanel = new AdvertPanel();
-		advertPanel.setVisible(true);
+		advertPanel.setVisible(false);
 		contentPanel.add(advertPanel);
 		panels.add(advertPanel);
 
@@ -109,9 +105,28 @@ public class Frame extends JFrame {
 
 		// 6
 		PodcastPanel podcastPanel = new PodcastPanel(panels);
-		podcasterPanel.setVisible(false);
+		podcastPanel.setVisible(false);
 		contentPanel.add(podcastPanel);
 		panels.add(podcastPanel);
+
+		// 7
+		LoginPanel loginPanel = new LoginPanel(panels);
+		loginPanel.setLocation(0, 0);
+		loginPanel.setVisible(true);
+		contentPanel.add(loginPanel);
+		panels.add(loginPanel);
+
+		// 8
+		MenuPanel menuPanel = new MenuPanel(panels);
+		contentPanel.add(menuPanel);
+		menuPanel.setVisible(false);
+		panels.add(menuPanel);
+
+		// 9
+		AudioControlPanel audioControlPanel = new AudioControlPanel();
+		contentPanel.add(audioControlPanel);
+		audioControlPanel.setVisible(false);
+		panels.add(audioControlPanel);
 
 	}
 }
