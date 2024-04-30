@@ -11,7 +11,7 @@ public class DateConverter {
 	 * @return
 	 */
 	public static java.util.Date sqlDateToUtilDate(java.sql.Date sqlDate) {
-		java.util.Date utilDate = new java.util.Date(sqlDate.getTime())
+		java.util.Date utilDate = new java.util.Date(sqlDate.getTime());
 		return utilDate;
 }
 
