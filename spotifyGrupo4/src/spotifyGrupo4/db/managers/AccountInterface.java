@@ -1,5 +1,6 @@
 package spotifyGrupo4.db.managers;
 
+import java.sql.SQLException;
 import java.util.Date;
 
 public interface AccountInterface<T> {
@@ -8,8 +9,10 @@ public interface AccountInterface<T> {
 	 * Gets the account by the login
 	 * 
 	 * @param login
+	 * @throws Exception 
+	 * @throws SQLException 
 	 */
-	public T getbyLogin(String login);
+	public T getbyLogin(String login) throws SQLException, Exception;
 
 	/**
 	 * Updates the last login of the account to database

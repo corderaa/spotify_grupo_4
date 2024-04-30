@@ -4,9 +4,11 @@ import javax.swing.JPanel;
 
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 import spotifyGrupo4.controllers.AdvertController;
@@ -50,7 +52,7 @@ public class AdvertPanel extends JPanel {
 		this.addComponentListener(new ComponentAdapter() {
 			public void componentShown(ComponentEvent e) {
 
-				spotifyGrupo4.db.pojo.Record record = advertController.chooseRandomAdvert(advertController.getAll());
+				spotifyGrupo4.db.pojo.Record record = handleGetAllRecords(advertController);
 
 				changeGroupNameLbl(lblBandName, record);
 				changeRecordDateLbl(lblPublicationDate, record);
@@ -69,6 +71,7 @@ public class AdvertPanel extends JPanel {
 		recordInage.setText(record.getRecordCover());
 	}
 
+	@SuppressWarnings("deprecation")
 	private void changeRecordDateLbl(JLabel recordDate, spotifyGrupo4.db.pojo.Record record) {
 		recordDate.setText(record.getReleaseDate().toGMTString());
 	}
@@ -79,5 +82,17 @@ public class AdvertPanel extends JPanel {
 
 	private void changeRecordGenreLbl(JLabel recordGenre, spotifyGrupo4.db.pojo.Record record) {
 		recordGenre.setText(record.getGenre());
+	}
+
+	private spotifyGrupo4.db.pojo.Record handleGetAllRecords(AdvertController advertController) {
+		spotifyGrupo4.db.pojo.Record record = null;
+		try {
+			record = advertController.chooseRandomAdvert(advertController.getAll());
+		} catch (SQLException sqle) {
+			JOptionPane.showMessageDialog(null, sqle.getMessage());
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+		}
+		return record;
 	}
 }

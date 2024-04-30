@@ -14,16 +14,17 @@ import spotifyGrupo4.db.utils.DBUtils;
 import spotifyGrupo4.utils.DateConverter;
 
 public class RecordManager implements ContentInterface<Record>, InterfaceManager<Record> {
-private String GET_ALL_RECORDS = "select * from record as r join band as b on r.bandId = b.contentCreatorId ";	
+	private String GET_ALL_RECORDS = "select * from record as r join band as b on r.bandId = b.contentCreatorId ";
+
 	@Override
 	public List<Record> getAll() {
 		return null;
 	}
 
-	public List<Record> getAllWithBand() {
+	public List<Record> getAllWithBand() throws SQLException, Exception {
 		ArrayList<Record> ret = null;
 
-		String sql = GET_ALL_RECORDS;
+		String sql = "select * from record as r join band as b on r.bandId = b.contentCreatorId ";
 
 		Connection connection = null;
 
@@ -81,29 +82,22 @@ private String GET_ALL_RECORDS = "select * from record as r join band as b on r.
 				record.setBand(band);
 				ret.add(record);
 			}
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
 		} finally {
 			try {
 				if (resultSet != null)
 					resultSet.close();
 			} catch (Exception e) {
 			}
-			;
 			try {
 				if (statement != null)
 					statement.close();
 			} catch (Exception e) {
 			}
-			;
 			try {
 				if (connection != null)
 					connection.close();
 			} catch (Exception e) {
 			}
-			;
 		}
 		return ret;
 	}
@@ -125,5 +119,4 @@ private String GET_ALL_RECORDS = "select * from record as r join band as b on r.
 		// TODO Auto-generated method stub
 
 	}
-
 }

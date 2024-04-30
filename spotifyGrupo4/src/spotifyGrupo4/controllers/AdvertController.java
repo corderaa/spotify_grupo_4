@@ -1,5 +1,6 @@
 package spotifyGrupo4.controllers;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import spotifyGrupo4.db.managers.RecordManager;
@@ -13,7 +14,7 @@ public class AdvertController implements ControllerInterface<spotifyGrupo4.db.po
 	}
 
 	@Override
-	public List<spotifyGrupo4.db.pojo.Record> getAll() {
+	public List<spotifyGrupo4.db.pojo.Record> getAll() throws SQLException, Exception {
 		return recordManager.getAllWithBand();
 	}
 

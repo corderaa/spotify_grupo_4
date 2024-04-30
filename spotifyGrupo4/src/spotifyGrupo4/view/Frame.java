@@ -12,6 +12,7 @@ import spotifyGrupo4.view.panels.LoginPanel;
 import spotifyGrupo4.view.panels.MenuPanel;
 import spotifyGrupo4.view.panels.PodcastPanel;
 import spotifyGrupo4.view.panels.PodcasterPanel;
+import spotifyGrupo4.view.panels.ProfilePanel;
 import spotifyGrupo4.view.panels.RecordPanel;
 import spotifyGrupo4.view.panels.SeriePanel;
 import spotifyGrupo4.view.panels.SongPanel;
@@ -128,5 +129,10 @@ public class Frame extends JFrame {
 		audioControlPanel.setVisible(true);
 		panels.add(audioControlPanel);
 
+		// 10
+		ProfilePanel profilePanel = new ProfilePanel();
+		contentPanel.add(profilePanel);
+		profilePanel.setVisible(false);
+		panels.add(profilePanel);
 	}
 }

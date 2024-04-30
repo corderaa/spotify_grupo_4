@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.Objects;
 
 public abstract class Account {
-
 	private int id = 0;
 	private int postalCode = 0;
 	private String city = null;
@@ -17,6 +16,7 @@ public abstract class Account {
 	private String surName = null;
 	private String accountType = null;
 	private Boolean isBloqued = null;
+	private String password = null;
 
 	public int getId() {
 		return id;
@@ -112,6 +112,14 @@ public abstract class Account {
 
 	public void setIsBloqued(Boolean isBloqued) {
 		this.isBloqued = isBloqued;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@Override
