@@ -15,6 +15,12 @@ import javax.swing.table.DefaultTableModel;
 
 import spotifyGrupo4.controllers.ProfileController;
 import spotifyGrupo4.db.pojo.Account;
+import spotifyGrupo4.db.pojo.PremiumAccount;
+
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ProfilePanel extends JPanel {
 	private static final long serialVersionUID = -3095344526722788814L;
@@ -22,6 +28,8 @@ public class ProfilePanel extends JPanel {
 	private JTable tableCommonInfo;
 	private JTable tableLoginInfo;
 	private JTable tablePremiumAccountInfo;
+	private JTextField textFieldPassword1;
+	private JTextField textFieldPassword2;
 
 	public ProfilePanel() {
 
@@ -69,28 +77,68 @@ public class ProfilePanel extends JPanel {
 		tableLoginInfo.setBounds(31, 380, 434, 48);
 		add(tableLoginInfo);
 
-		JLabel lblDatosDeRegistro = new JLabel("DATOS DE REGISTRO:");
-		lblDatosDeRegistro.setForeground(Color.WHITE);
-		lblDatosDeRegistro.setFont(new Font("Segoe UI Light", Font.PLAIN, 15));
-		lblDatosDeRegistro.setBounds(31, 345, 434, 24);
-		add(lblDatosDeRegistro);
+		JLabel lblRegistryInfo = new JLabel("DATOS DE REGISTRO:");
+		lblRegistryInfo.setForeground(Color.WHITE);
+		lblRegistryInfo.setFont(new Font("Segoe UI Light", Font.PLAIN, 15));
+		lblRegistryInfo.setBounds(31, 345, 434, 24);
+		add(lblRegistryInfo);
 
 		tablePremiumAccountInfo = new JTable();
-		tablePremiumAccountInfo.setModel(new DefaultTableModel(
-				new Object[][] { { "Numero de Cuenta:", null }, { "Fecha de Caducidad", null }, { "CVV", null }, },
-				new String[] { "Premium", "Info" }));
 		tablePremiumAccountInfo.setBounds(31, 499, 434, 48);
 		add(tablePremiumAccountInfo);
 
-		JLabel lblDatosDeCuentaPremium = new JLabel("DATOS DE CUENTA PREMIUM:");
-		lblDatosDeCuentaPremium.setForeground(Color.WHITE);
-		lblDatosDeCuentaPremium.setFont(new Font("Segoe UI Light", Font.PLAIN, 15));
-		lblDatosDeCuentaPremium.setBounds(31, 464, 434, 24);
-		add(lblDatosDeCuentaPremium);
+		JLabel lblPremiumAccountInfo = new JLabel("DATOS DE CUENTA PREMIUM:");
+		lblPremiumAccountInfo.setForeground(Color.WHITE);
+		lblPremiumAccountInfo.setFont(new Font("Segoe UI Light", Font.PLAIN, 15));
+		lblPremiumAccountInfo.setBounds(31, 464, 434, 24);
+		add(lblPremiumAccountInfo);
+
+		JLabel lblPasswordChange = new JLabel("PARSSWORD CHANGE:");
+		lblPasswordChange.setForeground(Color.WHITE);
+		lblPasswordChange.setFont(new Font("Segoe UI Light", Font.PLAIN, 15));
+		lblPasswordChange.setBounds(475, 122, 434, 24);
+		add(lblPasswordChange);
+
+		textFieldPassword1 = new JTextField();
+		textFieldPassword1.setBounds(475, 182, 434, 20);
+		add(textFieldPassword1);
+		textFieldPassword1.setColumns(10);
+
+		textFieldPassword2 = new JTextField();
+		textFieldPassword2.setColumns(10);
+		textFieldPassword2.setBounds(475, 237, 434, 20);
+		add(textFieldPassword2);
+
+		JLabel lblFirstPassword = new JLabel("FIRST PASSWORD:");
+		lblFirstPassword.setForeground(Color.WHITE);
+		lblFirstPassword.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
+		lblFirstPassword.setBounds(475, 157, 434, 24);
+		add(lblFirstPassword);
+
+		JLabel lblSecondPassword = new JLabel("SECOND PASSWORD:");
+		lblSecondPassword.setForeground(Color.WHITE);
+		lblSecondPassword.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
+		lblSecondPassword.setBounds(475, 213, 434, 24);
+		add(lblSecondPassword);
+
+		JButton btnNewButton = new JButton("DONE");
+
+		btnNewButton.setFont(new Font("Segoe UI Light", Font.PLAIN, 16));
+		btnNewButton.setBackground(Color.WHITE);
+		btnNewButton.setBounds(475, 268, 434, 33);
+		add(btnNewButton);
 
 		this.addComponentListener(new ComponentAdapter() {
 			public void componentShown(ComponentEvent e) {
 				handleFillInfoExceptions();
+			}
+		});
+
+		/**
+		 * PasswordChange
+		 */
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 			}
 		});
 	}
@@ -117,14 +165,24 @@ public class ProfilePanel extends JPanel {
 								new String[] { "DATOS", "CUENTA" }));
 	}
 
+	private void fillPremiumInfoTable(PremiumAccount premiumAccount, JTable tablePremiumAccountInfo) {
+
+		tablePremiumAccountInfo.setModel(new DefaultTableModel(
+				new Object[][] { { "Numero de Cuenta:", null }, { "Fecha de Caducidad", null }, { "CVV", null }, },
+				new String[] { "Premium", "Info" }));
+
+	}
+
 	private void handleFillInfoExceptions() {
 		try {
 			fillCommonInfoTable(profileController.getbyLogin(""), tableCommonInfo);
 			fillLoginInfoTable(profileController.getbyLogin(""), tableLoginInfo);
+			fillPremiumInfoTable(profileController.getPremiumByLogin(""), tablePremiumAccountInfo); // CAMBIAR POR
+																									// SEPARADO
 		} catch (SQLException sqle) {
 			JOptionPane.showMessageDialog(null, sqle.getMessage());
 		} catch (Exception e) {
-			JOptionPane.showConfirmDialog(null, e.getMessage());
+			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
 	}
 }

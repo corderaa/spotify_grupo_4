@@ -5,15 +5,15 @@ import java.util.Objects;
 
 public class PremiumAccount extends Account {
 
-	private int cardNumber = 0;
+	private long cardNumber = 0;
 	private Date expiringDate = null;
 	private int cardCvv = 0;
 
-	public int getCardNumber() {
+	public long getCardNumber() {
 		return cardNumber;
 	}
 
-	public void setCardNumber(int cardNumber) {
+	public void setCardNumber(long cardNumber) {
 		this.cardNumber = cardNumber;
 	}
 

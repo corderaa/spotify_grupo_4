@@ -27,11 +27,11 @@ public class FreeAccountManager implements AccountInterface<FreeAccount>, Interf
 	}
 
 	@Override
-	public FreeAccount getbyLogin(String login) throws SQLException, Exception {
+	public FreeAccount getbyLogin(String id) throws SQLException, Exception {
 
 		FreeAccount ret = null;
 
-		String sql = "select * from account where accountdni = " + login;
+		String sql = "select * from account where accountId = " + id;
 
 		Connection connection = null;
 
