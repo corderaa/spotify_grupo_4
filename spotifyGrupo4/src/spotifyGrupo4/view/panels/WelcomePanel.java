@@ -66,8 +66,7 @@ public class WelcomePanel extends JPanel {
 				panels.get(7).setVisible(true);
 				panels.get(8).setVisible(false);
 				panels.get(9).setVisible(false);
-				panels.get(10).setVisible(false);
-				
+				panels.get(10).setVisible(false);	
 			}
 		});
 		
