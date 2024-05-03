@@ -69,7 +69,7 @@ public class Frame extends JFrame {
 
 		setContentPane(contentPanel);
 		contentPanel.setLayout(null);
-		
+
 		// 0
 		BandPanel bandPanel = new BandPanel(panels);
 		bandPanel.setVisible(false);
@@ -132,27 +132,24 @@ public class Frame extends JFrame {
 		panels.add(audioControlPanel);
 
 		// 10
-		ProfilePanel profilePanel = new ProfilePanel();
+		ProfilePanel profilePanel = new ProfilePanel(panels);
 		contentPanel.add(profilePanel);
 		profilePanel.setVisible(false);
 		panels.add(profilePanel);
-		
+
 		// 11
 		WelcomePanel welcomePanel = new WelcomePanel(panels);
 		welcomePanel.setLocation(0, 0);
 		welcomePanel.setVisible(true);
 		contentPanel.add(welcomePanel);
 		panels.add(welcomePanel);
-		
+
 		// 12
 		RegisterPanel registerPanel = new RegisterPanel(panels);
 		registerPanel.setLocation(0, 0);
 		registerPanel.setVisible(false);
 		contentPanel.add(registerPanel);
 		panels.add(registerPanel);
-		
-		
-		
-		
+
 	}
 }

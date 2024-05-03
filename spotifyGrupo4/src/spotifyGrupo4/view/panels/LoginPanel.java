@@ -104,7 +104,7 @@ public class LoginPanel extends JPanel {
 				panels.get(9).setVisible(true);
 				panels.get(10).setVisible(false);	
 				panels.get(11).setVisible(false);
-				panels.get(12).setVisible(true);
+				panels.get(12).setVisible(false);
 			}
 		});
 		btnOk.setForeground(Color.WHITE);

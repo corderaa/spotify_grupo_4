@@ -2,6 +2,7 @@ package spotifyGrupo4.view.panels;
 
 import javax.swing.JPanel;
 
+import java.awt.Color;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.sql.SQLException;
@@ -22,6 +23,7 @@ public class AdvertPanel extends JPanel {
 		AdvertController advertController = new AdvertController();
 
 		setBounds(309, 0, 953, 618);
+		setBackground(new Color(159, 203, 217));
 		setLayout(null);
 
 		JLabel lblAdvertisementImage = new JLabel("IMAGEN DE DISCO");
@@ -54,11 +56,13 @@ public class AdvertPanel extends JPanel {
 
 				spotifyGrupo4.db.pojo.Record record = handleGetAllRecords(advertController);
 
-				changeGroupNameLbl(lblBandName, record);
-				changeRecordDateLbl(lblPublicationDate, record);
-				changeRecordGenreLbl(lblGenre, record);
-				changeRecordImageLbl(lblAdvertisementImage, record);
-				changeRecordTitleLbl(lblDiscTitle, record);
+				if (null != record) {
+					changeRecordDateLbl(lblPublicationDate, record);
+					changeRecordGenreLbl(lblGenre, record);
+					changeRecordImageLbl(lblAdvertisementImage, record);
+					changeRecordTitleLbl(lblDiscTitle, record);
+					changeGroupNameLbl(lblBandName, record);
+				}
 			}
 		});
 	}

@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -43,7 +44,7 @@ public class ProfilePanel extends JPanel {
 	private JLabel lblSecondPassword = null;
 	private JButton btnChangePassword = null;
 
-	public ProfilePanel() {
+	public ProfilePanel(List<JPanel> panels) {
 
 		profileController = new ProfileController();
 
@@ -139,6 +140,11 @@ public class ProfilePanel extends JPanel {
 		btnChangePassword.setBounds(498, 268, 434, 33);
 		add(btnChangePassword);
 
+		JButton btnGoBack = new JButton("SALIR");
+		btnGoBack.setBackground(Color.WHITE);
+		btnGoBack.setBounds(843, 574, 89, 33);
+		add(btnGoBack);
+
 		this.addComponentListener(new ComponentAdapter() {
 			public void componentShown(ComponentEvent e) {
 				handleFillInfoExceptions();
@@ -157,6 +163,24 @@ public class ProfilePanel extends JPanel {
 				} else {
 					JOptionPane.showMessageDialog(null, "Las contraseñas no son iguales");
 				}
+			}
+		});
+
+		btnGoBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panels.get(0).setVisible(false);
+				panels.get(1).setVisible(false);
+				panels.get(2).setVisible(true);
+				panels.get(3).setVisible(false);
+				panels.get(4).setVisible(false);
+				panels.get(5).setVisible(false);
+				panels.get(6).setVisible(false);
+				panels.get(7).setVisible(false);
+				panels.get(8).setVisible(true);
+				panels.get(9).setVisible(true);
+				panels.get(10).setVisible(false);
+				panels.get(11).setVisible(false);
+				panels.get(12).setVisible(false);
 			}
 		});
 	}
