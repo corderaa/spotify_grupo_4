@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import spotifyGrupo4.controllers.ProfileController;
+import spotifyGrupo4.controllers.Session;
 import spotifyGrupo4.db.pojo.Account;
 import spotifyGrupo4.db.pojo.PremiumAccount;
 
@@ -158,7 +159,7 @@ public class ProfilePanel extends JPanel {
 		 */
 		btnChangePassword.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (profileController.isPasswordValid(textFieldPassword1, textFieldPassword2)) {
+				if (Session.getInstance().isPasswordValid(textFieldPassword1, textFieldPassword2)) {
 					makePasswordChange();
 				} else {
 					JOptionPane.showMessageDialog(null, "La contraseña no es valida");
@@ -220,10 +221,13 @@ public class ProfilePanel extends JPanel {
 
 	private void fillInfo() {
 		try {
-			fillCommonInfoTable(profileController.getbyLogin(""), tableCommonInfo);
-			fillLoginInfoTable(profileController.getbyLogin(""), tableLoginInfo);
-			fillPremiumInfoTable(profileController.getPremiumByLogin(""), tablePremiumAccountInfo); // CAMBIAR POR
-																									// SEPARADO
+			fillCommonInfoTable(profileController.getbyLogin(Session.getInstance().getAccount().getDni()),
+					tableCommonInfo);
+			fillLoginInfoTable(profileController.getbyLogin(Session.getInstance().getAccount().getDni()),
+					tableLoginInfo);
+			fillPremiumInfoTable(profileController.getPremiumByLogin(Session.getInstance().getAccount().getDni()),
+					tablePremiumAccountInfo); // CAMBIAR POR
+			// SEPARADO
 		} catch (SQLException sqle) {
 			handleSqlException(sqle);
 		} catch (Exception e) {
@@ -233,7 +237,7 @@ public class ProfilePanel extends JPanel {
 
 	private void makePasswordChange() {
 		try {
-			profileController.updatePassword(null, textFieldPassword1);
+			Session.getInstance().updatePassword(Session.getInstance().getAccount(), textFieldPassword1);
 		} catch (SQLException sqle) {
 			handleSqlException(sqle);
 		} catch (Exception e) {

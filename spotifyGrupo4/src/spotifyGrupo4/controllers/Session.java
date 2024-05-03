@@ -63,7 +63,7 @@ public class Session {
 		int count = 0;
 		for (int i = 0; i < password1.getText().length(); i++) {
 			if (Character.isUpperCase(password1.getText().charAt(i))) {
-				count++; 
+				count++;
 			}
 		}
 
