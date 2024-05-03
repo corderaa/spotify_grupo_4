@@ -147,7 +147,7 @@ public class ProfilePanel extends JPanel {
 
 		this.addComponentListener(new ComponentAdapter() {
 			public void componentShown(ComponentEvent e) {
-				handleFillInfoExceptions();
+				fillInfoExceptions();
 			}
 		});
 
@@ -159,7 +159,7 @@ public class ProfilePanel extends JPanel {
 		btnChangePassword.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (profileController.isPasswordValid(textFieldPassword1, textFieldPassword2)) {
-					handlePasswordChange();
+					makePasswordChange();
 				} else {
 					JOptionPane.showMessageDialog(null, "La contraseña no es valida");
 				}
@@ -218,26 +218,34 @@ public class ProfilePanel extends JPanel {
 
 	}
 
-	private void handleFillInfoExceptions() {
+	private void fillInfoExceptions() {
 		try {
 			fillCommonInfoTable(profileController.getbyLogin(""), tableCommonInfo);
 			fillLoginInfoTable(profileController.getbyLogin(""), tableLoginInfo);
 			fillPremiumInfoTable(profileController.getPremiumByLogin(""), tablePremiumAccountInfo); // CAMBIAR POR
 																									// SEPARADO
 		} catch (SQLException sqle) {
-			JOptionPane.showMessageDialog(null, sqle.getMessage());
+			handleSqlException(sqle);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
+			handleGenericException(e);
 		}
 	}
 
-	private void handlePasswordChange() {
+	private void makePasswordChange() {
 		try {
 			profileController.updatePassword(null, textFieldPassword1);
 		} catch (SQLException sqle) {
-			JOptionPane.showMessageDialog(null, sqle.getMessage());
+			handleSqlException(sqle);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
+			handleGenericException(e);
 		}
+	}
+
+	private void handleSqlException(SQLException sqle) {
+		JOptionPane.showMessageDialog(null, sqle.getMessage());
+	}
+
+	private void handleGenericException(Exception e) {
+		JOptionPane.showMessageDialog(null, e.getMessage());
 	}
 }
