@@ -13,7 +13,7 @@ import spotifyGrupo4.db.utils.DBUtils;
 import spotifyGrupo4.utils.DateConverter;
 
 public class BandManager implements ContentInterface<Band>, InterfaceManager<Band> {
-private String GET_ALL_BANDS= "elect * from band b join contentcreator c using (contentCreatorId)";
+private String GET_ALL_BANDS= "select * from band b join contentcreator c using (contentCreatorId)";
 	@Override
 	public List<Band> getAll() {
 		ArrayList<Band> ret = null;
