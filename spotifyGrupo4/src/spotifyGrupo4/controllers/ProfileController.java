@@ -29,12 +29,58 @@ public class ProfileController {
 		return premiumAccountManager.getbyLogin(id);
 	}
 
-	public Boolean isPasswordSame(JTextField password1, JTextField password2) {
-
-		return password1.getText().equals(password2.getText()) ? true : false;
+	public void updatePassword(Account account, JTextField password1) throws SQLException, Exception {
+		if (null != account) {
+			if (account.getAccountType() == "Premium") {
+				freeAccountManager.updatePassword(freeAccountManager.getbyLogin(account.getDni()), password1.getText());
+			} else if (account.getAccountType() == "Free") {
+				premiumAccountManager.updatePassword(premiumAccountManager.getbyLogin(account.getDni()),
+						password1.getText());
+			}
+		}
 	}
 
-	public void updatePassword(Account account) throws SQLException, Exception {
-		// TODO: Llamar metodo update password
+	public boolean isPasswordValid(JTextField password1, JTextField password2) {
+		if (!(password1.getText().isEmpty()) && !(password2.getText().isBlank())
+				&& (password1.getText().equals(password2.getText()) && hasPasswordLowerCaseCharacter(password1)
+						&& hasPasswordNumber(password1) && hasPasswordUpperCaseCharacter(password1)
+						&& password1.getText().length() > 6)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private boolean hasPasswordUpperCaseCharacter(JTextField password1) {
+		int count = 0;
+		for (int i = 0; i < password1.getText().length(); i++) {
+			if (Character.isUpperCase(password1.getText().charAt(i))) {
+				count++;
+			}
+		}
+
+		return count > 0 ? true : false;
+	}
+
+	private boolean hasPasswordLowerCaseCharacter(JTextField password1) {
+		int count = 0;
+		for (int i = 0; i < password1.getText().length(); i++) {
+			if (Character.isLowerCase(password1.getText().charAt(i))) {
+				count++;
+			}
+		}
+
+		return count > 0 ? true : false;
+	}
+
+	private boolean hasPasswordNumber(JTextField password1) {
+		int count = 0;
+		for (int i = 0; i < password1.getText().length(); i++) {
+			if (Character.isDigit(password1.getText().charAt(i))) {
+				count++;
+			}
+		}
+
+		return count > 0 ? true : false;
 	}
 }

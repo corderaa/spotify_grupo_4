@@ -158,10 +158,10 @@ public class ProfilePanel extends JPanel {
 		 */
 		btnChangePassword.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (profileController.isPasswordSame(textFieldPassword1, textFieldPassword2)) {
+				if (profileController.isPasswordValid(textFieldPassword1, textFieldPassword2)) {
 					handlePasswordChange();
 				} else {
-					JOptionPane.showMessageDialog(null, "Las contraseñas no son iguales");
+					JOptionPane.showMessageDialog(null, "La contraseña no es valida");
 				}
 			}
 		});
@@ -233,7 +233,7 @@ public class ProfilePanel extends JPanel {
 
 	private void handlePasswordChange() {
 		try {
-			profileController.updatePassword(null);
+			profileController.updatePassword(null, textFieldPassword1);
 		} catch (SQLException sqle) {
 			JOptionPane.showMessageDialog(null, sqle.getMessage());
 		} catch (Exception e) {
