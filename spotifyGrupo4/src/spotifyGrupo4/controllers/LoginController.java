@@ -15,8 +15,7 @@ public class LoginController implements ControllerInterface<Account> {
 
 	@Override
 	public void insert(Account t) {
-		freeAccountManager.insert(freeAccountManager.getByLogin(t.getDni()));
-
+		freeAccountManager.insert(null);
 	}
 
 	@Override
