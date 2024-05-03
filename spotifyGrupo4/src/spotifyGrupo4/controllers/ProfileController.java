@@ -21,20 +21,20 @@ public class ProfileController {
 
 	public FreeAccount getbyLogin(String id) throws SQLException, Exception {
 
-		return freeAccountManager.getbyLogin(id);
+		return freeAccountManager.getByLogin(id);
 	}
 
 	public PremiumAccount getPremiumByLogin(String id) throws SQLException, Exception {
 
-		return premiumAccountManager.getbyLogin(id);
+		return premiumAccountManager.getByLogin(id);
 	}
 
 	public void updatePassword(Account account, JTextField password1) throws SQLException, Exception {
 		if (null != account) {
-			if (account.getAccountType() == "Premium") {
-				freeAccountManager.updatePassword(freeAccountManager.getbyLogin(account.getDni()), password1.getText());
-			} else if (account.getAccountType() == "Free") {
-				premiumAccountManager.updatePassword(premiumAccountManager.getbyLogin(account.getDni()),
+			if (account.getAccountType() == "Free") {
+				freeAccountManager.updatePassword(freeAccountManager.getByLogin(account.getDni()), password1.getText());
+			} else if (account.getAccountType() == "Premium") {
+				premiumAccountManager.updatePassword(premiumAccountManager.getByLogin(account.getDni()),
 						password1.getText());
 			}
 		}

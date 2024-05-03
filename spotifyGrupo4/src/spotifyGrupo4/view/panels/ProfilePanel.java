@@ -147,7 +147,7 @@ public class ProfilePanel extends JPanel {
 
 		this.addComponentListener(new ComponentAdapter() {
 			public void componentShown(ComponentEvent e) {
-				fillInfoExceptions();
+				fillInfo();
 			}
 		});
 
@@ -218,7 +218,7 @@ public class ProfilePanel extends JPanel {
 
 	}
 
-	private void fillInfoExceptions() {
+	private void fillInfo() {
 		try {
 			fillCommonInfoTable(profileController.getbyLogin(""), tableCommonInfo);
 			fillLoginInfoTable(profileController.getbyLogin(""), tableLoginInfo);

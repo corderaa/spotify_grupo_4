@@ -27,7 +27,7 @@ public class FreeAccountManager implements AccountInterface<FreeAccount>, Interf
 	}
 
 	@Override
-	public FreeAccount getbyLogin(String id) throws SQLException, Exception {
+	public FreeAccount getByLogin(String id) throws SQLException, Exception {
 
 		FreeAccount ret = null;
 

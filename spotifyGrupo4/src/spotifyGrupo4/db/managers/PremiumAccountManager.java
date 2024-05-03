@@ -29,7 +29,7 @@ public class PremiumAccountManager implements AccountInterface<PremiumAccount>, 
 	}
 
 	@Override
-	public PremiumAccount getbyLogin(String id) throws SQLException, Exception {
+	public PremiumAccount getByLogin(String id) throws SQLException, Exception {
 		PremiumAccount ret = null;
 
 		String sql = "select * from premiumAccount where accountId = " + id;

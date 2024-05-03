@@ -12,7 +12,7 @@ public interface AccountInterface<T> {
 	 * @throws Exception 
 	 * @throws SQLException 
 	 */
-	public T getbyLogin(String login) throws SQLException, Exception;
+	public T getByLogin(String login) throws SQLException, Exception;
 
 	/**
 	 * Updates the last login of the account to database

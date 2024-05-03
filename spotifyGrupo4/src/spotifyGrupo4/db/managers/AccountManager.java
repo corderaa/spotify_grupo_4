@@ -8,7 +8,7 @@ import spotifyGrupo4.db.pojo.Account;
 public class AccountManager implements AccountInterface<Account> {
 
 	@Override
-	public Account getbyLogin(String login) throws SQLException, Exception {
+	public Account getByLogin(String login) throws SQLException, Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

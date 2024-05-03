@@ -2,9 +2,16 @@ package spotifyGrupo4.controllers;
 
 import java.util.List;
 
+import spotifyGrupo4.db.managers.FreeAccountManager;
 import spotifyGrupo4.db.pojo.Account;
 
 public class LoginController implements ControllerInterface<Account> {
+	
+	private FreeAccountManager freeAccountManager = null;
+
+	public LoginController() {
+		freeAccountManager = new FreeAccountManager();
+	}
 
 	/**
 	 * Method that validates the login, it takes the input for the password and the
@@ -22,7 +29,7 @@ public class LoginController implements ControllerInterface<Account> {
 
 	@Override
 	public void insert(Account t) {
-		// TODO Auto-generated method stub
+		freeAccountManager.insert(freeAccountManager.getByLogin(t.getDni()));
 
 	}
 
