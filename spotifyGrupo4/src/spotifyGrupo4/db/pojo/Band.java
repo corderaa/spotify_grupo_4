@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class Band extends ContentCreator {
 
-	private Integer ContentCreatorId = 0;
+	private int ContentCreatorId = 0;
 	private Date creationDate = null;
 	private int members = 0;
 
