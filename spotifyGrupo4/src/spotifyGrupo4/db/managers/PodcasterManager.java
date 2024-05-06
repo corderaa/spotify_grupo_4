@@ -142,10 +142,10 @@ public class PodcasterManager implements ContentInterface<Podcaster>, InterfaceM
 
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 			statement = connection.createStatement();
-			
+
 			String sql = "update podcaster set podcastername = '" + t.getName() + "',registrationDate = '"
-					+ t.getRegistrationDate() + "',contentCreatorReproductionNumber = '" + t.getReproduction() + "' ,  = '" 
-					+ t.getImage() + "', = image '"+ "' where id = " + t.getId();
+					+ t.getRegistrationDate() + "',contentCreatorReproductionNumber = '" + t.getReproduction()
+					+ "' ,  = '" + t.getImage() + "', = image '" + "' where id = " + t.getId();
 
 			statement.executeUpdate(sql);
 
@@ -169,9 +169,8 @@ public class PodcasterManager implements ContentInterface<Podcaster>, InterfaceM
 			}
 			;
 		}
-		
-	}
 
+	}
 
 	@Override
 	public void delete(Podcaster t) {

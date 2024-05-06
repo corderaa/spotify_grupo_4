@@ -143,8 +143,9 @@ public class BandManager implements ContentInterface<Band>, InterfaceManager<Ban
 			statement = connection.createStatement();
 
 			String sql = "update band set members = '" + t.getMembers() + "',contentCreatorRegistrationDate = '"
-					+ t.getCreationDate() + "',contentCreatorReproductionNumber = '" + t.getReproduction() + "' , contentCreatorDescription = '" 
-					+ t.getDescription() + "',contentCreatorDescription = '" + t.getDescription() + "' where id = " + t.getId();
+					+ t.getCreationDate() + "',contentCreatorReproductionNumber = '" + t.getReproduction()
+					+ "' , contentCreatorDescription = '" + t.getDescription() + "',contentCreatorDescription = '"
+					+ t.getDescription() + "' where id = " + t.getId();
 
 			statement.executeUpdate(sql);
 
@@ -168,9 +169,8 @@ public class BandManager implements ContentInterface<Band>, InterfaceManager<Ban
 			}
 			;
 		}
-		
-	}
 
+	}
 	
 
 	@Override
