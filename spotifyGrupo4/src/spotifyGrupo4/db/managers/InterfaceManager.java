@@ -18,5 +18,10 @@ public interface InterfaceManager<T> {
 	 * @param t
 	 */
 	public void insert(T t);
-
+	/**
+	 * Search the object to the database
+	 * 
+	 * @param t
+	 */
+	public T getOne(T t);
 }

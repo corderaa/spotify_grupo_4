@@ -18,4 +18,10 @@ public class PodcastManager implements InterfaceManager<Podcast> {
 
 	}
 
+	@Override
+	public Podcast getOne(Podcast t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

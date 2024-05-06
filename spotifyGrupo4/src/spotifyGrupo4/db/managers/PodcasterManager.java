@@ -102,10 +102,9 @@ public class PodcasterManager implements ContentInterface<Podcaster>, InterfaceM
 
 			statement = connection.createStatement();
 
-			String sql = "insert into podcaster (podcasterId,contentcreatorId,podcasterName,registrationDate,numberReproductions,image) VALUES ('"
-					+ podcaster.getId() + "', '" + podcaster.getPodcasterId() + "', '" + podcaster.getName() + "', '"
-					+ podcaster.getRegistrationDate() + "', '" + podcaster.getReproduction() + "', '" + podcaster.getImage()
-					+ "')";
+			String sql = "insert into podcaster (podcasterName,registrationDate,numberReproductions,image) VALUES ('"
+					+ podcaster.getName() + "', '" + podcaster.getRegistrationDate() + "', '"
+					+ podcaster.getReproduction() + "', '" + podcaster.getImage() + "')";
 
 			statement.executeUpdate(sql);
 
@@ -139,6 +138,12 @@ public class PodcasterManager implements ContentInterface<Podcaster>, InterfaceM
 	public void delete(Podcaster t) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public Podcaster getOne(Podcaster t) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

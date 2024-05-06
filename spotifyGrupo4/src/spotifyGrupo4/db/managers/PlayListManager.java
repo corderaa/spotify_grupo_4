@@ -49,4 +49,10 @@ public class PlayListManager implements InterfaceManager<Playlist> {
 		return null;
 	}
 
+	@Override
+	public Playlist getOne(Playlist t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

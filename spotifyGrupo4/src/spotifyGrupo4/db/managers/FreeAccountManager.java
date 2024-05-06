@@ -111,4 +111,10 @@ public class FreeAccountManager implements AccountInterface<FreeAccount>, Interf
 
 	}
 
+	@Override
+	public FreeAccount getOne(FreeAccount t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

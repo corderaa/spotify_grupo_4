@@ -119,4 +119,10 @@ public class RecordManager implements ContentInterface<Record>, InterfaceManager
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public Record getOne(Record t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -118,4 +118,10 @@ public class PremiumAccountManager implements AccountInterface<PremiumAccount>, 
 
 	}
 
+	@Override
+	public PremiumAccount getOne(PremiumAccount t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

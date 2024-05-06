@@ -31,4 +31,10 @@ public class SongManager implements ContentInterface<Song>, InterfaceManager<Son
 		
 	}
 
+	@Override
+	public Song getOne(Song t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

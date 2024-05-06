@@ -31,4 +31,10 @@ public class SerieManager implements ContentInterface<Serie>, InterfaceManager<S
 		
 	}
 
+	@Override
+	public Serie getOne(Serie t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

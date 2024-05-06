@@ -30,4 +30,10 @@ public class ContentManager implements InterfaceManager<Content>, ContentInterfa
 
 	}
 
+	@Override
+	public Content getOne(Content t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

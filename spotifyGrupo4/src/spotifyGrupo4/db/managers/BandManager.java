@@ -9,11 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import spotifyGrupo4.db.pojo.Band;
+import spotifyGrupo4.db.pojo.Podcaster;
 import spotifyGrupo4.db.utils.DBUtils;
 import spotifyGrupo4.utils.DateConverter;
 
 public class BandManager implements ContentInterface<Band>, InterfaceManager<Band> {
-private String GET_ALL_BANDS= "select * from band b join contentcreator c using (contentCreatorId)";
+	private String GET_ALL_BANDS = "select * from band b join contentcreator c using (contentCreatorId)";
+
 	@Override
 	public List<Band> getAll() {
 		ArrayList<Band> ret = null;
@@ -40,7 +42,7 @@ private String GET_ALL_BANDS= "select * from band b join contentcreator c using 
 
 				spotifyGrupo4.db.pojo.Band band = new spotifyGrupo4.db.pojo.Band();
 
-				int contentCreatorId = resultSet.getInt("contentCreatorId");
+				int bandId = resultSet.getInt("bandId");
 				int members = resultSet.getInt("members");
 				String contentCreatorName = resultSet.getString("contentCreatorName");
 				java.sql.Date creationDate = resultSet.getDate("creationDate");
@@ -48,7 +50,7 @@ private String GET_ALL_BANDS= "select * from band b join contentcreator c using 
 				String contentCreatorDescription = resultSet.getString("contentCreatorDescription");
 				String contentCreatorImage = resultSet.getString("contentCreatorImage");
 
-				band.setId(contentCreatorId);
+				band.setId(bandId);
 				band.setMembers(members);
 				band.setName(contentCreatorName);
 				band.setReproduction(numberReproductions);
@@ -57,7 +59,6 @@ private String GET_ALL_BANDS= "select * from band b join contentcreator c using 
 				band.setDescription(contentCreatorDescription);
 				band.setImage(contentCreatorImage);
 
-				
 				ret.add(band);
 			}
 		} catch (SQLException sqle) {
@@ -87,11 +88,44 @@ private String GET_ALL_BANDS= "select * from band b join contentcreator c using 
 		return ret;
 	}
 
-
 	@Override
-	public void insert(Band t) {
-		// TODO Auto-generated method stub
+	public void insert(Band band) {
+		Connection connection = null;
 
+		Statement statement = null;
+
+		try {
+			Class.forName(DBUtils.DRIVER);
+
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+
+			statement = connection.createStatement();
+
+			String sql = "insert into band (members,contentCreatorRegistrationDate,\r\n"
+					+ "contentCreatorReproductionNumber,contentCreatorDescription,contentCreatorName, contentCreatorImage) VALUES ('"
+					+ band.getMembers() + "', '" + band.getCreationDate() + "', '" + band.getReproduction() + "', '"
+					+ band.getDescription() + "', '" + band.getName() + "', '" + band.getImage()  + "')";
+
+			statement.executeUpdate(sql);
+
+		} catch (SQLException sqle) {
+			System.out.println("Error con la BBDD - " + sqle.getMessage());
+		} catch (Exception e) {
+			System.out.println("Error generico - " + e.getMessage());
+		} finally {
+			try {
+				if (statement != null)
+					statement.close();
+			} catch (Exception e) {
+			}
+			;
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (Exception e) {
+			}
+			;
+		}
 	}
 
 	@Override
@@ -104,5 +138,11 @@ private String GET_ALL_BANDS= "select * from band b join contentcreator c using 
 	public void delete(Band t) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public Band getOne(Band t) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
