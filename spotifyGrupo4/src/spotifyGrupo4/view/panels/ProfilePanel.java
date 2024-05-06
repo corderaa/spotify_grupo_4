@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JLabel;
@@ -18,6 +19,7 @@ import spotifyGrupo4.controllers.ProfileController;
 import spotifyGrupo4.controllers.Session;
 import spotifyGrupo4.db.pojo.Account;
 import spotifyGrupo4.db.pojo.PremiumAccount;
+import spotifyGrupo4.utils.ExceptionHandler;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -229,27 +231,20 @@ public class ProfilePanel extends JPanel {
 					tablePremiumAccountInfo); // CAMBIAR POR
 			// SEPARADO
 		} catch (SQLException sqle) {
-			handleSqlException(sqle);
+			ExceptionHandler.handleSqlException(sqle, "No hay conexion a base de datos");
 		} catch (Exception e) {
-			handleGenericException(e);
+			ExceptionHandler.handleGenericException(e, "ERROR GENERICO" + e.getMessage());
 		}
+
 	}
 
 	private void makePasswordChange() {
 		try {
 			Session.getInstance().updatePassword(Session.getInstance().getAccount(), textFieldPassword1);
 		} catch (SQLException sqle) {
-			handleSqlException(sqle);
+			ExceptionHandler.handleSqlException(sqle, "No hay conexion a base de datos");
 		} catch (Exception e) {
-			handleGenericException(e);
+			ExceptionHandler.handleGenericException(e, "ERROR GENERICO" + e.getMessage());
 		}
-	}
-
-	private void handleSqlException(SQLException sqle) {
-		JOptionPane.showMessageDialog(null, sqle.getMessage());
-	}
-
-	private void handleGenericException(Exception e) {
-		JOptionPane.showMessageDialog(null, e.getMessage());
 	}
 }
