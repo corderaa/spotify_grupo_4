@@ -27,6 +27,7 @@ public class AudioControlPanel extends JPanel {
 	private JLabel lblPrevius = null;
 	private JLabel lblNext = null;
 	private JLabel lblLike = null;
+	private boolean isPlaying = false;
 
 	public AudioControlPanel() {
 		setBackground(new Color(51, 51, 51));
@@ -60,10 +61,14 @@ public class AudioControlPanel extends JPanel {
 		lblStartStop.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (lblStartStop.getIcon().getIconHeight() == (new ImageIcon(PLAY_ICON_URL).getIconHeight())) {
+				if (!isPlaying) {
 					lblStartStop.setIcon(new ImageIcon(STOP_ICON_URL));
+					AudioController.getInstance().playContent();
+					isPlaying = true;
 				} else {
 					lblStartStop.setIcon(new ImageIcon(PLAY_ICON_URL));
+					AudioController.getInstance().stopContent();
+					isPlaying = false;
 				}
 			}
 		});
@@ -72,7 +77,7 @@ public class AudioControlPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					AudioController.getInstance().getContents().get(currentSongPlayed + 1);
+					AudioController.getInstance().changeNextContent();
 				} catch (IndexOutOfBoundsException outOfBounds) {
 					handleIndexOutOfBounds(outOfBounds);
 				} catch (Exception e2) {
@@ -86,7 +91,7 @@ public class AudioControlPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					AudioController.getInstance().getContents().get(currentSongPlayed - 1);
+					AudioController.getInstance().changePreviusContent();
 				} catch (IndexOutOfBoundsException outOfBounds) {
 					handleIndexOutOfBounds(outOfBounds);
 				} catch (Exception e2) {
