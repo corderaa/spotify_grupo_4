@@ -4,13 +4,17 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import spotifyGrupo4.db.managers.AccountManager;
+import spotifyGrupo4.db.pojo.Account;
 
 public class LoginPanel extends JPanel {
 
@@ -88,7 +92,7 @@ public class LoginPanel extends JPanel {
 		btnClose.setBackground(new Color(204, 51, 51));
 		btnClose.setBounds(1159, 620, 89, 44);
 		add(btnClose);
-		
+
 		JButton btnOk = new JButton("ENTRAR");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -102,7 +106,7 @@ public class LoginPanel extends JPanel {
 				panels.get(7).setVisible(false);
 				panels.get(8).setVisible(true);
 				panels.get(9).setVisible(true);
-				panels.get(10).setVisible(false);	
+				panels.get(10).setVisible(false);
 				panels.get(11).setVisible(false);
 				panels.get(12).setVisible(false);
 			}
@@ -124,7 +128,7 @@ public class LoginPanel extends JPanel {
 				panels.get(7).setVisible(false);
 				panels.get(8).setVisible(false);
 				panels.get(9).setVisible(false);
-				panels.get(10).setVisible(false);	
+				panels.get(10).setVisible(false);
 				panels.get(11).setVisible(false);
 				panels.get(12).setVisible(true);
 			}
@@ -142,7 +146,7 @@ public class LoginPanel extends JPanel {
 				panels.get(7).setVisible(false);
 				panels.get(8).setVisible(false);
 				panels.get(9).setVisible(false);
-				panels.get(10).setVisible(false);	
+				panels.get(10).setVisible(false);
 				panels.get(11).setVisible(true);
 				panels.get(12).setVisible(false);
 			}
@@ -150,6 +154,29 @@ public class LoginPanel extends JPanel {
 
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (null != new AccountManager().getUser(textFieldMail.getText(), textFieldPassword.getText())) {
+					JOptionPane.showMessageDialog(null, "Bienvenido:" + textFieldMail.getText());
+					//Account loggedUser = new AccountManager().getUser(textFieldMail.getText(), textFieldPassword.getText());
+
+
+					clearTextFields(textFieldMail, textFieldPassword);
+					panels.get(0).setVisible(false);
+					panels.get(1).setVisible(false);
+					panels.get(2).setVisible(true);
+					panels.get(3).setVisible(false);
+					panels.get(4).setVisible(false);
+					panels.get(5).setVisible(false);
+					panels.get(6).setVisible(false);
+					panels.get(7).setVisible(false);
+					panels.get(8).setVisible(true);
+					panels.get(9).setVisible(true);
+					panels.get(10).setVisible(false);
+					panels.get(11).setVisible(false);
+					panels.get(12).setVisible(false);
+				} else {
+					JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta");
+					textFieldPassword.setText(null);
+				}
 			}
 		});
 	}
