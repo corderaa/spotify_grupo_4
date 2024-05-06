@@ -3,26 +3,30 @@ package spotifyGrupo4.controllers;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import javazoom.jl.player.Player;
+import spotifyGrupo4.db.pojo.Account;
 import spotifyGrupo4.db.pojo.Content;
+import spotifyGrupo4.db.pojo.FreeAccount;
+import spotifyGrupo4.db.pojo.PremiumAccount;
 
 public class AudioController {
 
 	public static AudioController instance = null;
 	private final String directoryPath = ".//music//";
-	private String MUSIC_FILE = null;
+	private String currentFileName = null;
 	private Player player = null;
 
 	/**
 	 * List of content waiting to be played
 	 */
-	public List<String> audioFiles = null;
+	public List<String> audioFileNames = null;
 
 	public AudioController() {
-		audioFiles = new ArrayList<String>();
-		loadAudioFilesArray();
+		audioFileNames = loadAudioFilesArray();
 	}
 
 	public static AudioController getInstance() {
@@ -43,24 +47,25 @@ public class AudioController {
 	 */
 	public void playContent() {
 
-		if (MUSIC_FILE == null) {
-			MUSIC_FILE = audioFiles.get(0);
-		}
+		if (null != audioFileNames) {
 
-		new Thread() {
-
-			@Override
-			public void run() {
-
-				try {
-					FileInputStream fileInputStream = new FileInputStream(directoryPath + MUSIC_FILE);
-					player = new Player(fileInputStream);
-					player.play();
-				} catch (Exception e) {
-					// TODO: think about how to propagate
-				}
+			if (null == currentFileName) {
+				currentFileName = audioFileNames.get(0);
 			}
-		}.start();
+
+			new Thread() {
+				@Override
+				public void run() {
+					try {
+						FileInputStream fileInputStream = new FileInputStream(directoryPath + currentFileName);
+						player = new Player(fileInputStream);
+						player.play();
+					} catch (Exception e) {
+
+					}
+				}
+			}.start();
+		}
 	}
 
 	/**
@@ -75,28 +80,28 @@ public class AudioController {
 	public void changeNextContent() {
 		stopContent();
 
-		for (int i = 0; i < audioFiles.size(); i++) {
-			if (MUSIC_FILE.equals(audioFiles.get(i))) {
-				if (i == audioFiles.size() + 1) {
-					MUSIC_FILE = audioFiles.get(0);
+		for (int i = 0; i < audioFileNames.size() - 1; i++) {
+			if (audioFileNames.get(i).equals(currentFileName)) {
+				if (i == audioFileNames.size()) {
+					currentFileName = audioFileNames.get(0);
 				} else {
-					MUSIC_FILE = audioFiles.get(i++);
+					currentFileName = audioFileNames.get(i + 1);
 				}
 			}
 		}
-
 		playContent();
 	}
 
 	public void changePreviusContent() {
 		stopContent();
 
-		for (int i = 0; i < audioFiles.size(); i++) {
-			if (MUSIC_FILE.equals(audioFiles.get(i))) {
+		ListIterator<String> iterator = audioFileNames.listIterator();
+		for (int i = 0; i < audioFileNames.size(); i++) {
+			if (currentFileName.equals(audioFileNames.get(i))) {
 				if (i == 0) {
-					MUSIC_FILE = audioFiles.get(audioFiles.size() - 1);
+					currentFileName = audioFileNames.get(audioFileNames.size() - 1);
 				} else {
-					MUSIC_FILE = audioFiles.get(i--);
+					currentFileName = iterator.next();
 				}
 			}
 		}
@@ -104,23 +109,47 @@ public class AudioController {
 		playContent();
 	}
 
-	private void loadAudioFilesArray() {
+	private List<String> loadAudioFilesArray() {
+		List<String> ret = null;
 
 		File directory = new File(directoryPath);
 		File[] files = directory.listFiles();
-
 		if (files != null) {
 			for (File file : files) {
-				audioFiles.add(file.getName());
+				System.out.println(file.getName());
+				ret = null == ret ? new ArrayList<String>() : ret;
+				ret.add(file.getName());
 			}
 		}
+		return ret;
 	}
 
 	public List<String> getContents() {
-		return audioFiles;
+		return audioFileNames;
 	}
 
 	public void setContents(List<String> audioFiles) {
-		this.audioFiles = audioFiles;
+		this.audioFileNames = audioFiles;
+	}
+
+	public void getNext() {
+
+		stopContent();
+
+		for (int i = 0; i < audioFileNames.size() - 1; i++) {
+			int idx = audioFileNames.indexOf(currentFileName);
+			if (idx < 0 || idx + 1 != audioFileNames.size()) {
+				currentFileName = audioFileNames.get(idx + 1);
+			}
+
+		}
+		playContent();
+	}
+
+	public String getPrevious(String uid) {
+		int idx = audioFileNames.indexOf(uid);
+		if (idx <= 0)
+			return "";
+		return audioFileNames.get(idx - 1);
 	}
 }

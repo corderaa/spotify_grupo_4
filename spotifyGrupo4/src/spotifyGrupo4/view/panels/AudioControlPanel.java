@@ -81,7 +81,7 @@ public class AudioControlPanel extends JPanel {
 				} catch (IndexOutOfBoundsException outOfBounds) {
 					handleIndexOutOfBounds(outOfBounds);
 				} catch (Exception e2) {
-					handleGenericException(e2);
+					System.out.println(e2.getMessage());
 				}
 
 			}
