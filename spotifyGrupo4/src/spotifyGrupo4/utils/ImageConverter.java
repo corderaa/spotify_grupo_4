@@ -23,6 +23,7 @@ public class ImageConverter {
 
 		return blob;
 	}
+
 	/**
 	 * Takes a String and converts it on to a image
 	 * 

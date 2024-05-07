@@ -2,6 +2,7 @@ package spotifyGrupo4.controllers;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Random;
 
 import spotifyGrupo4.db.managers.RecordManager;
 
@@ -38,6 +39,6 @@ public class AdvertController implements ControllerInterface<spotifyGrupo4.db.po
 
 	public spotifyGrupo4.db.pojo.Record chooseRandomAdvert(List<spotifyGrupo4.db.pojo.Record> records) {
 
-		return records.get((int) Math.random() * records.size());
+		return records.get((int) new Random().nextInt(records.size() - 1));
 	}
 }

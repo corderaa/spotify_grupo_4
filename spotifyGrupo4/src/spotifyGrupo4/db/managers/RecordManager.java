@@ -24,7 +24,7 @@ public class RecordManager implements ContentInterface<Record>, InterfaceManager
 	public List<Record> getAllWithBand() throws SQLException, Exception {
 		ArrayList<Record> ret = null;
 
-		String sql = "select * from record as r join band as b on r.bandId = b.contentCreatorId ";
+		String sql = "select * from record as r join band as b on r.bandId = b.contentCreatorId join contentcreator as c on b.contentCreatorId = c.contentCreatorId ";
 
 		Connection connection = null;
 

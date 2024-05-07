@@ -5,14 +5,18 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 import spotifyGrupo4.controllers.AdvertController;
+import spotifyGrupo4.utils.ImageConverter;
+import spotifyGrupo4.view.ExceptionHandler;
 
 public class AdvertPanel extends JPanel {
 
@@ -54,14 +58,19 @@ public class AdvertPanel extends JPanel {
 		this.addComponentListener(new ComponentAdapter() {
 			public void componentShown(ComponentEvent e) {
 
-				spotifyGrupo4.db.pojo.Record record = handleGetAllRecords(advertController);
+				spotifyGrupo4.db.pojo.Record record = getRandomRecord(advertController);
 
 				if (null != record) {
-					changeRecordDateLbl(lblPublicationDate, record);
-					changeRecordGenreLbl(lblGenre, record);
-					changeRecordImageLbl(lblAdvertisementImage, record);
-					changeRecordTitleLbl(lblDiscTitle, record);
-					changeGroupNameLbl(lblBandName, record);
+					try {
+						changeRecordDateLbl(lblPublicationDate, record);
+						changeRecordGenreLbl(lblGenre, record);
+						changeRecordImageLbl(lblAdvertisementImage, record);
+						changeRecordTitleLbl(lblDiscTitle, record);
+						changeGroupNameLbl(lblBandName, record);
+						loadBandImage(lblAdvertisementImage, record);
+					} catch (Exception e1) {
+						ExceptionHandler.handleGenericException(e1, "Ha habido un problema al cargar el anuncio");
+					}
 				}
 			}
 		});
@@ -88,14 +97,20 @@ public class AdvertPanel extends JPanel {
 		recordGenre.setText(record.getGenre());
 	}
 
-	private spotifyGrupo4.db.pojo.Record handleGetAllRecords(AdvertController advertController) {
+	private void loadBandImage(JLabel image, spotifyGrupo4.db.pojo.Record record) throws IOException {
+		image.setIcon(new ImageIcon(ImageConverter.BlobToImage(record.getBand().getImage())));
+	}
+
+	private spotifyGrupo4.db.pojo.Record getRandomRecord(AdvertController advertController) {
 		spotifyGrupo4.db.pojo.Record record = null;
 		try {
 			record = advertController.chooseRandomAdvert(advertController.getAll());
 		} catch (SQLException sqle) {
-			JOptionPane.showMessageDialog(null, sqle.getMessage());
+			ExceptionHandler.handleSqlException(sqle, "Ha habido un problema al cargar el anuncio");
+			System.out.println(sqle.getMessage());
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
+			ExceptionHandler.handleGenericException(e, "Ha habido un problema al cargar el anuncio");
+			System.out.println(e.getMessage());
 		}
 		return record;
 	}
