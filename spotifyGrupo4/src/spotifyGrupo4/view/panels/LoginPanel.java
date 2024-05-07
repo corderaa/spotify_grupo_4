@@ -20,6 +20,7 @@ public class LoginPanel extends JPanel {
 
 	private static final long serialVersionUID = -5444702140440966162L;
 	private JTextField textFieldMail = null;
+	private JTextField textFieldDni;
 	private JTextField textFieldPassword = null;
 	private JPanel panelForm = null;
 	private JLabel lblTitle = null;
@@ -47,12 +48,12 @@ public class LoginPanel extends JPanel {
 		lblTitle.setBounds(53, 41, 320, 57);
 		panelForm.add(lblTitle);
 
-		textFieldMail = new JTextField();
-		textFieldMail.setColumns(10);
-		textFieldMail.setBounds(42, 140, 331, 40);
-		panelForm.add(textFieldMail);
+		textFieldDni = new JTextField();
+		textFieldDni.setColumns(10);
+		textFieldDni.setBounds(42, 140, 331, 40);
+		panelForm.add(textFieldDni);
 
-		lblMain = new JLabel("Correo:");
+		lblMain = new JLabel("Dni:");
 		lblMain.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
 		lblMain.setBounds(42, 109, 76, 20);
 		panelForm.add(lblMain);
@@ -154,12 +155,12 @@ public class LoginPanel extends JPanel {
 
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (null != new AccountManager().getUser(textFieldMail.getText(), textFieldPassword.getText())) {
-					JOptionPane.showMessageDialog(null, "Bienvenido:" + textFieldMail.getText());
+				if (null != new AccountManager().getUser(textFieldDni.getText(), textFieldPassword.getText())) {
+					JOptionPane.showMessageDialog(null, "Bienvenido:" + textFieldDni.getText());
 					//Account loggedUser = new AccountManager().getUser(textFieldMail.getText(), textFieldPassword.getText());
 
 
-					clearTextFields(textFieldMail, textFieldPassword);
+					clearTextFields(textFieldDni, textFieldPassword);
 					panels.get(0).setVisible(false);
 					panels.get(1).setVisible(false);
 					panels.get(2).setVisible(true);

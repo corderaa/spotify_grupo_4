@@ -1,6 +1,7 @@
 package spotifyGrupo4.view.panels;
 
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -13,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
 
 public class RegisterPanel extends JPanel{
 	/**
@@ -20,10 +22,11 @@ public class RegisterPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = 8940817528876999995L;
 	private JTextField textField;
-	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
+	private JTextField textField_1;
+	private JTextField textField_5;
 
 	public RegisterPanel(List<JPanel> panels) {
 		setBackground(new Color(159, 203, 217));
@@ -35,83 +38,134 @@ public class RegisterPanel extends JPanel{
 		panelFormulario.setBounds(440, 105, 426, 522);
 		add(panelFormulario);
 		
-		JLabel lblTitulo = new JLabel("R E G I S T R A R S E");
-		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitulo.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 28));
-		lblTitulo.setBounds(79, 30, 267, 57);
-		panelFormulario.add(lblTitulo);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 0, 426, 522);
+		panelFormulario.add(scrollPane);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(47, 119, 131, 40);
-		panelFormulario.add(textField);
+		JPanel Subpanel = new JPanel();
+		Subpanel.setPreferredSize(new Dimension(200, 900));
+		scrollPane.setViewportView(Subpanel);
+		Subpanel.setLayout(null);
 		
 		JLabel lblUsuario = new JLabel("Nombre:");
 		lblUsuario.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
-		lblUsuario.setBounds(47, 89, 76, 20);
-		panelFormulario.add(lblUsuario);
+		lblUsuario.setBounds(39, 82, 76, 20);
+		Subpanel.add(lblUsuario);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(47, 291, 331, 40);
-		panelFormulario.add(textField_1);
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(39, 112, 331, 40);
+		Subpanel.add(textField);
 		
-		JLabel lblCorreo = new JLabel("Correo:");
-		lblCorreo.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
-		lblCorreo.setBounds(47, 260, 76, 20);
-		panelFormulario.add(lblCorreo);
+		JLabel lblTitulo = new JLabel("R E G I S T R A R S E");
+		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitulo.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 28));
+		lblTitulo.setBounds(64, 23, 267, 57);
+		Subpanel.add(lblTitulo);
+		
+		JLabel lblApellido1 = new JLabel("Apellido 1:");
+		lblApellido1.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
+		lblApellido1.setBounds(39, 171, 97, 20);
+		Subpanel.add(lblApellido1);
 		
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
-		textField_2.setBounds(47, 370, 331, 40);
-		panelFormulario.add(textField_2);
+		textField_2.setBounds(39, 202, 331, 40);
+		Subpanel.add(textField_2);
 		
-		JLabel lblContrasea = new JLabel("Contraseña:");
-		lblContrasea.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
-		lblContrasea.setBounds(47, 342, 115, 20);
-		panelFormulario.add(lblContrasea);
+		JLabel lblApellido2 = new JLabel("Apellido 2:");
+		lblApellido2.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
+		lblApellido2.setBounds(39, 253, 97, 20);
+		Subpanel.add(lblApellido2);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(39, 284, 331, 40);
+		Subpanel.add(textField_3);
+		
+		JLabel lblDni = new JLabel("DNI:\r\n");
+		lblDni.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
+		lblDni.setBounds(39, 335, 115, 20);
+		Subpanel.add(lblDni);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(39, 363, 331, 40);
+		Subpanel.add(textField_4);
+		
+		JCheckBox chckbxFree = new JCheckBox("Free\r\n");
+		chckbxFree.setSelected(true);
+		chckbxFree.setBounds(39, 810, 97, 23);
+		Subpanel.add(chckbxFree);
+		
+		JCheckBox chckbxPremium = new JCheckBox("Premium\r\n");
+		chckbxPremium.setBounds(141, 810, 97, 23);
+		Subpanel.add(chckbxPremium);
 		
 		JButton btnRegistrarse = new JButton("ENTRAR");
 		btnRegistrarse.setForeground(Color.WHITE);
 		btnRegistrarse.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
 		btnRegistrarse.setBackground(new Color(255, 51, 51));
-		btnRegistrarse.setBounds(47, 459, 331, 40);
-		panelFormulario.add(btnRegistrarse);
+		btnRegistrarse.setBounds(39, 850, 331, 40);
+		Subpanel.add(btnRegistrarse);
 		
-		JLabel lblDni = new JLabel("DNI:");
-		lblDni.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
-		lblDni.setBounds(47, 178, 76, 20);
-		panelFormulario.add(lblDni);
+		JLabel lblContraseña = new JLabel("Contraseña:");
+		lblContraseña.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
+		lblContraseña.setBounds(39, 414, 179, 20);
+		Subpanel.add(lblContraseña);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(47, 209, 331, 40);
-		panelFormulario.add(textField_3);
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(39, 442, 331, 40);
+		Subpanel.add(textField_1);
 		
-		JCheckBox chckbxMale = new JCheckBox("Hombre");
-		chckbxMale.setSelected(true);
-		chckbxMale.setBounds(47, 424, 97, 23);
-		panelFormulario.add(chckbxMale);
+		JLabel lblfechaNacimiento = new JLabel("Fecha de nacimiento:\r\n");
+		lblfechaNacimiento.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
+		lblfechaNacimiento.setBounds(39, 493, 179, 20);
+		Subpanel.add(lblfechaNacimiento);
 		
-		JCheckBox chckbxFemale = new JCheckBox("Mujer");
-		chckbxFemale.setBounds(146, 424, 97, 23);
-		panelFormulario.add(chckbxFemale);
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(39, 521, 331, 40);
+		Subpanel.add(textField_5);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(247, 119, 131, 40);
-		panelFormulario.add(textField_4);
+		JLabel lblCity = new JLabel("Ciudad:");
+		lblCity.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
+		lblCity.setBounds(39, 570, 179, 20);
+		Subpanel.add(lblCity);
 		
-		JLabel lblApellidos = new JLabel("Apellidos:");
-		lblApellidos.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
-		lblApellidos.setBounds(247, 89, 76, 20);
-		panelFormulario.add(lblApellidos);
+		JTextField textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(39, 600, 331, 40);
+		Subpanel.add(textField_6);
+		
+		JLabel lblCounty = new JLabel("Pais:");
+		lblCounty.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
+		lblCounty.setBounds(39, 647, 179, 20);
+		Subpanel.add(lblCounty);
+		
+		JTextField textField_7 = new JTextField();
+		textField_7.setColumns(10);
+		textField_7.setBounds(39, 679, 331, 40);
+		Subpanel.add(textField_7);
+		
+		JLabel lblPostCode = new JLabel("Codigo Postal:");
+		lblPostCode.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
+		lblPostCode.setBounds(39, 724, 179, 20);
+		Subpanel.add(lblPostCode);
+		
+		JTextField textField_8 = new JTextField();
+		textField_8.setColumns(10);
+		textField_8.setBounds(39, 758, 331, 40);
+		Subpanel.add(textField_8);
 		
 		JPanel panelFormularioFondo = new JPanel();
 		panelFormularioFondo.setLayout(null);
 		panelFormularioFondo.setBackground(Color.BLACK);
 		panelFormularioFondo.setBounds(469, 74, 436, 529);
 		add(panelFormularioFondo);
+		
+		
 		
 		JButton btnClose = new JButton("CERRAR");
 		btnClose.addActionListener(new ActionListener() {

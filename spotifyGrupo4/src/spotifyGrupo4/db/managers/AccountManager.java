@@ -36,7 +36,14 @@ public class AccountManager implements AccountInterface<Account> {
 		// TODO Auto-generated method stub
 
 	}
-
+	
+	/**
+	 * Get user from the database
+	 * @param dni
+	 * @param password
+	 * @return
+	 */
+	
 	public Account getUser(String dni, String password) {
 
 		Account ret = null;
