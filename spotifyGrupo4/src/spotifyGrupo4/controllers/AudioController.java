@@ -61,7 +61,7 @@ public class AudioController {
 						player = new Player(fileInputStream);
 						player.play();
 					} catch (Exception e) {
-
+						System.out.println(e.getMessage());
 					}
 				}
 			}.start();
@@ -80,15 +80,26 @@ public class AudioController {
 	public void changeNextContent() {
 		stopContent();
 
+		// for (int i = 0; i < audioFileNames.size() - 1; i++) {
+		// if (audioFileNames.get(i).equalsIgnoreCase(currentFileName)) {
+		// if (i == audioFileNames.size()) {
+		// currentFileName = audioFileNames.get(0);
+		// } else {
+		// currentFileName = audioFileNames.get(i);
+		// }
+		// }
+		// }
+
 		for (int i = 0; i < audioFileNames.size() - 1; i++) {
-			if (audioFileNames.get(i).equals(currentFileName)) {
-				if (i == audioFileNames.size()) {
-					currentFileName = audioFileNames.get(0);
+			if (currentFileName.equals(audioFileNames.get(i))) {
+				if (audioFileNames.size() - 1 == i) {
+					setCurrentFileName(audioFileNames.get(0));
 				} else {
-					currentFileName = audioFileNames.get(i + 1);
+					setCurrentFileName(audioFileNames.get(audioFileNames.size() + 1));
 				}
 			}
 		}
+
 		playContent();
 	}
 
@@ -99,7 +110,7 @@ public class AudioController {
 		for (int i = 0; i < audioFileNames.size(); i++) {
 			if (currentFileName.equals(audioFileNames.get(i))) {
 				if (i == 0) {
-					currentFileName = audioFileNames.get(audioFileNames.size() - 1);
+					setCurrentFileName(audioFileNames.get(audioFileNames.size() - 1));
 				} else {
 					currentFileName = iterator.next();
 				}
@@ -124,14 +135,6 @@ public class AudioController {
 		return ret;
 	}
 
-	public List<String> getContents() {
-		return audioFileNames;
-	}
-
-	public void setContents(List<String> audioFiles) {
-		this.audioFileNames = audioFiles;
-	}
-
 	public void getNext() {
 
 		stopContent();
@@ -151,5 +154,45 @@ public class AudioController {
 		if (idx <= 0)
 			return "";
 		return audioFileNames.get(idx - 1);
+	}
+
+	public List<String> getContents() {
+		return audioFileNames;
+	}
+
+	public void setContents(List<String> audioFiles) {
+		this.audioFileNames = audioFiles;
+	}
+
+	public String getCurrentFileName() {
+		return currentFileName;
+	}
+
+	public void setCurrentFileName(String currentFileName) {
+		this.currentFileName = currentFileName;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+	public List<String> getAudioFileNames() {
+		return audioFileNames;
+	}
+
+	public void setAudioFileNames(List<String> audioFileNames) {
+		this.audioFileNames = audioFileNames;
+	}
+
+	public String getDirectoryPath() {
+		return directoryPath;
+	}
+
+	public static void setInstance(AudioController instance) {
+		AudioController.instance = instance;
 	}
 }

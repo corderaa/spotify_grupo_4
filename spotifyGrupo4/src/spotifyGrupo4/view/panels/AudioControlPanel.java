@@ -30,6 +30,7 @@ public class AudioControlPanel extends JPanel {
 	private boolean isPlaying = false;
 
 	public AudioControlPanel() {
+
 		setBackground(new Color(51, 51, 51));
 		setBounds(309, 618, 953, 62);
 		setLayout(null);

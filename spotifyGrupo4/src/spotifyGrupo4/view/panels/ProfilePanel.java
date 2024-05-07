@@ -222,10 +222,8 @@ public class ProfilePanel extends JPanel {
 
 	private void fillInfo() {
 		try {
-			fillCommonInfoTable(profileController.getbyLogin(Session.getInstance().getAccount().getDni()),
-					tableCommonInfo);
-			fillLoginInfoTable(profileController.getbyLogin(Session.getInstance().getAccount().getDni()),
-					tableLoginInfo);
+			fillCommonInfoTable(Session.getInstance().getAccount(), tableCommonInfo);
+			fillLoginInfoTable(Session.getInstance().getAccount(), tableLoginInfo);
 			fillPremiumInfoTable(profileController.getPremiumByLogin(Session.getInstance().getAccount().getDni()),
 					tablePremiumAccountInfo); // CAMBIAR POR
 			// SEPARADO
