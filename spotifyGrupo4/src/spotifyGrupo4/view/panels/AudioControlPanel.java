@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import spotifyGrupo4.controllers.AudioController;
+import spotifyGrupo4.view.ExceptionHandler;
 
 public class AudioControlPanel extends JPanel {
 
@@ -21,7 +22,6 @@ public class AudioControlPanel extends JPanel {
 	private final String NEXT_ICON_URL = ".//img//forward-solid.png";
 	private final String PREVIUS_ICON_URL = ".//img//backward-solid.png";
 	private final String LIKE_ICON_URL = ".//img//heart-solid.png";
-	private int currentSongPlayed = 0;
 
 	private JLabel lblStartStop = null;
 	private JLabel lblPrevius = null;
@@ -65,6 +65,7 @@ public class AudioControlPanel extends JPanel {
 					lblStartStop.setIcon(new ImageIcon(STOP_ICON_URL));
 					AudioController.getInstance().playContent();
 					isPlaying = true;
+					// AudioController.getInstance().addReproduction(null);
 				} else {
 					lblStartStop.setIcon(new ImageIcon(PLAY_ICON_URL));
 					AudioController.getInstance().stopContent();
@@ -79,9 +80,11 @@ public class AudioControlPanel extends JPanel {
 				try {
 					AudioController.getInstance().changeNextContent();
 				} catch (IndexOutOfBoundsException outOfBounds) {
-					handleIndexOutOfBounds(outOfBounds);
+					ExceptionHandler.handleIndexOutOfBoundsException(outOfBounds,
+							"Ha ocurrido un error, no se ha podido cargar la siguiente cancion/podcast");
 				} catch (Exception e2) {
-					System.out.println(e2.getMessage());
+					ExceptionHandler.handleGenericException(e2,
+							"Ha ocurrido un error, no se ha podido cargar la siguiente cancion/podcast");
 				}
 
 			}
@@ -93,9 +96,11 @@ public class AudioControlPanel extends JPanel {
 				try {
 					AudioController.getInstance().changePreviusContent();
 				} catch (IndexOutOfBoundsException outOfBounds) {
-					handleIndexOutOfBounds(outOfBounds);
+					ExceptionHandler.handleIndexOutOfBoundsException(outOfBounds,
+							"Ha ocurrido un error, no se ha podido cargar la siguiente cancion/podcast");
 				} catch (Exception e2) {
-					handleGenericException(e2);
+					ExceptionHandler.handleGenericException(e2,
+							"Ha ocurrido un error, no se ha podido cargar la siguiente cancion/podcast");
 				}
 
 			}
@@ -106,13 +111,5 @@ public class AudioControlPanel extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 			}
 		});
-	}
-
-	private void handleIndexOutOfBounds(IndexOutOfBoundsException outOfBounds) {
-		JOptionPane.showMessageDialog(null, outOfBounds.getMessage());
-	}
-
-	private void handleGenericException(Exception e) {
-		JOptionPane.showMessageDialog(null, e.getMessage());
 	}
 }

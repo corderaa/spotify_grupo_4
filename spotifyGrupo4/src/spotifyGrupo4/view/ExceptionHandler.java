@@ -1,4 +1,4 @@
-package spotifyGrupo4.utils;
+package spotifyGrupo4.view;
 
 import java.sql.SQLException;
 
@@ -11,6 +11,10 @@ public class ExceptionHandler {
 	}
 
 	public static void handleGenericException(Exception e, String msg) {
+		JOptionPane.showMessageDialog(null, msg);
+	}
+
+	public static void handleIndexOutOfBoundsException(IndexOutOfBoundsException outOfBound, String msg) {
 		JOptionPane.showMessageDialog(null, msg);
 	}
 }
