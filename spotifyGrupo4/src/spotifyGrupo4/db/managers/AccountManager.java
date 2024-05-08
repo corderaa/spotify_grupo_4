@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import spotifyGrupo4.db.pojo.Account;
+import spotifyGrupo4.db.pojo.AdminAccount;
 import spotifyGrupo4.db.pojo.FreeAccount;
 import spotifyGrupo4.db.pojo.PremiumAccount;
 import spotifyGrupo4.db.utils.DBUtils;
@@ -76,7 +77,7 @@ public class AccountManager implements AccountInterface<Account> {
 					ret = new FreeAccount();
 				}
 				if (resultSet.getString("accountType").equalsIgnoreCase("admin")) {
-					ret = new PremiumAccount();
+					ret = new AdminAccount();
 				}
 
 				ret.setId(resultSet.getInt("accountId"));
