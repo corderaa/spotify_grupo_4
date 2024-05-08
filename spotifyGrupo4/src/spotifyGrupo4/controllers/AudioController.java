@@ -3,21 +3,15 @@ package spotifyGrupo4.controllers;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-
 import javazoom.jl.player.Player;
-import spotifyGrupo4.db.pojo.Account;
 import spotifyGrupo4.db.pojo.Content;
-import spotifyGrupo4.db.pojo.FreeAccount;
-import spotifyGrupo4.db.pojo.PremiumAccount;
 
 public class AudioController {
 
 	public static AudioController instance = null;
 	private final String directoryPath = ".//music//";
-	private String currentFileName = null;
+	private int currentAudioIndex = 0;
 	private Player player = null;
 
 	/**
@@ -49,15 +43,12 @@ public class AudioController {
 
 		if (null != audioFileNames) {
 
-			if (null == currentFileName) {
-				currentFileName = audioFileNames.get(0);
-			}
-
 			new Thread() {
 				@Override
 				public void run() {
 					try {
-						FileInputStream fileInputStream = new FileInputStream(directoryPath + currentFileName);
+						FileInputStream fileInputStream = new FileInputStream(
+								directoryPath + audioFileNames.get(currentAudioIndex));
 						player = new Player(fileInputStream);
 						player.play();
 					} catch (Exception e) {
@@ -80,24 +71,10 @@ public class AudioController {
 	public void changeNextContent() {
 		stopContent();
 
-		// for (int i = 0; i < audioFileNames.size() - 1; i++) {
-		// if (audioFileNames.get(i).equalsIgnoreCase(currentFileName)) {
-		// if (i == audioFileNames.size()) {
-		// currentFileName = audioFileNames.get(0);
-		// } else {
-		// currentFileName = audioFileNames.get(i);
-		// }
-		// }
-		// }
-
-		for (int i = 0; i < audioFileNames.size() - 1; i++) {
-			if (currentFileName.equals(audioFileNames.get(i))) {
-				if (audioFileNames.size() - 1 == i) {
-					setCurrentFileName(audioFileNames.get(0));
-				} else {
-					setCurrentFileName(audioFileNames.get(audioFileNames.size() + 1));
-				}
-			}
+		if (currentAudioIndex < audioFileNames.size() - 1) {
+			currentAudioIndex++;
+		} else {
+			currentAudioIndex = 0;
 		}
 
 		playContent();
@@ -106,15 +83,10 @@ public class AudioController {
 	public void changePreviusContent() {
 		stopContent();
 
-		ListIterator<String> iterator = audioFileNames.listIterator();
-		for (int i = 0; i < audioFileNames.size(); i++) {
-			if (currentFileName.equals(audioFileNames.get(i))) {
-				if (i == 0) {
-					setCurrentFileName(audioFileNames.get(audioFileNames.size() - 1));
-				} else {
-					currentFileName = iterator.next();
-				}
-			}
+		if (currentAudioIndex > 0) {
+			currentAudioIndex--;
+		} else {
+			currentAudioIndex = audioFileNames.size() - 1;
 		}
 
 		playContent();
@@ -135,41 +107,12 @@ public class AudioController {
 		return ret;
 	}
 
-	public void getNext() {
-
-		stopContent();
-
-		for (int i = 0; i < audioFileNames.size() - 1; i++) {
-			int idx = audioFileNames.indexOf(currentFileName);
-			if (idx < 0 || idx + 1 != audioFileNames.size()) {
-				currentFileName = audioFileNames.get(idx + 1);
-			}
-
-		}
-		playContent();
-	}
-
-	public String getPrevious(String uid) {
-		int idx = audioFileNames.indexOf(uid);
-		if (idx <= 0)
-			return "";
-		return audioFileNames.get(idx - 1);
-	}
-
 	public List<String> getContents() {
 		return audioFileNames;
 	}
 
 	public void setContents(List<String> audioFiles) {
 		this.audioFileNames = audioFiles;
-	}
-
-	public String getCurrentFileName() {
-		return currentFileName;
-	}
-
-	public void setCurrentFileName(String currentFileName) {
-		this.currentFileName = currentFileName;
 	}
 
 	public Player getPlayer() {

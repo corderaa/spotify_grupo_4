@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.Date;
 import java.util.List;
 
+import spotifyGrupo4.db.pojo.Account;
 import spotifyGrupo4.db.pojo.FreeAccount;
 import spotifyGrupo4.db.pojo.PremiumAccount;
 import spotifyGrupo4.db.utils.DBUtils;
@@ -29,10 +30,11 @@ public class PremiumAccountManager implements AccountInterface<PremiumAccount>, 
 	}
 
 	@Override
-	public PremiumAccount getByLogin(String id) throws SQLException, Exception {
+	public PremiumAccount getByLogin(Account account) throws SQLException, Exception {
 		PremiumAccount ret = null;
 
-		String sql = "select * from premiumAccount where accountId = " + id;
+		String sql = "select * from account as a join premium as p using (accountId)  where accountId = "
+				+ account.getId();
 
 		Connection connection = null;
 

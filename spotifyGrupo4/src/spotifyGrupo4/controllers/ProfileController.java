@@ -20,14 +20,14 @@ public class ProfileController {
 		premiumAccountManager = new PremiumAccountManager();
 	}
 
-	public FreeAccount getbyLogin(String id) throws SQLException, Exception {
+	public FreeAccount getbyLogin(Account account) throws SQLException, Exception {
 
-		return freeAccountManager.getByLogin(id);
+		return freeAccountManager.getByLogin(account);
 	}
 
-	public PremiumAccount getPremiumByLogin(String id) throws SQLException, Exception {
+	public PremiumAccount getPremiumByLogin(Account account) throws SQLException, Exception {
 
-		return premiumAccountManager.getByLogin(id);
+		return premiumAccountManager.getByLogin(account);
 	}
 
 }

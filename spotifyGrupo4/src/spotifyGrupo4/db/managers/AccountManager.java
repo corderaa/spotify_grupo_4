@@ -14,7 +14,7 @@ import spotifyGrupo4.db.utils.DBUtils;
 public class AccountManager implements AccountInterface<Account> {
 
 	@Override
-	public Account getByLogin(String login) throws SQLException, Exception {
+	public Account getByLogin(Account account) throws SQLException, Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -36,14 +36,15 @@ public class AccountManager implements AccountInterface<Account> {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	/**
 	 * Get user from the database
+	 * 
 	 * @param dni
 	 * @param password
 	 * @return
 	 */
-	
+
 	public Account getUser(String dni, String password) {
 
 		Account ret = null;
@@ -73,12 +74,12 @@ public class AccountManager implements AccountInterface<Account> {
 					ret = new PremiumAccount();
 				} else if (resultSet.getString("accountType").equalsIgnoreCase("free")) {
 					ret = new FreeAccount();
-				} 
+				}
 
 				ret.setId(resultSet.getInt("accountId"));
 				ret.setDni(resultSet.getString("accountdni"));
 				ret.setName(resultSet.getString("accountname"));
-				ret.setAccountType(resultSet.getString("aacountType"));
+				ret.setAccountType(resultSet.getString("accountType"));
 				ret.setMiddleName(resultSet.getString("accountmiddleName"));
 				ret.setSurName(resultSet.getString("accountsurname"));
 				ret.setBirthDate(resultSet.getDate("accountbirthDate"));

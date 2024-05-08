@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.Date;
 import java.util.List;
 
+import spotifyGrupo4.db.pojo.Account;
 import spotifyGrupo4.db.pojo.FreeAccount;
 import spotifyGrupo4.db.utils.DBUtils;
 import spotifyGrupo4.utils.DateConverter;
@@ -27,11 +28,11 @@ public class FreeAccountManager implements AccountInterface<FreeAccount>, Interf
 	}
 
 	@Override
-	public FreeAccount getByLogin(String id) throws SQLException, Exception {
+	public FreeAccount getByLogin(Account account) throws SQLException, Exception {
 
 		FreeAccount ret = null;
 
-		String sql = "select * from account where accountId = " + id;
+		String sql = "select * from account where accountId = " + account.getId();
 
 		Connection connection = null;
 

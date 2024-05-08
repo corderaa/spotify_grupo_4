@@ -224,9 +224,10 @@ public class ProfilePanel extends JPanel {
 		try {
 			fillCommonInfoTable(Session.getInstance().getAccount(), tableCommonInfo);
 			fillLoginInfoTable(Session.getInstance().getAccount(), tableLoginInfo);
-			fillPremiumInfoTable(profileController.getPremiumByLogin(Session.getInstance().getAccount().getDni()),
-					tablePremiumAccountInfo); // CAMBIAR POR
-			// SEPARADO
+			if (Session.getInstance().getAccount().getAccountType().equalsIgnoreCase("premium")) {
+				fillPremiumInfoTable(profileController.getPremiumByLogin(Session.getInstance().getAccount()),
+						tablePremiumAccountInfo);
+			}
 		} catch (SQLException sqle) {
 			ExceptionHandler.handleSqlException(sqle, "No hay conexion a base de datos");
 		} catch (Exception e) {

@@ -95,7 +95,7 @@ public class AudioControlPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					AudioController.getInstance().changePreviusContent();
+					// AudioController.getInstance().changePreviusContent();
 				} catch (IndexOutOfBoundsException outOfBounds) {
 					ExceptionHandler.handleIndexOutOfBoundsException(outOfBounds,
 							"Ha ocurrido un error, no se ha podido cargar la siguiente cancion/podcast");

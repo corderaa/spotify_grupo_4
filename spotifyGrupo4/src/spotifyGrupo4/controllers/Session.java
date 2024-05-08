@@ -7,15 +7,17 @@ import javax.swing.JTextField;
 import spotifyGrupo4.db.managers.FreeAccountManager;
 import spotifyGrupo4.db.managers.PremiumAccountManager;
 import spotifyGrupo4.db.pojo.Account;
+
 /**
- * Singleton pattern ensure one and only one instance of the same object is created.
- *   If null it creates a new one, else, it will return always the same instance, untill we nullify  and do it again.
+ * Singleton pattern ensure one and only one instance of the same object is
+ * created. If null it creates a new one, else, it will return always the same
+ * instance, untill we nullify and do it again.
  */
 public class Session {
 
 	public static Session instance = null;
 
-	/** 
+	/**
 	 * List of content waiting to be played
 	 */
 	private Account account = null;
@@ -33,7 +35,7 @@ public class Session {
 	}
 
 	public Account getAccount() {
-		
+
 		return account;
 	}
 
@@ -44,10 +46,9 @@ public class Session {
 	public void updatePassword(Account account, JTextField password1) throws SQLException, Exception {
 		if (null != account) {
 			if (account.getAccountType() == "Free") {
-				freeAccountManager.updatePassword(freeAccountManager.getByLogin(account.getDni()), password1.getText());
+				freeAccountManager.updatePassword(freeAccountManager.getByLogin(account), password1.getText());
 			} else if (account.getAccountType() == "Premium") {
-				premiumAccountManager.updatePassword(premiumAccountManager.getByLogin(account.getDni()),
-						password1.getText());
+				premiumAccountManager.updatePassword(premiumAccountManager.getByLogin(account), password1.getText());
 			}
 		}
 	}
