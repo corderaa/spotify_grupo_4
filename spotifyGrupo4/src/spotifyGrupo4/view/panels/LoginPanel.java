@@ -4,22 +4,21 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import spotifyGrupo4.controllers.Session;
 import spotifyGrupo4.db.managers.AccountManager;
-import spotifyGrupo4.db.pojo.Account;
+
 
 public class LoginPanel extends JPanel {
 
 	private static final long serialVersionUID = -5444702140440966162L;
-	private JTextField textFieldMail = null;
 	private JTextField textFieldDni;
 	private JTextField textFieldPassword = null;
 	private JPanel panelForm = null;
@@ -155,11 +154,13 @@ public class LoginPanel extends JPanel {
 
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
+				
 				if (null != new AccountManager().getUser(textFieldDni.getText(), textFieldPassword.getText())) {
 					JOptionPane.showMessageDialog(null, "Bienvenido:" + textFieldDni.getText());
-					//Account loggedUser = new AccountManager().getUser(textFieldMail.getText(), textFieldPassword.getText());
-
-
+					
+					Session.getInstance().setAccount( new AccountManager().getUser(textFieldDni.getText(), textFieldPassword.getText()));
 					clearTextFields(textFieldDni, textFieldPassword);
 					panels.get(0).setVisible(false);
 					panels.get(1).setVisible(false);

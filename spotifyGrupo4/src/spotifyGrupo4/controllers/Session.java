@@ -7,7 +7,10 @@ import javax.swing.JTextField;
 import spotifyGrupo4.db.managers.FreeAccountManager;
 import spotifyGrupo4.db.managers.PremiumAccountManager;
 import spotifyGrupo4.db.pojo.Account;
-
+/**
+ * Singleton pattern ensure one and only one instance of the same object is created.
+ *   If null it creates a new one, else, it will return always the same instance, untill we nullify  and do it again.
+ */
 public class Session {
 
 	public static Session instance = null;
@@ -30,6 +33,7 @@ public class Session {
 	}
 
 	public Account getAccount() {
+		
 		return account;
 	}
 
