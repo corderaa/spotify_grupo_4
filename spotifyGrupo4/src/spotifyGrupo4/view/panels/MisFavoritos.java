@@ -22,9 +22,12 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import spotifyGrupo4.controllers.PlaylistController;
+import spotifyGrupo4.controllers.Session;
 import spotifyGrupo4.db.managers.PlayListManager;
 import spotifyGrupo4.db.pojo.Content;
+import spotifyGrupo4.db.pojo.FreeAccount;
 import spotifyGrupo4.db.pojo.Playlist;
+import spotifyGrupo4.db.pojo.PremiumAccount;
 import spotifyGrupo4.utils.FileManager;
 
 public class MisFavoritos extends JPanel {
@@ -40,7 +43,11 @@ public class MisFavoritos extends JPanel {
 	 */
 	public MisFavoritos(List<JPanel> panels) {
 
-	
+	if (Session.getInstance().getAccount().getAccountType().equalsIgnoreCase("premium"))
+			{PremiumAccount user = (PremiumAccount) Session.getInstance().getAccount();}
+	else
+		{FreeAccount user = (FreeAccount) Session.getInstance().getAccount();}
+
 		
 		setBounds(309, 0, 953, 618);
 		setBackground(new Color(102, 205, 170));
@@ -202,7 +209,7 @@ public class MisFavoritos extends JPanel {
 				try {
 					
 					//////20 is the test number, change for account
-					ArrayList<Playlist> playlists = new PlaylistController().getAllPlaylistsFromAccount(1);
+					ArrayList<Playlist> playlists = new PlaylistController().getAllPlaylistsFromAccount(Session.getInstance().getAccount().getId()  );
 					
 					 showPlaylist(modelo, playlists);
 					
@@ -225,7 +232,7 @@ public class MisFavoritos extends JPanel {
 		btnExport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					ArrayList<Playlist> playlists = new PlaylistController().getAllPlaylistsFromAccount(2);
+					ArrayList<Playlist> playlists = new PlaylistController().getAllPlaylistsFromAccount(Session.getInstance().getAccount().getId() );
 					//////20 is the test number, change for account
 
 					new FileManager().writeObject(playlists, "1");
@@ -250,7 +257,8 @@ public class MisFavoritos extends JPanel {
 				////
 				////SAme thing, index in readboject gos for testing, a different one should be used
 				try {
-					ArrayList<Playlist> playlists  = (ArrayList<Playlist>)new FileManager().readObject("1");
+					@SuppressWarnings("unchecked")
+					ArrayList<Playlist> playlists  = (ArrayList<Playlist>)new FileManager().readObject(String.valueOf(Session.getInstance().getAccount().getId()));
 					showPlaylist( modelo,  playlists);
 				} catch (Exception e1) {
 					System.out.println("Import Failed");				
@@ -273,7 +281,7 @@ public class MisFavoritos extends JPanel {
 					var title = javax.swing.JOptionPane.showInputDialog("Write a name to indenity the playlist?");
 					 if (title == null)
 						 return;
-					new PlayListManager().createPlaylist(15, title.trim());
+					new PlayListManager().createPlaylist(Session.getInstance().getAccount().getId(), title.trim());
 				} catch (HeadlessException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
