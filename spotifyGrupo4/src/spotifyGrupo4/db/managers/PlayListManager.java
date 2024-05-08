@@ -71,19 +71,24 @@ public class PlayListManager {
 	 */
 	public void createPlaylist(int accountId, String title) throws Exception, SQLException {
 
-		String sql = "call insertPlaylist(" + accountId + ","+ title + ")";
+		String sql = "call insertPlaylist(" + accountId + ",'"+ title + "')";
 
 		////////////////////////////
 		Connection connection = null;
-		java.sql.Statement statement = null;
+		//java.sql.Statement statement = null;
+		connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+
+		PreparedStatement preparedStatement = null;
+		preparedStatement = connection.prepareStatement(sql);
+		
+
 		//ResultSet resultSet = null;
 
 		Class.forName(DBUtils.DRIVER);
-		connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-		statement = connection.createStatement();
-		 statement.executeQuery(sql);
+		//statement = connection.createStatement();
+		// statement.executeQuery(sql);
 		//resultSet = statement.executeQuery(sql);
-		
+		preparedStatement.executeUpdate();
 		/////////////////////
 
 
