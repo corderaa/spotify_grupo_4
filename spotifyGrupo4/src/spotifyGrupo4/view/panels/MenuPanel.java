@@ -76,6 +76,27 @@ public class MenuPanel extends JPanel {
 		JButton btnFavorites = new JButton("Mis Favoritos");
 		btnFavorites.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				panels.get(0).setVisible(false);
+				panels.get(1).setVisible(false);
+				panels.get(2).setVisible(false);
+				panels.get(3).setVisible(false);
+				panels.get(4).setVisible(false);
+				panels.get(5).setVisible(false);
+				panels.get(6).setVisible(false);
+				panels.get(7).setVisible(false);
+				panels.get(8).setVisible(false);
+				panels.get(9).setVisible(false);
+				panels.get(10).setVisible(false);
+				panels.get(11).setVisible(false);
+				panels.get(12).setVisible(false);
+				panels.get(13).setVisible(true);
+				
+				
+				
+				
+				
+				
+				
 			}
 		});
 		btnFavorites.setBackground(new Color(255, 255, 255));

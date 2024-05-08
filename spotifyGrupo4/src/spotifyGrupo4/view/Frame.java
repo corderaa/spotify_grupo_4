@@ -10,6 +10,7 @@ import spotifyGrupo4.view.panels.AudioControlPanel;
 import spotifyGrupo4.view.panels.BandPanel;
 import spotifyGrupo4.view.panels.LoginPanel;
 import spotifyGrupo4.view.panels.MenuPanel;
+import spotifyGrupo4.view.panels.MisFavoritos;
 import spotifyGrupo4.view.panels.PodcastPanel;
 import spotifyGrupo4.view.panels.PodcasterPanel;
 import spotifyGrupo4.view.panels.ProfilePanel;
@@ -150,6 +151,14 @@ public class Frame extends JFrame {
 		registerPanel.setVisible(false);
 		contentPanel.add(registerPanel);
 		panels.add(registerPanel);
+		
+		// 12
+		MisFavoritos misFavoritos = new MisFavoritos(panels);
+		
+		//13
+		misFavoritos.setVisible(false);
+		contentPanel.add(misFavoritos);
+		panels.add(misFavoritos);
 
 	}
 }
