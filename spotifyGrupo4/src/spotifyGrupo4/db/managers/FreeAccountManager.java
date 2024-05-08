@@ -119,8 +119,8 @@ public class FreeAccountManager implements AccountInterface<FreeAccount>, Interf
 
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 			statement = connection.createStatement();
-			String sql = "update reto4_grupo4.account set account.accountPassword = " + password
-					+ " where account.accountId = " + t.getId();
+			String sql = "update reto4_grupo4.account set account.accountPassword = '" + password
+					+ "' where account.accountId = " + t.getId();
 
 			statement.executeUpdate(sql);
 

@@ -45,9 +45,9 @@ public class Session {
 
 	public void updatePassword(Account account, JTextField password1) throws SQLException, Exception {
 		if (null != account) {
-			if (account.getAccountType() == "Free") {
+			if (account.getAccountType().equalsIgnoreCase("Free")) {
 				freeAccountManager.updatePassword(freeAccountManager.getByLogin(account), password1.getText());
-			} else if (account.getAccountType() == "Premium") {
+			} else if (account.getAccountType().equalsIgnoreCase("Premium")) {
 				premiumAccountManager.updatePassword(premiumAccountManager.getByLogin(account), password1.getText());
 			}
 		}

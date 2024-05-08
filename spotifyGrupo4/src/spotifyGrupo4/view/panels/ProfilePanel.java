@@ -162,6 +162,7 @@ public class ProfilePanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (Session.getInstance().isPasswordValid(textFieldPassword1, textFieldPassword2)) {
 					makePasswordChange();
+					JOptionPane.showMessageDialog(null, "La contraseña es valida");
 				} else {
 					JOptionPane.showMessageDialog(null, "La contraseña no es valida");
 				}
