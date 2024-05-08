@@ -75,6 +75,9 @@ public class AccountManager implements AccountInterface<Account> {
 				} else if (resultSet.getString("accountType").equalsIgnoreCase("free")) {
 					ret = new FreeAccount();
 				}
+				if (resultSet.getString("accountType").equalsIgnoreCase("admin")) {
+					ret = new PremiumAccount();
+				}
 
 				ret.setId(resultSet.getInt("accountId"));
 				ret.setDni(resultSet.getString("accountdni"));

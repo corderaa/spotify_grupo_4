@@ -15,7 +15,6 @@ import javax.swing.SwingConstants;
 import spotifyGrupo4.controllers.Session;
 import spotifyGrupo4.db.managers.AccountManager;
 
-
 public class LoginPanel extends JPanel {
 
 	private static final long serialVersionUID = -5444702140440966162L;
@@ -154,14 +153,14 @@ public class LoginPanel extends JPanel {
 
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				
+
 				if (null != new AccountManager().getUser(textFieldDni.getText(), textFieldPassword.getText())) {
 					JOptionPane.showMessageDialog(null, "Bienvenido:" + textFieldDni.getText());
-					
-					Session.getInstance().setAccount(new AccountManager().getUser(textFieldDni.getText(), textFieldPassword.getText()));
+
+					Session.getInstance().setAccount(
+							new AccountManager().getUser(textFieldDni.getText(), textFieldPassword.getText()));
 					clearTextFields(textFieldDni, textFieldPassword);
+
 					panels.get(0).setVisible(false);
 					panels.get(1).setVisible(false);
 					panels.get(2).setVisible(true);
