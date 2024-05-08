@@ -1,7 +1,9 @@
 package spotifyGrupo4.db.managers;
 
+import java.awt.Taskbar.State;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -96,7 +98,6 @@ public class FreeAccountManager implements AccountInterface<FreeAccount>, Interf
 
 	@Override
 	public void updateLastLogin(FreeAccount t, Date currentDate) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -107,8 +108,36 @@ public class FreeAccountManager implements AccountInterface<FreeAccount>, Interf
 	}
 
 	@Override
-	public void updatePassword(FreeAccount t, String password) {
-		// TODO Auto-generated method stub
+	public void updatePassword(FreeAccount t, String password) throws SQLException, Exception {
+
+		Connection connection = null;
+
+		Statement statement = null;
+
+		try {
+			Class.forName(DBUtils.DRIVER);
+
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			statement = connection.createStatement();
+			String sql = "update reto4_grupo4.account set account.accountPassword = " + password
+					+ " where account.accountId = " + t.getId();
+
+			statement.executeUpdate(sql);
+
+		} finally {
+			try {
+				if (statement != null)
+					statement.close();
+			} catch (Exception e) {
+			}
+			;
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (Exception e) {
+			}
+			;
+		}
 
 	}
 

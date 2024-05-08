@@ -115,9 +115,35 @@ public class PremiumAccountManager implements AccountInterface<PremiumAccount>, 
 	}
 
 	@Override
-	public void updatePassword(PremiumAccount t, String password) {
-		// TODO Auto-generated method stub
+	public void updatePassword(PremiumAccount t, String password) throws SQLException, Exception {
+		Connection connection = null;
 
+		Statement statement = null;
+
+		try {
+			Class.forName(DBUtils.DRIVER);
+
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			statement = connection.createStatement();
+			String sql = "update reto4_grupo4.account set account.accountPassword = " + password
+					+ " where account.accountId = " + t.getId();
+
+			statement.executeUpdate(sql);
+
+		} finally {
+			try {
+				if (statement != null)
+					statement.close();
+			} catch (Exception e) {
+			}
+			;
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (Exception e) {
+			}
+			;
+		}
 	}
 
 	@Override

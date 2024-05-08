@@ -30,6 +30,8 @@ public interface AccountInterface<T> {
 
 	/**
 	 * Updates the password of an account
+	 * @throws Exception 
+	 * @throws SQLException 
 	 */
-	public void updatePassword(T t, String password);
+	public void updatePassword(T t, String password) throws SQLException, Exception;
 }
