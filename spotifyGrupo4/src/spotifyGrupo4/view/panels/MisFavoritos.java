@@ -170,7 +170,7 @@ public class MisFavoritos extends JPanel {
         {
             public void mousePressed(MouseEvent e)
             {
-                System.out.println("pressed");
+                //System.out.println("pressed");
             }
 
             public void mouseReleased(MouseEvent e)
@@ -225,9 +225,9 @@ public class MisFavoritos extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					ArrayList<Playlist> playlists = new PlaylistController().getAllPlaylistsFromAccount(Session.getInstance().getAccount().getId() );
-					new FileManager().writeObject(playlists, "1");
+					new FileManager().writeObject(playlists, String.valueOf(Session.getInstance().getAccount().getId()));
 					
-					new PlaylistController().getAllPlaylistsFromAccount(2);
+					new PlaylistController().getAllPlaylistsFromAccount(Session.getInstance().getAccount().getId());
 				} catch (SQLException e1) {
 					
 //					System.out.println("Export Failed");

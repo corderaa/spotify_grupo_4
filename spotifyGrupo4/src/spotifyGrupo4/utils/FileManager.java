@@ -19,7 +19,10 @@ public class FileManager {
 	
 
 
+	private  final String RUTA = ".\\files\\";
+
 	public void writeObject(Object objeto, String ruta) throws IOException {
+		 ruta = RUTA + ruta;
 		try {
 			FileOutputStream fileOutput = new FileOutputStream(ruta);
 			ObjectOutputStream outputStream = new ObjectOutputStream(fileOutput);
@@ -38,6 +41,8 @@ public class FileManager {
 
 	public Object readObject(String ruta) throws IOException {
 		Object objeto = null;
+		 ruta = RUTA + ruta;
+
 		try {
 			FileInputStream fileInput = new FileInputStream(ruta);
 			try {

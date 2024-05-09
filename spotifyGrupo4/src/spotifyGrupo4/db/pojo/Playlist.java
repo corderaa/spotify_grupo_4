@@ -1,9 +1,10 @@
  	package spotifyGrupo4.db.pojo;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class Playlist {
+public class Playlist implements Serializable{
 	
 	//Para no quitar un campo que ya estaba creado,
 	//he anadido account id, que deberia en realidad susituir a account, 
