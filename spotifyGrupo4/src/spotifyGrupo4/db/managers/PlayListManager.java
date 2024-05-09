@@ -17,47 +17,76 @@ import spotifyGrupo4.db.utils.DBUtils;
 
 public class PlayListManager {
 
-	// private String GET_USER_PLAYLISTS = "select * from playlist where
-	// playlist.accountId = accountId";
-
 	/**
 	 * Deletes a playList from the database
 	 * 
 	 * @param t
 	 */
 	public void delete( int playlistId) throws SQLException, Exception {
-//it should make sure it doesnt delete the first one
+
 		String sql = null;
-
-		sql = "delete from playlist where playlistId = " + playlistId + " and borrable = 1";
 		Connection connection = null;
-		//java.sql.Statement statement = null;
 		PreparedStatement preparedStatement = null;
-
-
-		Class.forName(DBUtils.DRIVER);
-		connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-		preparedStatement = connection.prepareStatement(sql);
-		preparedStatement.executeUpdate();
-		//statement = connection.createStatement();
-//		ResultSet resultSet = null;
-//		resultSet = preparedStatement.executeQuery(sql);
-		//statement.executeQuery(sql);
+		
+		sql = "delete from playlist where playlistId = " + playlistId + " and borrable = 1";
+		try {
+			Class.forName(DBUtils.DRIVER);
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.executeUpdate();
+		}  catch (ClassNotFoundException e) {
+			throw e;
+		} catch (SQLException e) {
+			throw e;
+		}
+		finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} catch (Exception e) {
+			}
+			;
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (Exception e) {
+			}
+			;
+		}
+		
 
 	}
 
-	// private String GET_USER_PLAYLISTS = "select * from playlist where
-	// playlist.accountId = ?";
-
 	public void createFirstPlaylist(int accountId) throws Exception, SQLException {
 		
-		String sql = "insert into playlist values (default," + accountId + ",'favourites', 0)";
-		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		Class.forName(DBUtils.DRIVER);
-		connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-		preparedStatement = connection.prepareStatement(sql);
-		preparedStatement.executeUpdate();
+		Connection connection = null;
+
+		try {
+			String sql = "insert into playlist values (default," + accountId + ",'favourites', 0)";
+			Class.forName(DBUtils.DRIVER);
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			throw e;
+		} catch (SQLException e) {
+			throw e;
+		}
+		finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} catch (Exception e) {
+			}
+			;
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (Exception e) {
+			}
+			;
+		}
 		
 	}
 
@@ -73,23 +102,36 @@ public class PlayListManager {
 
 		String sql = "call insertPlaylist(" + accountId + ",'"+ title + "')";
 
-		////////////////////////////
+	
 		Connection connection = null;
-		//java.sql.Statement statement = null;
-		connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-
 		PreparedStatement preparedStatement = null;
-		preparedStatement = connection.prepareStatement(sql);
+
 		
+		try {
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			preparedStatement = connection.prepareStatement(sql);
+			Class.forName(DBUtils.DRIVER);
+			preparedStatement.executeUpdate();
+		} 	 catch (ClassNotFoundException e) {
+			throw e;
+		} catch (SQLException e) {
+			throw e;
+		}
+		finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} catch (Exception e) {
+			}
+			;
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (Exception e) {
+			}
+			;
+		}
 
-		//ResultSet resultSet = null;
-
-		Class.forName(DBUtils.DRIVER);
-		//statement = connection.createStatement();
-		// statement.executeQuery(sql);
-		//resultSet = statement.executeQuery(sql);
-		preparedStatement.executeUpdate();
-		/////////////////////
 
 
 	}
@@ -150,41 +192,59 @@ public class PlayListManager {
 		Connection connection = null;
 		java.sql.Statement statement = null;
 		ResultSet resultSet = null;
-
-		Class.forName(DBUtils.DRIVER);
-		connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-		statement = connection.createStatement();
-		 resultSet = statement.executeQuery(sql);
-		//resultSet = statement.executeQuery(GET_USER_PLAYLISTS);
-		 
-		 while (resultSet.next()) {
-				
-			 if (resultSet.getString("contentType").equalsIgnoreCase("single"))
-			 {
-				 	Song newContent = new Song();
-				 	newContent.setTitle(resultSet.getString("title"));
-					newContent.setContentId(resultSet.getInt("playlistId"));
-					//newContent.setDuration(resultSet.getDate("Duration"));
-					System.out.println(newContent.toString());
-					allContents.add(newContent);
-				 
-			 }
+		
+		
+		try {Class.forName(DBUtils.DRIVER);
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			statement = connection.createStatement();
+			 resultSet = statement.executeQuery(sql);
+			//resultSet = statement.executeQuery(GET_USER_PLAYLISTS);
+			 
+			 while (resultSet.next()) {
 					
-			 else if  (resultSet.getString("contentType").equalsIgnoreCase("podcast"))
-			 {
-				 Podcast newContent = new Podcast();
-				 	newContent.setTitle(resultSet.getString("title"));
-					newContent.setContentId(resultSet.getInt("playlistId"));
-					//newContent.setDuration(resultSet.getDate("Duration"));
-					System.out.println(newContent.toString());
+				 if (resultSet.getString("contentType").equalsIgnoreCase("single"))
+				 {
+					 	Song newContent = new Song();
+					 	newContent.setTitle(resultSet.getString("title"));
+						newContent.setContentId(resultSet.getInt("playlistId"));
+						//newContent.setDuration(resultSet.getDate("Duration"));
+						System.out.println(newContent.toString());
+						allContents.add(newContent);
+					 
+				 }
+						
+				 else if  (resultSet.getString("contentType").equalsIgnoreCase("podcast"))
+				 {
+					 Podcast newContent = new Podcast();
+					 	newContent.setTitle(resultSet.getString("title"));
+						newContent.setContentId(resultSet.getInt("playlistId"));
+						//newContent.setDuration(resultSet.getDate("Duration"));
+						System.out.println(newContent.toString());
 
-					allContents.add(newContent);
-				 
+						allContents.add(newContent);
+					 
+				 }
 			 }
-		 }
-
-		return allContents;
-		 
+		} catch (ClassNotFoundException e) {
+			throw e;
+		} catch (SQLException e) {
+			throw e;
+		}
+		finally {
+			try {
+				if (statement != null)
+					statement.close();
+			} catch (Exception e) {
+			}
+			;
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (Exception e) {
+			}
+			;
+		}
+		return allContents; 
 	}
 
 
@@ -213,39 +273,58 @@ public class PlayListManager {
 		java.sql.Statement statement = null;
 		ResultSet resultSet = null;
 
-		Class.forName(DBUtils.DRIVER);
-		connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-		statement = connection.createStatement();
-		resultSet = statement.executeQuery(sql);
+		
+		try {		
+			Class.forName(DBUtils.DRIVER);
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(sql);
 
-		while (resultSet.next()) {
-			if (resultSet.getString("contentType").equalsIgnoreCase("single") ) {
-				Song newSong = new Song();
+			while (resultSet.next()) {
+				if (resultSet.getString("contentType").equalsIgnoreCase("single") ) {
+					Song newSong = new Song();
 
-				newSong.setTitle(resultSet.getString("title"));
-				newSong.setContentId(accountId);
-				newSong.setReproductions(resultSet.getInt("numberReproductions"));
+					newSong.setTitle(resultSet.getString("title"));
+					newSong.setContentId(accountId);
+					newSong.setReproductions(resultSet.getInt("numberReproductions"));
 
-				// gotta be parsed
-				// newContent.setDuration(resultSet.getInt("duration"));
+					// gotta be parsed
+					// newContent.setDuration(resultSet.getInt("duration"));
 
-				playListContent.add(newSong);
-			} else {
-				Podcast newPodcast = new Podcast();
-				newPodcast.setContentId(accountId);
+					playListContent.add(newSong);
+				} else {
+					Podcast newPodcast = new Podcast();
+					newPodcast.setContentId(accountId);
 
-				newPodcast.setTitle(resultSet.getString("title"));
-				newPodcast.setReproductions(resultSet.getInt("numberReproductions"));
+					newPodcast.setTitle(resultSet.getString("title"));
+					newPodcast.setReproductions(resultSet.getInt("numberReproductions"));
 
-				// newContent.setDuration(resultSet.getInt("duration"));
-				// gotta be parsed
+					// newContent.setDuration(resultSet.getInt("duration"));
+					// gotta be parsed
 
-				playListContent.add(newPodcast);
+					playListContent.add(newPodcast);
+				}
+
 			}
-
+		} catch (ClassNotFoundException e) {
+			throw e;
+		} catch (SQLException e) {
+			throw e;
+		}
+		finally {
+			try {
+				if (statement != null)
+					statement.close();
+			} catch (Exception e) {
+			}
+			;
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (Exception e) {
+			}
+			;
 		}
 		return playListContent;
-
 	}
-
 }

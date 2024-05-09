@@ -19,7 +19,7 @@ public class FileManager {
 	
 
 
-	public void writeObject(Object objeto, String ruta) {
+	public void writeObject(Object objeto, String ruta) throws IOException {
 		try {
 			FileOutputStream fileOutput = new FileOutputStream(ruta);
 			ObjectOutputStream outputStream = new ObjectOutputStream(fileOutput);
@@ -27,15 +27,16 @@ public class FileManager {
 			fileOutput.close();
 			outputStream.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw  e;
+			//e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw  e;
+			//e.printStackTrace();
 		}
 	}
 
-	public Object readObject(String ruta) {
+	public Object readObject(String ruta) throws IOException {
 		Object objeto = null;
 		try {
 			FileInputStream fileInput = new FileInputStream(ruta);
@@ -51,10 +52,12 @@ public class FileManager {
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw  e;
+			//e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw  e;
+			//e.printStackTrace();
 		}
 		
 		return objeto;
