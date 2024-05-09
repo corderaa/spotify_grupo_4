@@ -4,8 +4,7 @@ import java.sql.SQLException;
 
 import javax.swing.JTextField;
 
-import spotifyGrupo4.db.managers.FreeAccountManager;
-import spotifyGrupo4.db.managers.PremiumAccountManager;
+import spotifyGrupo4.db.managers.AccountManager;
 import spotifyGrupo4.db.pojo.Account;
 
 /**
@@ -22,12 +21,10 @@ public class Session {
 	 */
 	private Account account = null;
 
-	private FreeAccountManager freeAccountManager = null;
-	private PremiumAccountManager premiumAccountManager = null;
+	private AccountManager accountManager = null;
 
 	private Session() {
-		freeAccountManager = new FreeAccountManager();
-		premiumAccountManager = new PremiumAccountManager();
+		accountManager = new AccountManager();
 	}
 
 	public static Session getInstance() {
@@ -46,9 +43,11 @@ public class Session {
 	public void updatePassword(Account account, JTextField password1) throws SQLException, Exception {
 		if (null != account) {
 			if (account.getAccountType().equalsIgnoreCase("Free")) {
-				freeAccountManager.updatePassword(freeAccountManager.getByLogin(account), password1.getText());
+				accountManager.updatePassword(accountManager.getByLogin(account), password1.getText());
 			} else if (account.getAccountType().equalsIgnoreCase("Premium")) {
-				premiumAccountManager.updatePassword(premiumAccountManager.getByLogin(account), password1.getText());
+				accountManager.updatePassword(accountManager.getByLogin(account), password1.getText());
+			} else if (account.getAccountType().equalsIgnoreCase("admin")) {
+				accountManager.updatePassword(accountManager.getByLogin(account), password1.getText());
 			}
 		}
 	}
