@@ -28,6 +28,7 @@ public abstract class PanelAbstract extends JPanel {
 	private JScrollPane scrollGroup = null;
 	private JLabel lblReproductionNumber = null;
 	private JButton btnBack = null;
+	private DefaultTableModel model = null;
 
 	public PanelAbstract() {
 
@@ -68,13 +69,8 @@ public abstract class PanelAbstract extends JPanel {
 		scrollGroup.setBounds(224, 415, 486, 329);
 		subPanel.add(scrollGroup);
 
-		table = new JTable();
-		table.setModel(
-				new DefaultTableModel(
-						new Object[][] { { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
-								{ null, null }, { null, null }, { null, null }, { null, null }, { null, null },
-								{ null, null }, { null, null }, { null, null }, },
-						new String[] { "New column", "New column" }));
+		model = new DefaultTableModel();
+		table = new JTable(model);
 		scrollGroup.setViewportView(table);
 
 		lblDescription = new JLabel("Description");
@@ -176,6 +172,18 @@ public abstract class PanelAbstract extends JPanel {
 
 	public void setBtnBack(JButton btnBack) {
 		this.btnBack = btnBack;
+	}
+
+	public DefaultTableModel getModel() {
+		return model;
+	}
+
+	public void setModel(DefaultTableModel model) {
+		this.model = model;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }
