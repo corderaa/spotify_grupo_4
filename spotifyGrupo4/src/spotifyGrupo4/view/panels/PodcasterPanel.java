@@ -1,13 +1,16 @@
 package spotifyGrupo4.view.panels;
 
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 import spotifyGrupo4.db.managers.PodcasterManager;
-import spotifyGrupo4.db.pojo.Podcast;
 import spotifyGrupo4.db.pojo.Podcaster;
+import spotifyGrupo4.view.ExceptionHandler;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.List;
 
 public class PodcasterPanel extends PanelAbstract {
@@ -19,8 +22,11 @@ public class PodcasterPanel extends PanelAbstract {
 	public PodcasterPanel(List<JPanel> panels) {
 		podcasterManager = new PodcasterManager();
 		getLblTitle().setText("podcaster");
+		getModel().addColumn("name");
+		getModel().addColumn("reproduction Number");
+		getModel().addColumn("registration date");
+		getModel().addColumn("description");
 
-		
 		getBtnBack().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panels.get(0).setVisible(false);
@@ -32,11 +38,23 @@ public class PodcasterPanel extends PanelAbstract {
 				panels.get(6).setVisible(false);
 			}
 		});
+
+		this.addComponentListener(new ComponentAdapter() {
+			public void componentShown(ComponentEvent e) {
+				List<Podcaster> podcasters = podcasterManager.getAll();
+				fillTable(getModel(), podcasters);
+			}
+		});
 	}
 
-	private void fillTable() {
-		List<Podcaster> podcasters = podcasterManager.getAll();
-		
-		
+	private void fillTable(DefaultTableModel model, List<Podcaster> podcasters) {
+
+		for (Podcaster podcaster : podcasters) {
+			Object[] linea = { podcaster.getName(), podcaster.getReproduction(), podcaster.getRegistrationDate(),
+					podcaster.getDescription() };
+
+			model.addRow(linea);
+		}
+
 	}
 }

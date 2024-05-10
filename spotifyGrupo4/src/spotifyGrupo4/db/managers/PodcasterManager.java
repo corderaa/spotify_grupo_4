@@ -46,15 +46,13 @@ public class PodcasterManager implements ContentInterface<Podcaster>, InterfaceM
 				spotifyGrupo4.db.pojo.Podcaster podcaster = new spotifyGrupo4.db.pojo.Podcaster();
 
 				int contentCreatorId = resultSet.getInt("contentCreatorId");
-				int podcasterId = resultSet.getInt("podcasterId");
 				String contentCreatorName = resultSet.getString("contentCreatorName");
-				java.sql.Date registrationDate = resultSet.getDate("registrationDate");
-				int numberReproductions = resultSet.getInt("numberReproductions");
+				java.sql.Date registrationDate = resultSet.getDate("ContentCreatorRegistrationDate");
+				int numberReproductions = resultSet.getInt("ContentCreatorReproductionNumber");
 				String contentCreatorDescription = resultSet.getString("contentCreatorDescription");
 				String contentCreatorImage = resultSet.getString("contentCreatorImage");
 
 				podcaster.setId(contentCreatorId);
-				podcaster.setPodcasterId(podcasterId);
 				podcaster.setName(contentCreatorName);
 				podcaster.setReproduction(numberReproductions);
 				podcaster.setRegistrationDate(DateConverter.sqlDateToUtilDate(registrationDate));
