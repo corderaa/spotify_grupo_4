@@ -44,20 +44,19 @@ public class BandManager implements ContentInterface<Band>, InterfaceManager<Ban
 
 				spotifyGrupo4.db.pojo.Band band = new spotifyGrupo4.db.pojo.Band();
 
-				int bandId = resultSet.getInt("bandId");
+				int contentCreatorId = resultSet.getInt("contentCreatorId");
 				int members = resultSet.getInt("members");
 				String contentCreatorName = resultSet.getString("contentCreatorName");
-				java.sql.Date creationDate = resultSet.getDate("creationDate");
-				int numberReproductions = resultSet.getInt("numberReproductions");
+				java.sql.Date contentCreatorRegistrationDate = resultSet.getDate("contentCreatorRegistrationDate");
+				int contentCreatorReproductionNumber = resultSet.getInt("contentCreatorReproductionNumber");
 				String contentCreatorDescription = resultSet.getString("contentCreatorDescription");
 				String contentCreatorImage = resultSet.getString("contentCreatorImage");
 
-				band.setId(bandId);
+				band.setId(contentCreatorId);
 				band.setMembers(members);
 				band.setName(contentCreatorName);
-				band.setReproduction(numberReproductions);
-				band.setCreationDate(DateConverter.sqlDateToUtilDate(creationDate));
-				band.setReproduction(numberReproductions);
+				band.setCreationDate(DateConverter.sqlDateToUtilDate(contentCreatorRegistrationDate));
+				band.setReproduction(contentCreatorReproductionNumber);
 				band.setDescription(contentCreatorDescription);
 				band.setImage(contentCreatorImage);
 
