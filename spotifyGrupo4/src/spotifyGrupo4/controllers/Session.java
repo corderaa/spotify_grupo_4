@@ -6,6 +6,12 @@ import javax.swing.JTextField;
 
 import spotifyGrupo4.db.managers.AccountManager;
 import spotifyGrupo4.db.pojo.Account;
+import spotifyGrupo4.db.pojo.Band;
+import spotifyGrupo4.db.pojo.Content;
+import spotifyGrupo4.db.pojo.Podcast;
+import spotifyGrupo4.db.pojo.Podcaster;
+import spotifyGrupo4.db.pojo.Serie;
+import spotifyGrupo4.db.pojo.Song;
 
 /**
  * Singleton pattern ensure one and only one instance of the same object is
@@ -20,6 +26,11 @@ public class Session {
 	 * List of content waiting to be played
 	 */
 	private Account account = null;
+	private Band selectedBand = null;
+	private Record selectedRecord = null;
+	private Song selectedSong = null;
+	private Podcaster selectedPodcaster = null;
+	private Content selectedContent = null;
 
 	private AccountManager accountManager = null;
 
