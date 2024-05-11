@@ -6,11 +6,14 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import spotifyGrupo4.db.managers.BandManager;
 import spotifyGrupo4.db.pojo.Band;
+import spotifyGrupo4.view.ExceptionHandler;
 
 public class BandPanel extends PanelAbstract {
 
@@ -50,12 +53,18 @@ public class BandPanel extends PanelAbstract {
 	}
 
 	private void fillTable(DefaultTableModel model, List<Band> bands) {
+		try {
 
-		for (Band band : bands) {
-			Object[] linea = { band.getMembers(), band.getName(), band.getCreationDate(), band.getReproduction(),
-					band.getDescription(), band.getImage() };
+			if (getModel().getRowCount() == 0) {
+				for (Band band : bands) {
+					Object[] linea = { band.getMembers(), band.getName(), band.getCreationDate(),
+							band.getReproduction(), band.getDescription(), band.getImage() };
 
-			model.addRow(linea);
+					model.addRow(linea);
+				}
+			}
+		} catch (Exception e) {
+			ExceptionHandler.handleGenericException(e, "ERROR THERE ARE NO BANDS" + e.getMessage());
 		}
 
 	}

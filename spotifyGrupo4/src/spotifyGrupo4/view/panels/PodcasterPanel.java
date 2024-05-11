@@ -48,13 +48,17 @@ public class PodcasterPanel extends PanelAbstract {
 	}
 
 	private void fillTable(DefaultTableModel model, List<Podcaster> podcasters) {
+		try {
+			if (getModel().getRowCount() == 0) {
+				for (Podcaster podcaster : podcasters) {
+					Object[] linea = { podcaster.getName(), podcaster.getReproduction(),
+							podcaster.getRegistrationDate(), podcaster.getDescription() };
 
-		for (Podcaster podcaster : podcasters) {
-			Object[] linea = { podcaster.getName(), podcaster.getReproduction(), podcaster.getRegistrationDate(),
-					podcaster.getDescription() };
-
-			model.addRow(linea);
+					model.addRow(linea);
+				}
+			}
+		} catch (Exception e) {
+			ExceptionHandler.handleGenericException(e, "ERROR THERE ARE NO PODCASTERS" + e.getMessage());
 		}
-
 	}
 }
