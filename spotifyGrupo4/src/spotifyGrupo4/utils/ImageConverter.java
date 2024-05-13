@@ -3,9 +3,14 @@ package spotifyGrupo4.utils;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Base64;
 
 import javax.imageio.ImageIO;
+import javax.sql.rowset.serial.SerialBlob;
+
+import com.mysql.cj.jdbc.Blob;
 
 public class ImageConverter {
 
@@ -14,14 +19,10 @@ public class ImageConverter {
 	 * 
 	 * @return
 	 */
-	public static BufferedImage imageToBlob(String image) throws IOException {
+	public static String imageToBlob(String image) throws IOException {
 
-		byte[] blobBytes = Base64.getDecoder().decode(image);
-
-		ByteArrayInputStream blobArrayInputStream = new ByteArrayInputStream(blobBytes);
-		BufferedImage blob = ImageIO.read(blobArrayInputStream);
-
-		return blob;
+		byte[] fileContent = Files.readAllBytes(Paths.get(image));
+		return Base64.getEncoder().encodeToString(fileContent);
 	}
 
 	/**
