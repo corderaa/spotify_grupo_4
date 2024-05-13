@@ -43,7 +43,6 @@ public class Session {
 	}
 
 	public Account getAccount() {
-
 		return account;
 	}
 
@@ -51,6 +50,10 @@ public class Session {
 		this.account = account;
 	}
 
+	public void resetAccount() {
+		this.account = null;
+	}
+	
 	public void updatePassword(Account account, JTextField password1) throws SQLException, Exception {
 		if (null != account) {
 			if (account.getAccountType().equalsIgnoreCase("Free")) {
@@ -120,4 +123,6 @@ public class Session {
 
 		return false;
 	}
+	
+	
 }

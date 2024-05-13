@@ -5,10 +5,23 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.util.List;
 
 import javax.swing.SwingConstants;
+
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+import org.jdatepicker.util.JDatePickerUtil;
+
+import com.toedter.calendar.JDateChooser;
+
+import spotifyGrupo4.db.managers.FreeAccountManager;
+import spotifyGrupo4.db.pojo.FreeAccount;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -16,157 +29,188 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 
-public class RegisterPanel extends JPanel{
+public class RegisterPanel extends JPanel {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8940817528876999995L;
-	private JTextField textField;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_1;
-	private JTextField textField_5;
+	private JTextField textFieldNombre;
+	private JTextField textFieldSurname;
+	private JTextField textFieldMiddleName;
+	private JTextField textFieldDni;
+	private JTextField textFieldPassword;
 
 	public RegisterPanel(List<JPanel> panels) {
 		setBackground(new Color(159, 203, 217));
 		setBounds(100, 100, 1278, 719);
 		setLayout(null);
-		
+
 		JPanel panelFormulario = new JPanel();
 		panelFormulario.setLayout(null);
 		panelFormulario.setBounds(440, 105, 426, 522);
 		add(panelFormulario);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(0, 0, 426, 522);
 		panelFormulario.add(scrollPane);
-		
-		JPanel Subpanel = new JPanel();
-		Subpanel.setPreferredSize(new Dimension(200, 900));
-		scrollPane.setViewportView(Subpanel);
-		Subpanel.setLayout(null);
-		
+
+		JPanel subpanel = new JPanel();
+		subpanel.setPreferredSize(new Dimension(200, 900));
+		scrollPane.setViewportView(subpanel);
+		subpanel.setLayout(null);
+
 		JLabel lblUsuario = new JLabel("Nombre:");
 		lblUsuario.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
 		lblUsuario.setBounds(39, 82, 76, 20);
-		Subpanel.add(lblUsuario);
-		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(39, 112, 331, 40);
-		Subpanel.add(textField);
-		
+		subpanel.add(lblUsuario);
+
+		textFieldNombre = new JTextField();
+		textFieldNombre.setColumns(10);
+		textFieldNombre.setBounds(39, 112, 331, 40);
+		subpanel.add(textFieldNombre);
+
 		JLabel lblTitulo = new JLabel("R E G I S T R A R S E");
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 28));
 		lblTitulo.setBounds(64, 23, 267, 57);
-		Subpanel.add(lblTitulo);
-		
+		subpanel.add(lblTitulo);
+
 		JLabel lblApellido1 = new JLabel("Apellido 1:");
 		lblApellido1.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
 		lblApellido1.setBounds(39, 171, 97, 20);
-		Subpanel.add(lblApellido1);
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(39, 202, 331, 40);
-		Subpanel.add(textField_2);
-		
+		subpanel.add(lblApellido1);
+
+		textFieldSurname = new JTextField();
+		textFieldSurname.setColumns(10);
+		textFieldSurname.setBounds(39, 202, 331, 40);
+		subpanel.add(textFieldSurname);
+
 		JLabel lblApellido2 = new JLabel("Apellido 2:");
 		lblApellido2.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
 		lblApellido2.setBounds(39, 253, 97, 20);
-		Subpanel.add(lblApellido2);
-		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(39, 284, 331, 40);
-		Subpanel.add(textField_3);
-		
+		subpanel.add(lblApellido2);
+
+		textFieldMiddleName = new JTextField();
+		textFieldMiddleName.setColumns(10);
+		textFieldMiddleName.setBounds(39, 284, 331, 40);
+		subpanel.add(textFieldMiddleName);
+
 		JLabel lblDni = new JLabel("DNI:\r\n");
 		lblDni.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
 		lblDni.setBounds(39, 335, 115, 20);
-		Subpanel.add(lblDni);
-		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(39, 363, 331, 40);
-		Subpanel.add(textField_4);
-		
+		subpanel.add(lblDni);
+
+		textFieldDni = new JTextField();
+		textFieldDni.setColumns(10);
+		textFieldDni.setBounds(39, 363, 331, 40);
+		subpanel.add(textFieldDni);
+
 		JCheckBox chckbxFree = new JCheckBox("Free\r\n");
+
 		chckbxFree.setSelected(true);
 		chckbxFree.setBounds(39, 810, 97, 23);
-		Subpanel.add(chckbxFree);
-		
+		subpanel.add(chckbxFree);
+
 		JCheckBox chckbxPremium = new JCheckBox("Premium\r\n");
 		chckbxPremium.setBounds(141, 810, 97, 23);
-		Subpanel.add(chckbxPremium);
-		
-		JButton btnRegistrarse = new JButton("ENTRAR");
-		btnRegistrarse.setForeground(Color.WHITE);
-		btnRegistrarse.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
-		btnRegistrarse.setBackground(new Color(255, 51, 51));
-		btnRegistrarse.setBounds(39, 850, 331, 40);
-		Subpanel.add(btnRegistrarse);
-		
+		subpanel.add(chckbxPremium);
+
 		JLabel lblContraseña = new JLabel("Contraseña:");
 		lblContraseña.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
 		lblContraseña.setBounds(39, 414, 179, 20);
-		Subpanel.add(lblContraseña);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(39, 442, 331, 40);
-		Subpanel.add(textField_1);
-		
+		subpanel.add(lblContraseña);
+
+		textFieldPassword = new JTextField();
+		textFieldPassword.setColumns(10);
+		textFieldPassword.setBounds(39, 442, 331, 40);
+		subpanel.add(textFieldPassword);
+
 		JLabel lblfechaNacimiento = new JLabel("Fecha de nacimiento:\r\n");
 		lblfechaNacimiento.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
 		lblfechaNacimiento.setBounds(39, 493, 179, 20);
-		Subpanel.add(lblfechaNacimiento);
-		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(39, 521, 331, 40);
-		Subpanel.add(textField_5);
-		
+		subpanel.add(lblfechaNacimiento);
+
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setSize(331, 40);
+		dateChooser.setLocation(39, 521);
+		subpanel.add(dateChooser);
+
 		JLabel lblCity = new JLabel("Ciudad:");
 		lblCity.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
 		lblCity.setBounds(39, 570, 179, 20);
-		Subpanel.add(lblCity);
-		
-		JTextField textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(39, 600, 331, 40);
-		Subpanel.add(textField_6);
-		
+		subpanel.add(lblCity);
+
+		JTextField textFieldCity = new JTextField();
+		textFieldCity.setColumns(10);
+		textFieldCity.setBounds(39, 600, 331, 40);
+		subpanel.add(textFieldCity);
+
 		JLabel lblCounty = new JLabel("Pais:");
 		lblCounty.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
 		lblCounty.setBounds(39, 647, 179, 20);
-		Subpanel.add(lblCounty);
-		
-		JTextField textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(39, 679, 331, 40);
-		Subpanel.add(textField_7);
-		
+		subpanel.add(lblCounty);
+
+		JTextField textFieldCountry = new JTextField();
+		textFieldCountry.setColumns(10);
+		textFieldCountry.setBounds(39, 679, 331, 40);
+		subpanel.add(textFieldCountry);
+
 		JLabel lblPostCode = new JLabel("Codigo Postal:");
 		lblPostCode.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
 		lblPostCode.setBounds(39, 724, 179, 20);
-		Subpanel.add(lblPostCode);
-		
-		JTextField textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(39, 758, 331, 40);
-		Subpanel.add(textField_8);
-		
+		subpanel.add(lblPostCode);
+
+		JTextField textFieldPostalCode = new JTextField();
+		textFieldPostalCode.setColumns(10);
+		textFieldPostalCode.setBounds(39, 758, 331, 40);
+		subpanel.add(textFieldPostalCode);
+
 		JPanel panelFormularioFondo = new JPanel();
 		panelFormularioFondo.setLayout(null);
 		panelFormularioFondo.setBackground(Color.BLACK);
 		panelFormularioFondo.setBounds(469, 74, 436, 529);
 		add(panelFormularioFondo);
-		
-		
-		
+
+		JButton btnRegistrarse = new JButton("ENTRAR");
+		btnRegistrarse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				if (fieldsFilled() && fieldValid()) {
+
+					FreeAccountManager freeAccountManager = new FreeAccountManager();
+					FreeAccount newUser = new FreeAccount();
+
+					newUser.setDni(textFieldDni.getText().trim());
+					newUser.setName(textFieldNombre.getText());
+					newUser.setMiddleName(textFieldMiddleName.getText().trim());
+					newUser.setSurName(textFieldSurname.getText().trim());
+					newUser.setBirthDate(dateChooser.getDate());
+					newUser.setPostalCode(Integer.parseInt(textFieldPostalCode.getText().trim()));
+					newUser.setCity(textFieldCity.getText().trim());
+					newUser.setCountry(textFieldCountry.getText().trim());
+					newUser.setPassword(textFieldPassword.getText().trim());
+					newUser.setAccountType(chckbxFree.isSelected() == true ? "free" : "premium");
+
+					freeAccountManager.insertUser(newUser);
+
+					JOptionPane.showMessageDialog(null, "Usuario registrado con exito");
+
+					// clearFields();
+
+					panels.get(0).setVisible(true);
+					panels.get(1).setVisible(false);
+				} else {
+					JOptionPane.showMessageDialog(null, "Error, Algun campo esta vacio o es incorrecto");
+				}
+
+			}
+		});
+		btnRegistrarse.setForeground(Color.WHITE);
+		btnRegistrarse.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
+		btnRegistrarse.setBackground(new Color(255, 51, 51));
+		btnRegistrarse.setBounds(39, 850, 331, 40);
+		subpanel.add(btnRegistrarse);
+
 		JButton btnClose = new JButton("CERRAR");
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -180,7 +224,7 @@ public class RegisterPanel extends JPanel{
 				panels.get(7).setVisible(true);
 				panels.get(8).setVisible(false);
 				panels.get(9).setVisible(false);
-				panels.get(10).setVisible(false);	
+				panels.get(10).setVisible(false);
 				panels.get(11).setVisible(false);
 				panels.get(12).setVisible(false);
 			}
@@ -189,6 +233,20 @@ public class RegisterPanel extends JPanel{
 		btnClose.setBackground(new Color(204, 51, 51));
 		btnClose.setBounds(1129, 619, 89, 44);
 		add(btnClose);
-		
+
+		chckbxFree.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				chckbxPremium.setSelected(false);
+				chckbxFree.setSelected(true);
+			}
+		});
+
+		chckbxPremium.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				chckbxFree.setSelected(false);
+				chckbxPremium.setSelected(true);
+			}
+		});
+
 	}
 }

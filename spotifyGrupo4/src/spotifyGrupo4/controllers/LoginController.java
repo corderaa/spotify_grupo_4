@@ -18,13 +18,6 @@ public class LoginController implements ControllerInterface<Account> {
 		freeAccountManager.insert(null);
 	}
 
-	@Override
-	public void update(Account t) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void delete(Account t) {
 		// TODO Auto-generated method stub
 
@@ -34,5 +27,11 @@ public class LoginController implements ControllerInterface<Account> {
 	public List<Account> getAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void update(Account t) {
+		// TODO Auto-generated method stub
+		
 	}
 }

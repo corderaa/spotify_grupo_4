@@ -22,10 +22,39 @@ public class AccountManager implements AccountInterface<Account> {
 	}
 
 	@Override
-	public void updateLastLogin(Account t, Date currentDate) {
-		// TODO Auto-generated method stub
+	public void updateLastLogin(Account t, Date currentDate) throws SQLException, ClassNotFoundException {
+
+		Connection connection = null;
+
+		Statement statement = null;
+
+		try {
+			Class.forName(DBUtils.DRIVER);
+
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			statement = connection.createStatement();
+			String sql = "update reto4_grupo4.account set account.last_login = '" + currentDate
+					+ "' where account.accountId = " + t.getId();
+
+			statement.executeUpdate(sql);
+
+		} finally {
+			try {
+				if (statement != null)
+					statement.close();
+			} catch (Exception e) {
+			}
+			;
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (Exception e) {
+			}
+			;
+		}
 
 	}
+
 
 	@Override
 	public void updateIsBloqued(Account t, Boolean bloqued) {
@@ -141,4 +170,5 @@ public class AccountManager implements AccountInterface<Account> {
 
 		return ret;
 	}
+	
 }

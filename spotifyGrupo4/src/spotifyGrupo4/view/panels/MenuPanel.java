@@ -90,13 +90,6 @@ public class MenuPanel extends JPanel {
 				panels.get(11).setVisible(false);
 				panels.get(12).setVisible(false);
 				panels.get(13).setVisible(true);
-				
-				
-				
-				
-				
-				
-				
 			}
 		});
 		btnFavorites.setBackground(new Color(255, 255, 255));

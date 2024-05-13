@@ -155,10 +155,12 @@ public class LoginPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				if (null != new AccountManager().getUser(textFieldDni.getText(), textFieldPassword.getText())) {
+
 					JOptionPane.showMessageDialog(null, "Bienvenido:" + textFieldDni.getText());
 
 					Session.getInstance().setAccount(
 							new AccountManager().getUser(textFieldDni.getText(), textFieldPassword.getText()));
+
 					clearTextFields(textFieldDni, textFieldPassword);
 
 					panels.get(0).setVisible(false);

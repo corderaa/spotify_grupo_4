@@ -17,6 +17,7 @@ public abstract class Account {
 	private String accountType = null;
 	private Boolean isBloqued = null;
 	private String password = null;
+	private Date registryDate = null;
 
 	public int getId() {
 		return id;
@@ -150,7 +151,15 @@ public abstract class Account {
 		return "Account [id=" + id + ", postalCode=" + postalCode + ", city=" + city + ", country=" + country
 				+ ", birthDate=" + birthDate + ", lastLogin=" + lastLogin + ", dni=" + dni + ", name=" + name
 				+ ", middleName=" + middleName + ", surName=" + surName + ", accountType=" + accountType
-				+ ", isBloqued=" + isBloqued + "]";
+				+ ", isBloqued=" + isBloqued + ", password=" + password + ", registryDate=" + registryDate + "]";
+	}
+
+	public Date getRegistryDate() {
+		return registryDate;
+	}
+
+	public void setRegistryDate(Date registryDate) {
+		this.registryDate = registryDate;
 	}
 
 }
