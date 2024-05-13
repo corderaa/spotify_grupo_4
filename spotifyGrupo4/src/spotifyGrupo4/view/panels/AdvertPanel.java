@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
+import javazoom.jl.converter.Converter;
 import spotifyGrupo4.controllers.AdvertController;
 import spotifyGrupo4.utils.ImageConverter;
 import spotifyGrupo4.view.ExceptionHandler;
@@ -67,6 +68,9 @@ public class AdvertPanel extends JPanel {
 						changeRecordImageLbl(lblAdvertisementImage, record);
 						changeRecordTitleLbl(lblDiscTitle, record);
 						changeGroupNameLbl(lblBandName, record);
+						if (null == record.getRecordCover()) {
+							record.setRecordCover(ImageConverter.imageToBlob(".//img//Sin título.png").toString());
+						}
 						loadBandImage(lblAdvertisementImage, record);
 					} catch (Exception e1) {
 						ExceptionHandler.handleGenericException(e1, "Ha habido un problema al cargar el anuncio");
@@ -98,7 +102,7 @@ public class AdvertPanel extends JPanel {
 	}
 
 	private void loadBandImage(JLabel image, spotifyGrupo4.db.pojo.Record record) throws IOException {
-		image.setIcon(new ImageIcon(ImageConverter.BlobToImage(record.getBand().getImage())));
+		image.setIcon(new ImageIcon(ImageConverter.BlobToImage(record.getRecordCover())));
 	}
 
 	private spotifyGrupo4.db.pojo.Record getRandomRecord(AdvertController advertController) {
