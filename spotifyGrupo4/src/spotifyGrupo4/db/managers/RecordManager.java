@@ -141,14 +141,14 @@ public class RecordManager implements ContentInterface<Record>, InterfaceManager
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 			String sql = GET_RECORDS_FROM_BANDS;
 			statement = connection.prepareStatement(sql);
-			statement.setObject(1, band);
+			statement.setObject(1, band.getId());
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 
 				spotifyGrupo4.db.pojo.Record record = new spotifyGrupo4.db.pojo.Record();
 
 				record.setId(resultSet.getInt("recordId"));
-				record.setTitle(resultSet.getString("tilte"));
+				record.setTitle(resultSet.getString("title"));
 				record.setRecordCover(resultSet.getString("cover"));
 				record.setGenre(resultSet.getString("genre"));
 				record.setReleaseDate(resultSet.getDate("releaseDate"));
