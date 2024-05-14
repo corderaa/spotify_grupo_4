@@ -123,7 +123,7 @@ public class RecordManager implements ContentInterface<Record>, InterfaceManager
 	}
 
 	@Override
-	public Record getOne(Record recordId) {
+	public Record getOne(Record bandId) {
 		Record record = null;
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -134,7 +134,7 @@ public class RecordManager implements ContentInterface<Record>, InterfaceManager
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 			String sql = GET_ONE_RECORD;
 			statement = connection.prepareStatement(sql);
-			statement.setObject(1, recordId);
+			statement.setObject(1, bandId);
 			resultSet = statement.executeQuery();
 
 			if (resultSet.next()) {
@@ -144,6 +144,7 @@ public class RecordManager implements ContentInterface<Record>, InterfaceManager
 				record.setRecordCover(resultSet.getString("recordCover"));
 				record.setGenre(resultSet.getString("genre"));
 				record.setReleaseDate(resultSet.getDate("realeseDate"));
+				
 				record.setNumberReproductions(resultSet.getInt("numberReproduction"));
 			}
 		} catch (SQLException sqle) {

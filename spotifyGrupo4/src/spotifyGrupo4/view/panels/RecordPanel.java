@@ -9,7 +9,6 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
-import spotifyGrupo4.db.pojo.Podcaster;
 import spotifyGrupo4.db.pojo.Record;
 import spotifyGrupo4.db.managers.RecordManager;
 import spotifyGrupo4.view.ExceptionHandler;
@@ -23,13 +22,13 @@ public class RecordPanel extends PanelAbstract {
 	public RecordPanel(List<JPanel> panels) {
 
 		recordManager = new RecordManager();
-		getLblTitle().setText("Title");
-		getModel().addColumn("Record Cover");
-		getModel().addColumn("Genre");
-		getModel().addColumn("Release date");
-		getModel().addColumn("Number Reproductions");
-
 		getLblTitle().setText("Record");
+		getModel().addColumn("Title");
+		getModel().addColumn("RecordCover");
+		getModel().addColumn("Genre");
+		getModel().addColumn("ReleaseDate");
+		getModel().addColumn("NumberReproductions");
+
 
 		getBtnBack().addActionListener(new ActionListener() {
 
@@ -45,22 +44,13 @@ public class RecordPanel extends PanelAbstract {
 		});
 		this.addComponentListener(new ComponentAdapter() {
 			public void componentShown(ComponentEvent e) {
-				List<Record> records;
-				try {
-					records = recordManager.getAllWithBand();
-					fillRecordTable(getModel(), records);
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
+					fillRecordTale(getModel());
 			}
 		});
-	}
-
-	public void fillRecordTable(DefaultTableModel model,List<Record> records) {
+		}
+	public void fillRecordTale(DefaultTableModel model) {
 		try {
-
+			List<Record> records = recordManager.getAllWithBand();
 			if (getModel().getRowCount() == 0) {
 				for (Record record : records) {
 					Object[] linea = { record.getTitle(), record.getRecordCover(), record.getGenre(),

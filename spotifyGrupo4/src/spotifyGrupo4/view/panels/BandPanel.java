@@ -48,11 +48,12 @@ public class BandPanel extends PanelAbstract {
 		});
 		getTable().addMouseListener(new java.awt.event.MouseAdapter() {
 		    public void mouseClicked(java.awt.event.MouseEvent e) {
-		        int row = getTable().rowAtPoint(e.getPoint());
+
+		    	int row = getTable().rowAtPoint(e.getPoint());
 		        if (row >= 0 && e.getClickCount() == 2) {
 		            if (recordPanel != null) {
 		                DefaultTableModel model = (DefaultTableModel) getTable().getModel();
-		                recordPanel.fillRecordTable(model, null);
+		                recordPanel.fillRecordTale(model);
 		                panels.get(0).setVisible(false);
 						panels.get(1).setVisible(false);
 						panels.get(2).setVisible(false);
@@ -69,12 +70,12 @@ public class BandPanel extends PanelAbstract {
 		this.addComponentListener(new ComponentAdapter() {
 			public void componentShown(ComponentEvent e) {
 				List<Band> band = bandManager.getAll();
-				fillTable(getModel(), band);
+				fillBandTable(getModel(), band);
 			}
 		});
 	}
 	
-	private void fillTable(DefaultTableModel model, List<Band> bands) {
+	private void fillBandTable(DefaultTableModel model, List<Band> bands) {
 		try {
 
 			if (getModel().getRowCount() == 0) {
