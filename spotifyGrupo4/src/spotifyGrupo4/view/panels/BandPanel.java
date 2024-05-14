@@ -29,10 +29,10 @@ public class BandPanel extends PanelAbstract {
 		getModel().addColumn("Description");
 		getModel().addColumn("Image");
 
-		getLblTitle().setText("band");
 
 		getBtnBack().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				getModel().setRowCount(0);
 				panels.get(0).setVisible(false);
 				panels.get(1).setVisible(false);
 				panels.get(2).setVisible(true);
@@ -44,7 +44,7 @@ public class BandPanel extends PanelAbstract {
 		});
 		getTable().addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent e) {
-
+				
 				Session.getInstance().setSelectedBand(band.get(getTable().getSelectedRow()));
 				
 				panels.get(0).setVisible(false);

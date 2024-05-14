@@ -9,8 +9,6 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
-import spotifyGrupo4.db.pojo.Band;
-import spotifyGrupo4.db.pojo.Podcaster;
 import spotifyGrupo4.db.pojo.Record;
 import spotifyGrupo4.controllers.Session;
 import spotifyGrupo4.db.managers.RecordManager;
@@ -35,6 +33,7 @@ public class RecordPanel extends PanelAbstract {
 		getBtnBack().addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
+				getModel().setRowCount(0);
 				panels.get(0).setVisible(true);
 				panels.get(1).setVisible(false);
 				panels.get(2).setVisible(false);
@@ -60,17 +59,17 @@ public class RecordPanel extends PanelAbstract {
 
 	public void fillRecordTable(DefaultTableModel recordPanel, List<Record> records) {
 		try {
+			getModel().setRowCount(0);
 			if (getModel().getRowCount() == 0) {
+				for (Record record : records) {
+					Object[] linea = { record.getTitle(), record.getRecordCover(), record.getGenre(),
+							record.getReleaseDate(), record.getNumberReproductions() };
 
-				if (getModel().getRowCount() == 0) {
-					for (Record record : records) {
-						Object[] linea = { record.getTitle(), record.getRecordCover(), record.getGenre(),
-								record.getReleaseDate(), record.getNumberReproductions() };
+					recordPanel.addRow(linea);
 
-						recordPanel.addRow(linea);
-					}
 				}
 			}
+
 		} catch (Exception e) {
 			ExceptionHandler.handleGenericException(e, "ERROR: " + e.getMessage());
 		}
