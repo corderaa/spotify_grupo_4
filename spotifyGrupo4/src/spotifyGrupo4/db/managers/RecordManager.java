@@ -2,6 +2,7 @@ package spotifyGrupo4.db.managers;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,6 +15,7 @@ import spotifyGrupo4.db.utils.DBUtils;
 import spotifyGrupo4.utils.DateConverter;
 
 public class RecordManager implements ContentInterface<Record>, InterfaceManager<Record> {
+	private static final String GET_ONE_RECORD = null;
 	private String GET_ALL_RECORDS = "select * from record as r join band as b on r.bandId = b.contentCreatorId ";
 
 	@Override
@@ -121,8 +123,45 @@ public class RecordManager implements ContentInterface<Record>, InterfaceManager
 	}
 
 	@Override
-	public Record getOne(Record t) {
-		// TODO Auto-generated method stub
-		return null;
+	public Record getOne(Record recordId) {
+		Record record = null;
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+
+		try {
+			Class.forName(DBUtils.DRIVER);
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			String sql = GET_ONE_RECORD;
+			statement = connection.prepareStatement(sql);
+			statement.setObject(1, recordId);
+			resultSet = statement.executeQuery();
+
+			if (resultSet.next()) {
+				record = new Record();
+				record.setId(resultSet.getInt("recordId"));
+				record.setTitle(resultSet.getString("title"));
+				record.setRecordCover(resultSet.getString("recordCover"));
+				record.setGenre(resultSet.getString("genre"));
+				record.setReleaseDate(resultSet.getDate("realeseDate"));
+				record.setNumberReproductions(resultSet.getInt("numberReproduction"));
+			}
+		} catch (SQLException sqle) {
+			System.out.println("Error con la BBDD - " + sqle.getMessage());
+		} catch (Exception e) {
+			System.out.println("Error generico - " + e.getMessage());
+		} finally {
+			try {
+				if (resultSet != null)
+					resultSet.close();
+				if (statement != null)
+					statement.close();
+				if (connection != null)
+					connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return record;
 	}
 }

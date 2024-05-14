@@ -69,9 +69,12 @@ public abstract class PanelAbstract extends JPanel {
 		scrollGroup.setBounds(224, 415, 486, 329);
 		subPanel.add(scrollGroup);
 
+		
 		model = new DefaultTableModel();
 		table = new JTable(model);
 		scrollGroup.setViewportView(table);
+		table.setDefaultEditor(Object.class, null);
+
 
 		lblDescription = new JLabel("Description");
 		lblDescription.setBounds(224, 780, 486, 14);

@@ -49,6 +49,7 @@ public class PodcasterPanel extends PanelAbstract {
 
 	private void fillTable(DefaultTableModel model, List<Podcaster> podcasters) {
 		try {
+			
 			if (getModel().getRowCount() == 0) {
 				for (Podcaster podcaster : podcasters) {
 					Object[] linea = { podcaster.getName(), podcaster.getReproduction(),

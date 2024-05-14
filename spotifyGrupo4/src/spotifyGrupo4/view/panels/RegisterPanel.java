@@ -12,12 +12,7 @@ import java.util.List;
 
 import javax.swing.SwingConstants;
 
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
-import org.jdatepicker.util.JDatePickerUtil;
 
-import com.toedter.calendar.JDateChooser;
 
 import spotifyGrupo4.db.managers.FreeAccountManager;
 import spotifyGrupo4.db.pojo.FreeAccount;
@@ -130,10 +125,10 @@ public class RegisterPanel extends JPanel {
 		lblfechaNacimiento.setBounds(39, 493, 179, 20);
 		subpanel.add(lblfechaNacimiento);
 
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setSize(331, 40);
-		dateChooser.setLocation(39, 521);
-		subpanel.add(dateChooser);
+//		JDateChooser dateChooser = new JDateChooser();
+//		dateChooser.setSize(331, 40);
+//		dateChooser.setLocation(39, 521);
+//		subpanel.add(dateChooser);
 
 		JLabel lblCity = new JLabel("Ciudad:");
 		lblCity.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
@@ -172,39 +167,39 @@ public class RegisterPanel extends JPanel {
 		add(panelFormularioFondo);
 
 		JButton btnRegistrarse = new JButton("ENTRAR");
-		btnRegistrarse.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				if (fieldsFilled() && fieldValid()) {
-
-					FreeAccountManager freeAccountManager = new FreeAccountManager();
-					FreeAccount newUser = new FreeAccount();
-
-					newUser.setDni(textFieldDni.getText().trim());
-					newUser.setName(textFieldNombre.getText());
-					newUser.setMiddleName(textFieldMiddleName.getText().trim());
-					newUser.setSurName(textFieldSurname.getText().trim());
-					newUser.setBirthDate(dateChooser.getDate());
-					newUser.setPostalCode(Integer.parseInt(textFieldPostalCode.getText().trim()));
-					newUser.setCity(textFieldCity.getText().trim());
-					newUser.setCountry(textFieldCountry.getText().trim());
-					newUser.setPassword(textFieldPassword.getText().trim());
-					newUser.setAccountType(chckbxFree.isSelected() == true ? "free" : "premium");
-
-					freeAccountManager.insertUser(newUser);
-
-					JOptionPane.showMessageDialog(null, "Usuario registrado con exito");
-
-					// clearFields();
-
-					panels.get(0).setVisible(true);
-					panels.get(1).setVisible(false);
-				} else {
-					JOptionPane.showMessageDialog(null, "Error, Algun campo esta vacio o es incorrecto");
-				}
-
-			}
-		});
+//		btnRegistrarse.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//
+//				if (fieldsFilled() && fieldValid()) {
+//
+//					FreeAccountManager freeAccountManager = new FreeAccountManager();
+//					FreeAccount newUser = new FreeAccount();
+//
+//					newUser.setDni(textFieldDni.getText().trim());
+//					newUser.setName(textFieldNombre.getText());
+//					newUser.setMiddleName(textFieldMiddleName.getText().trim());
+//					newUser.setSurName(textFieldSurname.getText().trim());
+//					newUser.setBirthDate(dateChooser.getDate());
+//					newUser.setPostalCode(Integer.parseInt(textFieldPostalCode.getText().trim()));
+//					newUser.setCity(textFieldCity.getText().trim());
+//					newUser.setCountry(textFieldCountry.getText().trim());
+//					newUser.setPassword(textFieldPassword.getText().trim());
+//					newUser.setAccountType(chckbxFree.isSelected() == true ? "free" : "premium");
+//
+//					freeAccountManager.insertUser(newUser);
+//
+//					JOptionPane.showMessageDialog(null, "Usuario registrado con exito");
+//
+//					// clearFields();
+//
+//					panels.get(0).setVisible(true);
+//					panels.get(1).setVisible(false);
+//				} else {
+//					JOptionPane.showMessageDialog(null, "Error, Algun campo esta vacio o es incorrecto");
+//				}
+//
+//			}
+//		});
 		btnRegistrarse.setForeground(Color.WHITE);
 		btnRegistrarse.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
 		btnRegistrarse.setBackground(new Color(255, 51, 51));
@@ -250,3 +245,4 @@ public class RegisterPanel extends JPanel {
 
 	}
 }
+		
