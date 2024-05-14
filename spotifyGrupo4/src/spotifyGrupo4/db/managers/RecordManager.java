@@ -15,8 +15,8 @@ import spotifyGrupo4.db.utils.DBUtils;
 import spotifyGrupo4.utils.DateConverter;
 
 public class RecordManager implements ContentInterface<Record>, InterfaceManager<Record> {
-	private static final String GET_ONE_RECORD = null;
-	private String GET_ALL_RECORDS = "select * from record as r join band as b on r.bandId = b.contentCreatorId ";
+	private String GET_ALL_RECORDS = "select * from record as r join band as b on r.bandId = b.contentCreatorId join contentcreator as c on b.contentCreatorId = c.contentCreatorId ";
+	private String GET_RECORDS_FROM_BANDS = "select * from record where bandId = ? ";
 
 	@Override
 	public List<Record> getAll() {
@@ -26,7 +26,7 @@ public class RecordManager implements ContentInterface<Record>, InterfaceManager
 	public List<Record> getAllWithBand() throws SQLException, Exception {
 		ArrayList<Record> ret = null;
 
-		String sql = "select * from record as r join band as b on r.bandId = b.contentCreatorId join contentcreator as c on b.contentCreatorId = c.contentCreatorId ";
+		String sql = GET_ALL_RECORDS;
 
 		Connection connection = null;
 
@@ -124,29 +124,38 @@ public class RecordManager implements ContentInterface<Record>, InterfaceManager
 
 	@Override
 	public Record getOne(Record bandId) {
-		Record record = null;
+		return bandId;
+	}
+
+	public List<Record> getRecordsFromBand(Band band) throws ClassNotFoundException, SQLException {
+
+		ArrayList<Record> ret = new ArrayList<Record>();
+
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 
 		try {
+
 			Class.forName(DBUtils.DRIVER);
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-			String sql = GET_ONE_RECORD;
+			String sql = GET_RECORDS_FROM_BANDS;
 			statement = connection.prepareStatement(sql);
-			statement.setObject(1, bandId);
+			statement.setObject(1, band);
 			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
 
-			if (resultSet.next()) {
-				record = new Record();
+				spotifyGrupo4.db.pojo.Record record = new spotifyGrupo4.db.pojo.Record();
+
 				record.setId(resultSet.getInt("recordId"));
-				record.setTitle(resultSet.getString("title"));
-				record.setRecordCover(resultSet.getString("recordCover"));
+				record.setTitle(resultSet.getString("tilte"));
+				record.setRecordCover(resultSet.getString("cover"));
 				record.setGenre(resultSet.getString("genre"));
-				record.setReleaseDate(resultSet.getDate("realeseDate"));
-				
-				record.setNumberReproductions(resultSet.getInt("numberReproduction"));
+				record.setReleaseDate(resultSet.getDate("releaseDate"));
+				record.setNumberReproductions(resultSet.getInt("numberReproductions"));
+				ret.add(record);
 			}
+
 		} catch (SQLException sqle) {
 			System.out.println("Error con la BBDD - " + sqle.getMessage());
 		} catch (Exception e) {
@@ -163,6 +172,6 @@ public class RecordManager implements ContentInterface<Record>, InterfaceManager
 				e.printStackTrace();
 			}
 		}
-		return record;
+		return ret;
 	}
 }

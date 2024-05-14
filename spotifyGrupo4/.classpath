@@ -7,6 +7,6 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="lib/jlayer-1.0.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Dennis/reto4/spotifyGrupo4/lib/mysql-connector-java-8.0.25.jar"/>
+	<classpathentry kind="lib" path="C:/Users/in1dm3-v/reto4/spotifyGrupo4/lib/mysql-connector-java-8.0.25.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

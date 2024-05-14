@@ -9,14 +9,17 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
+import spotifyGrupo4.db.pojo.Band;
+import spotifyGrupo4.db.pojo.Podcaster;
 import spotifyGrupo4.db.pojo.Record;
+import spotifyGrupo4.controllers.Session;
 import spotifyGrupo4.db.managers.RecordManager;
 import spotifyGrupo4.view.ExceptionHandler;
 
 public class RecordPanel extends PanelAbstract {
 
 	private static final long serialVersionUID = 683877449051207298L;
-	
+
 	RecordManager recordManager = null;
 
 	public RecordPanel(List<JPanel> panels) {
@@ -28,7 +31,6 @@ public class RecordPanel extends PanelAbstract {
 		getModel().addColumn("Genre");
 		getModel().addColumn("ReleaseDate");
 		getModel().addColumn("NumberReproductions");
-
 
 		getBtnBack().addActionListener(new ActionListener() {
 
@@ -44,19 +46,29 @@ public class RecordPanel extends PanelAbstract {
 		});
 		this.addComponentListener(new ComponentAdapter() {
 			public void componentShown(ComponentEvent e) {
-					fillRecordTale(getModel());
+				List<Record> records;
+				try {
+					records = recordManager.getRecordsFromBand(Session.getInstance().getSelectedBand());
+					fillRecordTable(getModel(), records);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+
 			}
 		});
-		}
-	public void fillRecordTale(DefaultTableModel model) {
-		try {
-			List<Record> records = recordManager.getAllWithBand();
-			if (getModel().getRowCount() == 0) {
-				for (Record record : records) {
-					Object[] linea = { record.getTitle(), record.getRecordCover(), record.getGenre(),
-							record.getReleaseDate(), record.getNumberReproductions() };
+	}
 
-					model.addRow(linea);
+	public void fillRecordTable(DefaultTableModel recordPanel, List<Record> records) {
+		try {
+			if (getModel().getRowCount() == 0) {
+
+				if (getModel().getRowCount() == 0) {
+					for (Record record : records) {
+						Object[] linea = { record.getTitle(), record.getRecordCover(), record.getGenre(),
+								record.getReleaseDate(), record.getNumberReproductions() };
+
+						recordPanel.addRow(linea);
+					}
 				}
 			}
 		} catch (Exception e) {

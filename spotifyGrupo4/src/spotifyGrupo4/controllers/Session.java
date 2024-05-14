@@ -53,7 +53,7 @@ public class Session {
 	public void resetAccount() {
 		this.account = null;
 	}
-	
+
 	public void updatePassword(Account account, JTextField password1) throws SQLException, Exception {
 		if (null != account) {
 			if (account.getAccountType().equalsIgnoreCase("Free")) {
@@ -123,6 +123,45 @@ public class Session {
 
 		return false;
 	}
-	
-	
+
+	public Band getSelectedBand() {
+		return selectedBand;
+	}
+
+	public void setSelectedBand(Band selectedBand) {
+		this.selectedBand = selectedBand;
+	}
+
+	public Record getSelectedRecord() {
+		return selectedRecord;
+	}
+
+	public void setSelectedRecord(Record selectedRecord) {
+		this.selectedRecord = selectedRecord;
+	}
+
+	public Song getSelectedSong() {
+		return selectedSong;
+	}
+
+	public void setSelectedSong(Song selectedSong) {
+		this.selectedSong = selectedSong;
+	}
+
+	public Podcaster getSelectedPodcaster() {
+		return selectedPodcaster;
+	}
+
+	public void setSelectedPodcaster(Podcaster selectedPodcaster) {
+		this.selectedPodcaster = selectedPodcaster;
+	}
+
+	public Content getSelectedContent() {
+		return selectedContent;
+	}
+
+	public void setSelectedContent(Content selectedContent) {
+		this.selectedContent = selectedContent;
+	}
+
 }
