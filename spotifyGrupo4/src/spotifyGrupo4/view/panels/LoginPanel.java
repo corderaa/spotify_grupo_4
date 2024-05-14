@@ -28,6 +28,7 @@ public class LoginPanel extends JPanel {
 	private JButton btnClose = null;
 	private JButton btnRegister = null;
 	private JPanel panelFormBackground = null;
+	private int loginError = 0;
 
 	public LoginPanel(List<JPanel> panels) {
 
@@ -176,11 +177,16 @@ public class LoginPanel extends JPanel {
 					panels.get(10).setVisible(false);
 					panels.get(11).setVisible(false);
 					panels.get(12).setVisible(false);
+					loginError = 0;
 				} else {
 					JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta");
 					textFieldPassword.setText(null);
+					loginError++;
+
 				}
+
 			}
+
 		});
 	}
 
