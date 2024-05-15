@@ -140,7 +140,7 @@ public class FreeAccountManager implements AccountInterface<FreeAccount>, Interf
 
 	}
 
-	public void insertUser(FreeAccount newUser) {
+	public void insertUser(FreeAccount newUser) throws SQLException, Exception {
 		Connection connection = null;
 
 		Statement statement = null;
@@ -153,18 +153,13 @@ public class FreeAccountManager implements AccountInterface<FreeAccount>, Interf
 			statement = connection.createStatement();
 
 			String sql = "insert into account (accountdni, accountname, accountType, accountmiddleName, registryDate, accountsurname, accountbirthDate, accountpostCode, accountcity, accountcountry, accountPassword) VALUES ('"
-					+ newUser.getDni() + "', '" + newUser.getName() + "','"
-					+ newUser.getAccountType() + "', '" + newUser.getMiddleName() + "', '" + newUser.getRegistryDate()
-					+ "', '" + newUser.getSurName() + "', '" + newUser.getBirthDate() + "', '" + newUser.getPostalCode()
-					+ "', '" + newUser.getCity() + "', '" + newUser.getCountry() + "', '" + newUser.getPassword()
-					+ "')";
+					+ newUser.getDni() + "', '" + newUser.getName() + "','" + newUser.getAccountType() + "', '"
+					+ newUser.getMiddleName() + "', '" + newUser.getRegistryDate() + "', '" + newUser.getSurName()
+					+ "', '" + newUser.getBirthDate() + "', '" + newUser.getPostalCode() + "', '" + newUser.getCity()
+					+ "', '" + newUser.getCountry() + "', '" + newUser.getPassword() + "')";
 
 			statement.executeUpdate(sql);
 
-		} catch (SQLException sqle) {
-			JOptionPane.showMessageDialog(null, "Err, Algun dato introducido esta incorrecto");
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Err, Algun dato introducido ya existe");
 		} finally {
 			try {
 				if (statement != null)

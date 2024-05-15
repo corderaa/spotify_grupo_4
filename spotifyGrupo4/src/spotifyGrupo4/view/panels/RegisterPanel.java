@@ -22,6 +22,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 
@@ -52,7 +54,7 @@ public class RegisterPanel extends JPanel {
 		panelFormulario.add(scrollPane);
 
 		JPanel subpanel = new JPanel();
-		subpanel.setPreferredSize(new Dimension(200, 1000));
+		subpanel.setPreferredSize(new Dimension(200, 1150));
 		scrollPane.setViewportView(subpanel);
 		subpanel.setLayout(null);
 
@@ -105,11 +107,11 @@ public class RegisterPanel extends JPanel {
 		JCheckBox chckbxFree = new JCheckBox("Free\r\n");
 
 		chckbxFree.setSelected(true);
-		chckbxFree.setBounds(39, 900, 97, 23);
+		chckbxFree.setBounds(39, 1050, 97, 23);
 		subpanel.add(chckbxFree);
 
 		JCheckBox chckbxPremium = new JCheckBox("Premium\r\n");
-		chckbxPremium.setBounds(141, 900, 97, 23);
+		chckbxPremium.setBounds(141, 1050, 97, 23);
 		subpanel.add(chckbxPremium);
 
 		JLabel lblContraseña = new JLabel("Contraseña:");
@@ -161,7 +163,7 @@ public class RegisterPanel extends JPanel {
 		textFieldPostalCode.setColumns(10);
 		textFieldPostalCode.setBounds(39, 758, 331, 40);
 		subpanel.add(textFieldPostalCode);
-		
+
 		JLabel lblCreditCard = new JLabel("Tarjeta de credito:");
 		lblCreditCard.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
 		lblCreditCard.setBounds(39, 801, 179, 20);
@@ -171,6 +173,26 @@ public class RegisterPanel extends JPanel {
 		textFieldCreditCard.setColumns(10);
 		textFieldCreditCard.setBounds(39, 837, 331, 40);
 		subpanel.add(textFieldCreditCard);
+
+		JLabel lblCreditCardexpiration = new JLabel("Caducidad:");
+		lblCreditCardexpiration.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
+		lblCreditCardexpiration.setBounds(39, 878, 179, 20);
+		subpanel.add(lblCreditCardexpiration);
+
+		JTextField textFieldCreditCardexpiration = new JTextField();
+		textFieldCreditCardexpiration.setColumns(10);
+		textFieldCreditCardexpiration.setBounds(39, 915, 331, 40);
+		subpanel.add(textFieldCreditCardexpiration);
+
+		JLabel lblCreditCVV = new JLabel("CVV:");
+		lblCreditCVV.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
+		lblCreditCVV.setBounds(39, 955, 179, 20);
+		subpanel.add(lblCreditCVV);
+
+		JTextField textFieldCVV = new JTextField();
+		textFieldCVV.setColumns(10);
+		textFieldCVV.setBounds(39, 992, 331, 40);
+		subpanel.add(textFieldCVV);
 
 		JPanel panelFormularioFondo = new JPanel();
 		panelFormularioFondo.setLayout(null);
@@ -198,7 +220,11 @@ public class RegisterPanel extends JPanel {
 					newUser.setPassword(textFieldPassword.getText().trim());
 					newUser.setAccountType(chckbxFree.isSelected() == true ? "free" : "premium");
 
-					freeAccountManager.insertUser(newUser);
+					try {
+						freeAccountManager.insertUser(newUser);
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
 
 					JOptionPane.showMessageDialog(null, "Usuario registrado con exito");
 
@@ -238,7 +264,7 @@ public class RegisterPanel extends JPanel {
 		btnRegistrarse.setForeground(Color.WHITE);
 		btnRegistrarse.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
 		btnRegistrarse.setBackground(new Color(255, 51, 51));
-		btnRegistrarse.setBounds(39, 850, 331, 40);
+		btnRegistrarse.setBounds(39, 1090, 331, 40);
 		subpanel.add(btnRegistrarse);
 
 		JButton btnClose = new JButton("CERRAR");
@@ -269,27 +295,48 @@ public class RegisterPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				chckbxPremium.setSelected(false);
 				chckbxFree.setSelected(true);
+				textFieldCreditCard.setEnabled(false);
+				lblCreditCard.setEnabled(false);
+				lblCreditCardexpiration.setEnabled(false);
+				textFieldCreditCardexpiration.setEnabled(false);
+				lblCreditCVV.setEnabled(false);
+				textFieldCVV.setEnabled(false);
 			}
 		});
 
 		chckbxPremium.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			if (chckbxPremium.isSelected()) {
-				chckbxFree.setSelected(false);
-				textFieldCreditCard.setEnabled(true);
-				lblCreditCard.setEnabled(true);
-				
-				
-			} else {
-				
 
+			public void actionPerformed(ActionEvent e) {
+				if (chckbxPremium.isSelected()) {
+					chckbxFree.setSelected(false);
+					textFieldCreditCard.setEnabled(true);
+					lblCreditCard.setEnabled(true);
+					lblCreditCardexpiration.setEnabled(true);
+					textFieldCreditCardexpiration.setEnabled(true);
+					lblCreditCVV.setEnabled(true);
+					textFieldCVV.setEnabled(true);
+
+				} else {
+					textFieldCreditCard.setEnabled(false);
+					lblCreditCard.setEnabled(false);
+					lblCreditCardexpiration.setEnabled(false);
+					textFieldCreditCardexpiration.setEnabled(false);
+					lblCreditCVV.setEnabled(false);
+					textFieldCVV.setEnabled(false);
+				}
 			}
-				
-				chckbxPremium.setSelected(true);
+
+		});
+		this.addComponentListener(new ComponentAdapter() {
+			public void componentShown(ComponentEvent e) {
 				textFieldCreditCard.setEnabled(false);
 				lblCreditCard.setEnabled(false);
-			}
+				lblCreditCardexpiration.setEnabled(false);
+				textFieldCreditCardexpiration.setEnabled(false);
+				lblCreditCVV.setEnabled(false);
+				textFieldCVV.setEnabled(false);
 
+			}
 		});
 
 	}
