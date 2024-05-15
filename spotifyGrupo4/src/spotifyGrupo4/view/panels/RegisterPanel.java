@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.SwingConstants;
@@ -208,12 +209,14 @@ public class RegisterPanel extends JPanel {
 
 					FreeAccountManager freeAccountManager = new FreeAccountManager();
 					FreeAccount newUser = new FreeAccount();
+					Date date = new Date();
 
 					newUser.setDni(textFieldDni.getText().trim());
 					newUser.setName(textFieldNombre.getText());
 					newUser.setMiddleName(textFieldMiddleName.getText().trim());
 					newUser.setSurName(textFieldSurname.getText().trim());
 					newUser.setBirthDate(dateChooser.getDate());
+					newUser.setRegistryDate(date);
 					newUser.setPostalCode(Integer.parseInt(textFieldPostalCode.getText().trim()));
 					newUser.setCity(textFieldCity.getText().trim());
 					newUser.setCountry(textFieldCountry.getText().trim());

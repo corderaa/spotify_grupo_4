@@ -152,10 +152,11 @@ public class FreeAccountManager implements AccountInterface<FreeAccount>, Interf
 
 			statement = connection.createStatement();
 
+			
 			String sql = "insert into account (accountdni, accountname, accountType, accountmiddleName, registryDate, accountsurname, accountbirthDate, accountpostCode, accountcity, accountcountry, accountPassword) VALUES ('"
 					+ newUser.getDni() + "', '" + newUser.getName() + "','" + newUser.getAccountType() + "', '"
-					+ newUser.getMiddleName() + "', '" + newUser.getRegistryDate() + "', '" + newUser.getSurName()
-					+ "', '" + newUser.getBirthDate() + "', '" + newUser.getPostalCode() + "', '" + newUser.getCity()
+					+ newUser.getMiddleName() + "', '" + DateConverter.utilDateToSqlDate(newUser.getRegistryDate()) + "', '" + newUser.getSurName()
+					+ "', '" + DateConverter.utilDateToSqlDate(newUser.getBirthDate()) + "', '" + newUser.getPostalCode() + "', '" + newUser.getCity()
 					+ "', '" + newUser.getCountry() + "', '" + newUser.getPassword() + "')";
 
 			statement.executeUpdate(sql);
