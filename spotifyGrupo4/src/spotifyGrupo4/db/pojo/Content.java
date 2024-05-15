@@ -9,7 +9,7 @@ public abstract class Content {
 	private String title = null;
 	private int reproductions = 0;
 	private String contentType = null;
-
+ 
 	public int getContentId() {
 		return contentId;
 	}

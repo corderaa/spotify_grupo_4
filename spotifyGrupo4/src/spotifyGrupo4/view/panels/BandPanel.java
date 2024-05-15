@@ -44,7 +44,7 @@ public class BandPanel extends PanelAbstract {
 		});
 		getTable().addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent e) {
-				
+		 		
 				Session.getInstance().setSelectedBand(band.get(getTable().getSelectedRow()));
 				
 				panels.get(0).setVisible(false);

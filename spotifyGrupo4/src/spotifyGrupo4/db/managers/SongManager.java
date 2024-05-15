@@ -32,7 +32,7 @@ public class SongManager implements ContentInterface<Song>, InterfaceManager<Son
 
 		Statement statement = null;
 		ResultSet resultSet = null;
-
+ 
 		try {
 			Class.forName(DBUtils.DRIVER);
 

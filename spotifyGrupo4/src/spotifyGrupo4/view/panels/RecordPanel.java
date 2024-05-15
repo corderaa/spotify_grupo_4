@@ -32,7 +32,7 @@ public class RecordPanel extends PanelAbstract {
 		getModel().addColumn("NumberReproductions");
 
 		getBtnBack().addActionListener(new ActionListener() {
-
+ 
 			public void actionPerformed(ActionEvent e) {
 				getModel().setRowCount(0);
 				panels.get(0).setVisible(true);

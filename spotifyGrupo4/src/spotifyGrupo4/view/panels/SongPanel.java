@@ -12,7 +12,7 @@ import spotifyGrupo4.db.pojo.Song;
 import spotifyGrupo4.view.ExceptionHandler;
 
 public class SongPanel extends PanelAbstract {
-
+  
 	private static final long serialVersionUID = -1754009495368908597L;
 	SongManager songManager = null;
 

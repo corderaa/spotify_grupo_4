@@ -106,7 +106,7 @@ public class BandManager implements ContentInterface<Band>, InterfaceManager<Ban
 					+ "contentCreatorReproductionNumber,contentCreatorDescription,contentCreatorName, contentCreatorImage) VALUES ('"
 					+ band.getMembers() + "', '" + band.getCreationDate() + "', '" + band.getReproduction() + "', '"
 					+ band.getDescription() + "', '" + band.getName() + "', '" + band.getImage() + "')";
-
+ 
 			statement.executeUpdate(sql);
 
 		} catch (SQLException sqle) {
