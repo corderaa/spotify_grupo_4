@@ -9,7 +9,6 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
-import spotifyGrupo4.db.pojo.Band;
 import spotifyGrupo4.db.pojo.Record;
 import spotifyGrupo4.controllers.Session;
 import spotifyGrupo4.db.managers.RecordManager;
@@ -47,13 +46,13 @@ public class RecordPanel extends PanelAbstract {
 		getTable().addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent e) {
 				
-//				Session.getInstance().setSelectedRecord(record.get(getTable().getSelectedRow()));
+				Session.getInstance().setSelectedRecord(record.get(getTable().getSelectedRow()));
 				
 				panels.get(0).setVisible(false);
 				panels.get(1).setVisible(false);
 				panels.get(2).setVisible(false);
-				panels.get(3).setVisible(true);
-				panels.get(4).setVisible(false);
+				panels.get(3).setVisible(false);
+				panels.get(4).setVisible(true);
 				panels.get(5).setVisible(false);
 				panels.get(6).setVisible(false);
 			}

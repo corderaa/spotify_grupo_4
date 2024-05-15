@@ -13,6 +13,7 @@ import com.toedter.calendar.JDateChooser;
 import spotifyGrupo4.db.managers.AccountManager;
 import spotifyGrupo4.db.pojo.Account;
 import spotifyGrupo4.db.pojo.Band;
+import spotifyGrupo4.db.pojo.Record;
 import spotifyGrupo4.db.pojo.Content;
 import spotifyGrupo4.db.pojo.FreeAccount;
 import spotifyGrupo4.db.pojo.Podcaster;

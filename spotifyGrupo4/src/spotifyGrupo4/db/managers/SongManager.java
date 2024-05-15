@@ -20,7 +20,7 @@ import spotifyGrupo4.utils.DateConverter;
 public class SongManager implements ContentInterface<Song>, InterfaceManager<Song> {
 
 	private static final String GET_ALL_SONG_WITH_CONTENT = "SELECT * FROM reto4_grupo4.song join content c using (contentId)";
-	private static final String GET_SONG_FROM_RECORDS = null;
+	private static final String GET_SONG_FROM_RECORDS = "SELECT * FROM reto4_grupo4.song join content c using (contentId) where recordId = ?";
 
 	@Override
 	public List<Song> getAll() {
