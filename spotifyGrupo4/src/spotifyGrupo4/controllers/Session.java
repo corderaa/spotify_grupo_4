@@ -1,17 +1,25 @@
 package spotifyGrupo4.controllers;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
+import javax.swing.JCheckBox;
 import javax.swing.JTextField;
+
+import com.toedter.calendar.JDateChooser;
 
 import spotifyGrupo4.db.managers.AccountManager;
 import spotifyGrupo4.db.pojo.Account;
 import spotifyGrupo4.db.pojo.Band;
 import spotifyGrupo4.db.pojo.Content;
-import spotifyGrupo4.db.pojo.Podcast;
+import spotifyGrupo4.db.pojo.FreeAccount;
 import spotifyGrupo4.db.pojo.Podcaster;
-import spotifyGrupo4.db.pojo.Serie;
+import spotifyGrupo4.db.pojo.PremiumAccount;
 import spotifyGrupo4.db.pojo.Song;
+import spotifyGrupo4.db.managers.FreeAccountManager;
+import spotifyGrupo4.db.managers.PremiumAccountManager;
 
 /**
  * Singleton pattern ensure one and only one instance of the same object is
@@ -33,9 +41,13 @@ public class Session {
 	private Content selectedContent = null;
 
 	private AccountManager accountManager = null;
+	private FreeAccountManager freeAccountManager = null;
+	private PremiumAccountManager premiumAccountManager = null;
 
 	private Session() {
 		accountManager = new AccountManager();
+		freeAccountManager = new FreeAccountManager();
+		premiumAccountManager = new PremiumAccountManager();
 	}
 
 	public static Session getInstance() {
@@ -64,6 +76,14 @@ public class Session {
 				accountManager.updatePassword(accountManager.getByLogin(account), password1.getText());
 			}
 		}
+	}
+
+	public void insertNewFreeAccount(FreeAccount freeAccount) throws SQLException, Exception {
+		freeAccountManager.insert(freeAccount);
+	}
+
+	public void insertNewPremiumAccount(PremiumAccount premiumAccount) {
+		premiumAccountManager.insert(premiumAccount);
 	}
 
 	public boolean isPasswordValid(JTextField password1, JTextField password2) {
@@ -122,6 +142,49 @@ public class Session {
 	public boolean validateLogin(String password, Account t) {
 
 		return false;
+	}
+
+	public FreeAccount createFreeAccount(JTextField textFieldDni, JTextField textFieldNombre,
+			JTextField textFieldMiddleName, JTextField textFieldSurname, JDateChooser dateChooser,
+			JTextField textFieldPostalCode, JTextField textFieldCity, JTextField textFieldCountry,
+			JTextField textFieldPassword, JCheckBox chckbxFree) {
+
+		FreeAccount ret = new FreeAccount();
+
+		ret.setDni(textFieldDni.getText().trim());
+		ret.setName(textFieldNombre.getText());
+		ret.setMiddleName(textFieldMiddleName.getText().trim());
+		ret.setSurName(textFieldSurname.getText().trim());
+		ret.setBirthDate(dateChooser.getDate());
+		ret.setRegistryDate(new Date());
+		ret.setPostalCode(Integer.parseInt(textFieldPostalCode.getText().trim()));
+		ret.setCity(textFieldCity.getText().trim());
+		ret.setCountry(textFieldCountry.getText().trim());
+		ret.setPassword(textFieldPassword.getText().trim());
+		ret.setAccountType(chckbxFree.isSelected() == true ? "free" : "premium");
+		setAccount(ret);
+
+		return ret;
+	}
+
+	private boolean postalCodeVerify(JTextField PostalCode) {
+
+		String postalCode = PostalCode.getText().trim();
+
+		List<String> postalCodeList = new ArrayList<>();
+		postalCodeList.add("12345");
+		postalCodeList.add("67890");
+		postalCodeList.add("98765");
+
+		return postalCodeList.contains(postalCode);
+	}
+
+	public boolean verifyRegister(JTextField PostalCode) {
+		if (postalCodeVerify(PostalCode)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public Band getSelectedBand() {

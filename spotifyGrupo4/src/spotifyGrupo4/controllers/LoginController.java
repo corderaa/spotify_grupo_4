@@ -1,5 +1,6 @@
 package spotifyGrupo4.controllers;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import spotifyGrupo4.db.managers.FreeAccountManager;
@@ -14,7 +15,7 @@ public class LoginController implements ControllerInterface<Account> {
 	}
 
 	@Override
-	public void insert(Account t) {
+	public void insert(Account t) throws SQLException, Exception {
 		freeAccountManager.insert(null);
 	}
 

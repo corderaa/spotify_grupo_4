@@ -19,8 +19,10 @@ public interface ControllerInterface<T> {
 	 * Inserts the object to the database
 	 * 
 	 * @param t
+	 * @throws Exception 
+	 * @throws SQLException 
 	 */
-	public void insert(T t);
+	public void insert(T t) throws SQLException, Exception;
 
 	/**
 	 * Updates the object to the database

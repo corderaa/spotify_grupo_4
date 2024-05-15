@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 import java.util.List;
-
-import javax.swing.JOptionPane;
 import spotifyGrupo4.db.pojo.Account;
 import spotifyGrupo4.db.pojo.FreeAccount;
 import spotifyGrupo4.db.utils.DBUtils;
@@ -23,9 +21,40 @@ public class FreeAccountManager implements AccountInterface<FreeAccount>, Interf
 	}
 
 	@Override
-	public void insert(FreeAccount t) {
-		// TODO Auto-generated method stub
+	public void insert(FreeAccount newUser) throws SQLException, Exception {
+		Connection connection = null;
 
+		Statement statement = null;
+
+		try {
+			Class.forName(DBUtils.DRIVER);
+
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+
+			statement = connection.createStatement();
+
+			String sql = "insert into account (accountdni, accountname, accountType, accountmiddleName, registryDate, accountsurname, accountbirthDate, accountpostCode, accountcity, accountcountry, accountPassword) VALUES ('"
+					+ newUser.getDni() + "', '" + newUser.getName() + "','" + newUser.getAccountType() + "', '"
+					+ newUser.getMiddleName() + "', '" + DateConverter.utilDateToSqlDate(newUser.getRegistryDate())
+					+ "', '" + newUser.getSurName() + "', '" + DateConverter.utilDateToSqlDate(newUser.getBirthDate())
+					+ "', '" + newUser.getPostalCode() + "', '" + newUser.getCity() + "', '" + newUser.getCountry()
+					+ "', '" + newUser.getPassword() + "')";
+
+			statement.executeUpdate(sql);
+
+		} finally {
+			try {
+				if (statement != null)
+					statement.close();
+			} catch (Exception e) {
+			}
+
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (Exception e) {
+			}
+		}
 	}
 
 	@Override
@@ -138,42 +167,6 @@ public class FreeAccountManager implements AccountInterface<FreeAccount>, Interf
 			;
 		}
 
-	}
-
-	public void insertUser(FreeAccount newUser) throws SQLException, Exception {
-		Connection connection = null;
-
-		Statement statement = null;
-
-		try {
-			Class.forName(DBUtils.DRIVER);
-
-			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-
-			statement = connection.createStatement();
-
-			
-			String sql = "insert into account (accountdni, accountname, accountType, accountmiddleName, registryDate, accountsurname, accountbirthDate, accountpostCode, accountcity, accountcountry, accountPassword) VALUES ('"
-					+ newUser.getDni() + "', '" + newUser.getName() + "','" + newUser.getAccountType() + "', '"
-					+ newUser.getMiddleName() + "', '" + DateConverter.utilDateToSqlDate(newUser.getRegistryDate()) + "', '" + newUser.getSurName()
-					+ "', '" + DateConverter.utilDateToSqlDate(newUser.getBirthDate()) + "', '" + newUser.getPostalCode() + "', '" + newUser.getCity()
-					+ "', '" + newUser.getCountry() + "', '" + newUser.getPassword() + "')";
-
-			statement.executeUpdate(sql);
-
-		} finally {
-			try {
-				if (statement != null)
-					statement.close();
-			} catch (Exception e) {
-			}
-
-			try {
-				if (connection != null)
-					connection.close();
-			} catch (Exception e) {
-			}
-		}
 	}
 
 	@Override

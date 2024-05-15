@@ -8,16 +8,14 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.swing.SwingConstants;
 
 import com.toedter.calendar.JDateChooser;
 
-import spotifyGrupo4.db.managers.FreeAccountManager;
-import spotifyGrupo4.db.pojo.FreeAccount;
+import spotifyGrupo4.controllers.Session;
+import spotifyGrupo4.view.ExceptionHandler;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -25,6 +23,7 @@ import javax.swing.JCheckBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 
@@ -202,68 +201,6 @@ public class RegisterPanel extends JPanel {
 		add(panelFormularioFondo);
 
 		JButton btnRegistrarse = new JButton("ENTRAR");
-		btnRegistrarse.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				if (postalCodeVerify()) {
-
-					FreeAccountManager freeAccountManager = new FreeAccountManager();
-					FreeAccount newUser = new FreeAccount();
-					Date date = new Date();
-
-					newUser.setDni(textFieldDni.getText().trim());
-					newUser.setName(textFieldNombre.getText());
-					newUser.setMiddleName(textFieldMiddleName.getText().trim());
-					newUser.setSurName(textFieldSurname.getText().trim());
-					newUser.setBirthDate(dateChooser.getDate());
-					newUser.setRegistryDate(date);
-					newUser.setPostalCode(Integer.parseInt(textFieldPostalCode.getText().trim()));
-					newUser.setCity(textFieldCity.getText().trim());
-					newUser.setCountry(textFieldCountry.getText().trim());
-					newUser.setPassword(textFieldPassword.getText().trim());
-					newUser.setAccountType(chckbxFree.isSelected() == true ? "free" : "premium");
-
-					try {
-						freeAccountManager.insertUser(newUser);
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}
-
-					JOptionPane.showMessageDialog(null, "Usuario registrado con exito");
-
-					panels.get(0).setVisible(false);
-					panels.get(1).setVisible(false);
-					panels.get(2).setVisible(true);
-					panels.get(3).setVisible(false);
-					panels.get(4).setVisible(false);
-					panels.get(5).setVisible(false);
-					panels.get(6).setVisible(false);
-					panels.get(7).setVisible(false);
-					panels.get(8).setVisible(true);
-					panels.get(9).setVisible(true);
-					panels.get(10).setVisible(false);
-					panels.get(11).setVisible(false);
-					panels.get(12).setVisible(false);
-
-				} else {
-					JOptionPane.showMessageDialog(null, "Error, Algun campo esta vacio o es incorrecto");
-				}
-
-			}
-
-			private boolean postalCodeVerify() {
-
-				String postalCode = textFieldPostalCode.getText().trim();
-
-				List<String> postalCodeList = new ArrayList<>();
-				postalCodeList.add("12345");
-				postalCodeList.add("67890");
-				postalCodeList.add("98765");
-
-				return postalCodeList.contains(postalCode);
-			}
-
-		});
 		btnRegistrarse.setForeground(Color.WHITE);
 		btnRegistrarse.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
 		btnRegistrarse.setBackground(new Color(255, 51, 51));
@@ -293,6 +230,44 @@ public class RegisterPanel extends JPanel {
 		btnClose.setBackground(new Color(204, 51, 51));
 		btnClose.setBounds(1129, 619, 89, 44);
 		add(btnClose);
+
+		btnRegistrarse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				try {
+					if (Session.getInstance().verifyRegister(textFieldPostalCode)) {
+
+						Session.getInstance().insertNewFreeAccount(Session.getInstance().createFreeAccount(textFieldDni,
+								textFieldNombre, textFieldMiddleName, textFieldSurname, dateChooser,
+								textFieldPostalCode, textFieldCity, textFieldCountry, textFieldPassword, chckbxFree));
+
+						panels.get(0).setVisible(false);
+						panels.get(1).setVisible(false);
+						panels.get(2).setVisible(true);
+						panels.get(3).setVisible(false);
+						panels.get(4).setVisible(false);
+						panels.get(5).setVisible(false);
+						panels.get(6).setVisible(false);
+						panels.get(7).setVisible(false);
+						panels.get(8).setVisible(true);
+						panels.get(9).setVisible(true);
+						panels.get(10).setVisible(false);
+						panels.get(11).setVisible(false);
+						panels.get(12).setVisible(false);
+
+						// JOptionPane.showMessageDialog(null, "Usuario registrado con exito");
+
+					} else
+						JOptionPane.showMessageDialog(null, "Error, Algun campo esta vacio o es incorrecto");
+
+				} catch (SQLException sqle) {
+					sqle.printStackTrace();
+				} catch (Exception e1) {
+					ExceptionHandler.handleGenericException(e1, "Error");
+				}
+
+			}
+		});
 
 		chckbxFree.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

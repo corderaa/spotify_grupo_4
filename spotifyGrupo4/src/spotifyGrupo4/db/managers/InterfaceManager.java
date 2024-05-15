@@ -1,5 +1,6 @@
 package spotifyGrupo4.db.managers;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface InterfaceManager<T> {
@@ -16,8 +17,11 @@ public interface InterfaceManager<T> {
 	 * Inserts the object to the database
 	 * 
 	 * @param t
+	 * @throws Exception 
+	 * @throws SQLException 
 	 */
-	public void insert(T t);
+	public void insert(T t) throws SQLException, Exception;
+
 	/**
 	 * Search the object to the database
 	 * 
