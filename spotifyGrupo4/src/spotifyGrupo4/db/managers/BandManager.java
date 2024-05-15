@@ -212,6 +212,7 @@ public class BandManager implements ContentInterface<Band>, InterfaceManager<Ban
 
 	@Override
 	public Band getOne(Band podcasterId) {
+		
 		Band band = null;
 		Connection connection = null;
 		PreparedStatement statement = null;

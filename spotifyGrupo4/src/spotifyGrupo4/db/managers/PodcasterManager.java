@@ -9,7 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import spotifyGrupo4.db.pojo.Band;
 import spotifyGrupo4.db.pojo.Podcaster;
 import spotifyGrupo4.db.utils.DBUtils;
 import spotifyGrupo4.utils.DateConverter;

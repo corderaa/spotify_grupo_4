@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import spotifyGrupo4.db.pojo.Band;
 import spotifyGrupo4.db.pojo.Serie;
 import spotifyGrupo4.view.panels.AdvertPanel;
 import spotifyGrupo4.view.panels.AudioControlPanel;
@@ -42,7 +43,7 @@ public class Frame extends JFrame {
 	private JPanel contentPanel;
 
 	private List<JPanel> panels = null;
-
+	ArrayList<Band> selectedBand = null;
 	/**
 	 * Launch the application.
 	 */

@@ -8,9 +8,18 @@ public abstract class Content {
 	private Date duration = null;
 	private String title = null;
 	private int reproductions = 0;
+	private String contentType = null;
 
 	public int getContentId() {
 		return contentId;
+	}
+
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
 	}
 
 	public void setContentId(int contentId) {
@@ -43,7 +52,7 @@ public abstract class Content {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(contentId, duration, reproductions, title);
+		return Objects.hash(contentType);
 	}
 
 	@Override
@@ -55,8 +64,7 @@ public abstract class Content {
 		if (getClass() != obj.getClass())
 			return false;
 		Content other = (Content) obj;
-		return contentId == other.contentId && Objects.equals(duration, other.duration)
-				&& reproductions == other.reproductions && Objects.equals(title, other.title);
+		return Objects.equals(contentType, other.contentType);
 	}
 
 	@Override
