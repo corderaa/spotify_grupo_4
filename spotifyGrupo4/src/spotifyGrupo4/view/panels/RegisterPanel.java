@@ -52,7 +52,7 @@ public class RegisterPanel extends JPanel {
 		panelFormulario.add(scrollPane);
 
 		JPanel subpanel = new JPanel();
-		subpanel.setPreferredSize(new Dimension(200, 900));
+		subpanel.setPreferredSize(new Dimension(200, 1000));
 		scrollPane.setViewportView(subpanel);
 		subpanel.setLayout(null);
 
@@ -105,11 +105,11 @@ public class RegisterPanel extends JPanel {
 		JCheckBox chckbxFree = new JCheckBox("Free\r\n");
 
 		chckbxFree.setSelected(true);
-		chckbxFree.setBounds(39, 810, 97, 23);
+		chckbxFree.setBounds(39, 900, 97, 23);
 		subpanel.add(chckbxFree);
 
 		JCheckBox chckbxPremium = new JCheckBox("Premium\r\n");
-		chckbxPremium.setBounds(141, 810, 97, 23);
+		chckbxPremium.setBounds(141, 900, 97, 23);
 		subpanel.add(chckbxPremium);
 
 		JLabel lblContraseña = new JLabel("Contraseña:");
@@ -161,6 +161,16 @@ public class RegisterPanel extends JPanel {
 		textFieldPostalCode.setColumns(10);
 		textFieldPostalCode.setBounds(39, 758, 331, 40);
 		subpanel.add(textFieldPostalCode);
+		
+		JLabel lblCreditCard = new JLabel("Tarjeta de credito:");
+		lblCreditCard.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
+		lblCreditCard.setBounds(39, 801, 179, 20);
+		subpanel.add(lblCreditCard);
+
+		JTextField textFieldCreditCard = new JTextField();
+		textFieldCreditCard.setColumns(10);
+		textFieldCreditCard.setBounds(39, 837, 331, 40);
+		subpanel.add(textFieldCreditCard);
 
 		JPanel panelFormularioFondo = new JPanel();
 		panelFormularioFondo.setLayout(null);
@@ -264,8 +274,20 @@ public class RegisterPanel extends JPanel {
 
 		chckbxPremium.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			if (chckbxPremium.isSelected()) {
 				chckbxFree.setSelected(false);
+				textFieldCreditCard.setEnabled(true);
+				lblCreditCard.setEnabled(true);
+				
+				
+			} else {
+				
+
+			}
+				
 				chckbxPremium.setSelected(true);
+				textFieldCreditCard.setEnabled(false);
+				lblCreditCard.setEnabled(false);
 			}
 
 		});
