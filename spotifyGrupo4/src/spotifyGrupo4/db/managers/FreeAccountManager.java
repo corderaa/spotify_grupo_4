@@ -125,9 +125,39 @@ public class FreeAccountManager implements AccountInterface<FreeAccount>, Interf
 	}
 
 	@Override
-	public void updateLastLogin(FreeAccount t, Date currentDate) {
+	public void updateLastLogin(FreeAccount t, Date currentDate) throws SQLException, Exception {
+		Connection connection = null;
+
+		Statement statement = null;
+
+		try {
+			Class.forName(DBUtils.DRIVER);
+
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			statement = connection.createStatement();
+			String sql = "update reto4_grupo4.account set account.last_login = '" + DateConverter.utilDateToSqlDate(currentDate)
+					+ "' where account.accountId = " + t.getId();
+
+			statement.executeUpdate(sql);
+
+		} finally {
+			try {
+				if (statement != null)
+					statement.close();
+			} catch (Exception e) {
+			}
+			;
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (Exception e) {
+			}
+			;
+		}
 
 	}
+		
+	
 
 	@Override
 	public void updateIsBloqued(FreeAccount t, Boolean bloqued) {

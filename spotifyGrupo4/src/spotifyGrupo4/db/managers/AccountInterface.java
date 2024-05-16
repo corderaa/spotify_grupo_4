@@ -22,8 +22,9 @@ public interface AccountInterface<T> {
 	 * @param account
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
+	 * @throws Exception 
 	 */
-	public void updateLastLogin(T t, Date currentDate) throws SQLException, ClassNotFoundException;
+	public void updateLastLogin(T t, Date currentDate) throws SQLException, ClassNotFoundException, Exception;
 
 	/**
 	 * Updates isBloqued value of the account to database

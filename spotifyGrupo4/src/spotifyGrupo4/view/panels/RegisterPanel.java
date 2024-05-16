@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 import com.toedter.calendar.JDateChooser;
 
 import spotifyGrupo4.controllers.Session;
+import spotifyGrupo4.db.managers.AccountManager;
 import spotifyGrupo4.view.ExceptionHandler;
 
 import javax.swing.JTextField;
@@ -179,10 +180,10 @@ public class RegisterPanel extends JPanel {
 		lblCreditCardexpiration.setBounds(39, 878, 179, 20);
 		subpanel.add(lblCreditCardexpiration);
 
-		JTextField textFieldCreditCardexpiration = new JTextField();
-		textFieldCreditCardexpiration.setColumns(10);
-		textFieldCreditCardexpiration.setBounds(39, 915, 331, 40);
-		subpanel.add(textFieldCreditCardexpiration);
+		JDateChooser dateChooserCreditCard = new JDateChooser();
+		dateChooserCreditCard.setSize(331, 40);
+		dateChooserCreditCard.setLocation(39, 910);
+		subpanel.add(dateChooserCreditCard);
 
 		JLabel lblCreditCVV = new JLabel("CVV:");
 		lblCreditCVV.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
@@ -276,7 +277,7 @@ public class RegisterPanel extends JPanel {
 				textFieldCreditCard.setEnabled(false);
 				lblCreditCard.setEnabled(false);
 				lblCreditCardexpiration.setEnabled(false);
-				textFieldCreditCardexpiration.setEnabled(false);
+				dateChooserCreditCard.setEnabled(false);
 				lblCreditCVV.setEnabled(false);
 				textFieldCVV.setEnabled(false);
 			}
@@ -290,7 +291,7 @@ public class RegisterPanel extends JPanel {
 					textFieldCreditCard.setEnabled(true);
 					lblCreditCard.setEnabled(true);
 					lblCreditCardexpiration.setEnabled(true);
-					textFieldCreditCardexpiration.setEnabled(true);
+					dateChooserCreditCard.setEnabled(true);
 					lblCreditCVV.setEnabled(true);
 					textFieldCVV.setEnabled(true);
 
@@ -298,7 +299,7 @@ public class RegisterPanel extends JPanel {
 					textFieldCreditCard.setEnabled(false);
 					lblCreditCard.setEnabled(false);
 					lblCreditCardexpiration.setEnabled(false);
-					textFieldCreditCardexpiration.setEnabled(false);
+					dateChooserCreditCard.setEnabled(false);
 					lblCreditCVV.setEnabled(false);
 					textFieldCVV.setEnabled(false);
 				}
@@ -310,7 +311,7 @@ public class RegisterPanel extends JPanel {
 				textFieldCreditCard.setEnabled(false);
 				lblCreditCard.setEnabled(false);
 				lblCreditCardexpiration.setEnabled(false);
-				textFieldCreditCardexpiration.setEnabled(false);
+				dateChooserCreditCard.setEnabled(false);
 				lblCreditCVV.setEnabled(false);
 				textFieldCVV.setEnabled(false);
 

@@ -1,6 +1,5 @@
 package spotifyGrupo4.db.managers;
 
-import java.lang.annotation.Retention;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -8,9 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 import java.util.List;
-
 import spotifyGrupo4.db.pojo.Account;
-import spotifyGrupo4.db.pojo.FreeAccount;
 import spotifyGrupo4.db.pojo.PremiumAccount;
 import spotifyGrupo4.db.utils.DBUtils;
 import spotifyGrupo4.utils.DateConverter;
@@ -24,8 +21,50 @@ public class PremiumAccountManager implements AccountInterface<PremiumAccount>, 
 	}
 
 	@Override
-	public void insert(PremiumAccount t) {
-		// TODO Auto-generated method stub
+	public void insert(PremiumAccount newUser) throws SQLException, Exception {
+		Connection connection = null;
+
+		Statement statement = null;
+
+		try {
+			Class.forName(DBUtils.DRIVER);
+
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+
+			statement = connection.createStatement();
+
+			String sql = "INSERT INTO account (accountName, accountMiddleName, accountSurName, accountType, accountBirthDate, accountPostCode, accountCity, accountCountry, accountPassword) "
+					+ "VALUES ('" + newUser.getName() + "', '" + newUser.getMiddleName() + "', '" + newUser.getSurName()
+					+ "', '" + newUser.getAccountType() + "', '" + new java.sql.Date(newUser.getBirthDate().getTime())
+					+ "', " + newUser.getPostalCode() + ", '" + newUser.getCity() + "', '" + newUser.getCountry()
+					+ "', '" + newUser.getPassword() + "')";
+			statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+			ResultSet generatedKeys = statement.getGeneratedKeys();
+
+			if (generatedKeys.next()) {
+				int accountId = generatedKeys.getInt(1);
+				sql = "INSERT INTO premium (accountId, cardNumber, cvv, expiringDate) " + "VALUES (" + accountId + ", "
+						+ newUser.getCardNumber() + ", " + newUser.getCardCvv() + ", '" + new java.sql.Date(newUser.getExpiringDate().getTime())
+						+ "')";
+				statement.executeUpdate(sql);
+			}
+
+			statement.executeUpdate(sql);
+
+		} finally {
+			try {
+				if (statement != null)
+					statement.close();
+			} catch (Exception e) {
+			}
+
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 
 	}
 

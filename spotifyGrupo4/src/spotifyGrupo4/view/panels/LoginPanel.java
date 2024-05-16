@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 
 import spotifyGrupo4.controllers.Session;
 import spotifyGrupo4.db.managers.AccountManager;
+import spotifyGrupo4.db.pojo.FreeAccount;
 
 public class LoginPanel extends JPanel {
 
@@ -154,6 +155,7 @@ public class LoginPanel extends JPanel {
 
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 
 				if (null != new AccountManager().getUser(textFieldDni.getText(), textFieldPassword.getText())) {
 
@@ -163,7 +165,8 @@ public class LoginPanel extends JPanel {
 							new AccountManager().getUser(textFieldDni.getText(), textFieldPassword.getText()));
 
 					clearTextFields(textFieldDni, textFieldPassword);
-
+					
+					
 					panels.get(0).setVisible(false);
 					panels.get(1).setVisible(false);
 					panels.get(2).setVisible(true);

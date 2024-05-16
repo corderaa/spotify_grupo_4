@@ -40,7 +40,7 @@ public class Session {
 	private Record selectedRecord = null;
 	private Song selectedSong = null;
 	private Podcaster selectedPodcaster = null;
-	private Serie selectedSerie= null;
+	private Serie selectedSerie = null;
 	private Content selectedContent = null;
 
 	private AccountManager accountManager = null;
@@ -85,7 +85,7 @@ public class Session {
 		freeAccountManager.insert(freeAccount);
 	}
 
-	public void insertNewPremiumAccount(PremiumAccount premiumAccount) {
+	public void insertNewPremiumAccount(PremiumAccount premiumAccount) throws SQLException, Exception {
 		premiumAccountManager.insert(premiumAccount);
 	}
 
@@ -170,6 +170,33 @@ public class Session {
 		return ret;
 	}
 
+	public PremiumAccount createPremiumAccount(JTextField textFieldDni, JTextField textFieldNombre,
+			JTextField textFieldMiddleName, JTextField textFieldSurname, JDateChooser dateChooser,
+			JTextField textFieldPostalCode, JTextField textFieldCity, JTextField textFieldCountry,
+			JTextField textFieldPassword, JCheckBox chckbxPremium, JTextField textFieldCreditCard,
+			JDateChooser dateChooserCreditCard, JTextField textFieldCVV) {
+		
+		PremiumAccount ret = new PremiumAccount();
+
+		ret.setDni(textFieldDni.getText().trim());
+		ret.setName(textFieldNombre.getText());
+		ret.setMiddleName(textFieldMiddleName.getText().trim());
+		ret.setSurName(textFieldSurname.getText().trim());
+		ret.setBirthDate(dateChooser.getDate());
+		ret.setRegistryDate(new Date());
+		ret.setPostalCode(Integer.parseInt(textFieldPostalCode.getText().trim()));
+		ret.setCity(textFieldCity.getText().trim());
+		ret.setCountry(textFieldCountry.getText().trim());
+		ret.setPassword(textFieldPassword.getText().trim());
+		ret.setAccountType(chckbxPremium.isSelected() == true ? "premium" : "free");
+		ret.setCardNumber(Long.parseLong(textFieldCreditCard.getText().trim()));
+	    ret.setCardCvv(Integer.parseInt(textFieldCVV.getText().trim()));
+	    ret.setExpiringDate(dateChooserCreditCard.getDate());
+	    setAccount(ret);
+
+		return ret;
+	}
+
 	private boolean postalCodeVerify(JTextField PostalCode) {
 
 		String postalCode = PostalCode.getText().trim();
@@ -205,7 +232,7 @@ public class Session {
 	public void setSelectedRecord(Record selectedRecord) {
 		this.selectedRecord = selectedRecord;
 	}
-	
+
 	public Serie getSelectedSerie() {
 		return selectedSerie;
 	}
