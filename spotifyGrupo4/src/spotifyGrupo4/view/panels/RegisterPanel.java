@@ -2,22 +2,16 @@ package spotifyGrupo4.view.panels;
 
 import java.awt.Color;
 import java.awt.Dimension;
-
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import java.util.List;
-
 import javax.swing.SwingConstants;
-
 import com.toedter.calendar.JDateChooser;
-
 import spotifyGrupo4.controllers.Session;
 import spotifyGrupo4.db.managers.AccountManager;
 import spotifyGrupo4.view.ExceptionHandler;
-
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -236,11 +230,19 @@ public class RegisterPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				try {
-					if (Session.getInstance().verifyRegister(textFieldPostalCode)) {
+
+					if (Session.getInstance().verifyRegister(textFieldPostalCode, textFieldCity)) {
 
 						Session.getInstance().insertNewFreeAccount(Session.getInstance().createFreeAccount(textFieldDni,
 								textFieldNombre, textFieldMiddleName, textFieldSurname, dateChooser,
 								textFieldPostalCode, textFieldCity, textFieldCountry, textFieldPassword, chckbxFree));
+						Session.getInstance()
+								.setAccount(new AccountManager().getByLogin(Session.getInstance().getAccount()));
+
+						Session.getInstance().insertNewPremiumAccount(Session.getInstance().createPremiumAccount(
+								chckbxPremium, textFieldCreditCard, dateChooserCreditCard, textFieldCVV));
+						Session.getInstance()
+								.setAccount(new AccountManager().getByLogin(Session.getInstance().getAccount()));
 
 						panels.get(0).setVisible(false);
 						panels.get(1).setVisible(false);
@@ -256,13 +258,13 @@ public class RegisterPanel extends JPanel {
 						panels.get(11).setVisible(false);
 						panels.get(12).setVisible(false);
 
-						// JOptionPane.showMessageDialog(null, "Usuario registrado con exito");
+						JOptionPane.showMessageDialog(null, "Usuario registrado con exito");
 
 					} else
 						JOptionPane.showMessageDialog(null, "Error, Algun campo esta vacio o es incorrecto");
 
 				} catch (SQLException sqle) {
-					sqle.printStackTrace();
+					ExceptionHandler.handleSqlException(sqle, "Algun dato esta incorrecto");
 				} catch (Exception e1) {
 					ExceptionHandler.handleGenericException(e1, "Error");
 				}

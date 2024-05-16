@@ -165,34 +165,20 @@ public class Session {
 		ret.setCountry(textFieldCountry.getText().trim());
 		ret.setPassword(textFieldPassword.getText().trim());
 		ret.setAccountType(chckbxFree.isSelected() == true ? "free" : "premium");
-		setAccount(ret);
 
+		setAccount(ret);
 		return ret;
 	}
 
-	public PremiumAccount createPremiumAccount(JTextField textFieldDni, JTextField textFieldNombre,
-			JTextField textFieldMiddleName, JTextField textFieldSurname, JDateChooser dateChooser,
-			JTextField textFieldPostalCode, JTextField textFieldCity, JTextField textFieldCountry,
-			JTextField textFieldPassword, JCheckBox chckbxPremium, JTextField textFieldCreditCard,
+	public PremiumAccount createPremiumAccount(JCheckBox chckbxPremium, JTextField textFieldCreditCard,
 			JDateChooser dateChooserCreditCard, JTextField textFieldCVV) {
-		
+
 		PremiumAccount ret = new PremiumAccount();
 
-		ret.setDni(textFieldDni.getText().trim());
-		ret.setName(textFieldNombre.getText());
-		ret.setMiddleName(textFieldMiddleName.getText().trim());
-		ret.setSurName(textFieldSurname.getText().trim());
-		ret.setBirthDate(dateChooser.getDate());
-		ret.setRegistryDate(new Date());
-		ret.setPostalCode(Integer.parseInt(textFieldPostalCode.getText().trim()));
-		ret.setCity(textFieldCity.getText().trim());
-		ret.setCountry(textFieldCountry.getText().trim());
-		ret.setPassword(textFieldPassword.getText().trim());
 		ret.setAccountType(chckbxPremium.isSelected() == true ? "premium" : "free");
 		ret.setCardNumber(Long.parseLong(textFieldCreditCard.getText().trim()));
-	    ret.setCardCvv(Integer.parseInt(textFieldCVV.getText().trim()));
-	    ret.setExpiringDate(dateChooserCreditCard.getDate());
-	    setAccount(ret);
+		ret.setCardCvv(Integer.parseInt(textFieldCVV.getText().trim()));
+		ret.setExpiringDate(dateChooserCreditCard.getDate());
 
 		return ret;
 	}
@@ -209,8 +195,20 @@ public class Session {
 		return postalCodeList.contains(postalCode);
 	}
 
-	public boolean verifyRegister(JTextField PostalCode) {
-		if (postalCodeVerify(PostalCode)) {
+	private boolean cityVerify(JTextField City) {
+
+		String city = City.getText().trim();
+
+		List<String> cityList = new ArrayList<>();
+		cityList.add("bilbao");
+		cityList.add("madrid");
+		cityList.add("barcelona");
+
+		return cityList.contains(city);
+	}
+
+	public boolean verifyRegister(JTextField PostalCode, JTextField City) {
+		if (postalCodeVerify(PostalCode) && cityVerify(City)) {
 			return true;
 		} else {
 			return false;

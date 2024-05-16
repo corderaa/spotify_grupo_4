@@ -17,8 +17,70 @@ public class AccountManager implements AccountInterface<Account> {
 
 	@Override
 	public Account getByLogin(Account account) throws SQLException, Exception {
-		// TODO Auto-generated method stub
-		return null;
+
+		Account ret = null;
+
+		Connection connection = null;
+
+		PreparedStatement statement = null;
+
+		ResultSet resultSet = null;
+
+		try {
+			Class.forName(DBUtils.DRIVER);
+
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+
+			String sql = "SELECT * FROM account WHERE accountdni = ? ";
+
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, account.getDni());
+
+			resultSet = statement.executeQuery();
+
+			if (resultSet.next()) {
+
+				if (resultSet.getString("accountType").equalsIgnoreCase("premium")) {
+					ret = new PremiumAccount();
+				} else if (resultSet.getString("accountType").equalsIgnoreCase("free")) {
+					ret = new FreeAccount();
+				}
+				if (resultSet.getString("accountType").equalsIgnoreCase("admin")) {
+					ret = new AdminAccount();
+				}
+
+				ret.setId(resultSet.getInt("accountId"));
+				ret.setDni(resultSet.getString("accountdni"));
+				ret.setName(resultSet.getString("accountname"));
+				ret.setAccountType(resultSet.getString("accountType"));
+				ret.setMiddleName(resultSet.getString("accountmiddleName"));
+				ret.setSurName(resultSet.getString("accountsurname"));
+				ret.setBirthDate(resultSet.getDate("accountbirthDate"));
+				ret.setPostalCode(resultSet.getInt("accountpostCode"));
+				ret.setCity(resultSet.getString("accountcity"));
+				ret.setCountry(resultSet.getString("accountcountry"));
+				ret.setPassword(resultSet.getString("accountPassword"));
+
+			}
+		} catch (SQLException sqle) {
+			System.out.println("Error con la BBDD - " + sqle.getMessage());
+		} catch (Exception e) {
+			System.out.println("Error generico - " + e.getMessage());
+		} finally {
+			try {
+				if (statement != null)
+					statement.close();
+			} catch (Exception e) {
+			}
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (Exception e) {
+			}
+		}
+
+		return ret;
+
 	}
 
 	@Override
@@ -54,7 +116,6 @@ public class AccountManager implements AccountInterface<Account> {
 		}
 
 	}
-
 
 	@Override
 	public void updateIsBloqued(Account t, Boolean bloqued) {
@@ -170,5 +231,5 @@ public class AccountManager implements AccountInterface<Account> {
 
 		return ret;
 	}
-	
+
 }

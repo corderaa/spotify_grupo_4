@@ -135,8 +135,8 @@ public class FreeAccountManager implements AccountInterface<FreeAccount>, Interf
 
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 			statement = connection.createStatement();
-			String sql = "update reto4_grupo4.account set account.last_login = '" + DateConverter.utilDateToSqlDate(currentDate)
-					+ "' where account.accountId = " + t.getId();
+			String sql = "update reto4_grupo4.account set account.last_login = '"
+					+ DateConverter.utilDateToSqlDate(currentDate) + "' where account.accountId = " + t.getId();
 
 			statement.executeUpdate(sql);
 
@@ -156,8 +156,6 @@ public class FreeAccountManager implements AccountInterface<FreeAccount>, Interf
 		}
 
 	}
-		
-	
 
 	@Override
 	public void updateIsBloqued(FreeAccount t, Boolean bloqued) {
@@ -187,12 +185,14 @@ public class FreeAccountManager implements AccountInterface<FreeAccount>, Interf
 				if (statement != null)
 					statement.close();
 			} catch (Exception e) {
+
 			}
 			;
 			try {
 				if (connection != null)
 					connection.close();
 			} catch (Exception e) {
+
 			}
 			;
 		}
