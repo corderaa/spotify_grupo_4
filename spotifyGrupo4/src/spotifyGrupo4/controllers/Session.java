@@ -4,12 +4,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
-
 import com.toedter.calendar.JDateChooser;
-
 import spotifyGrupo4.db.managers.AccountManager;
 import spotifyGrupo4.db.pojo.Account;
 import spotifyGrupo4.db.pojo.Band;
@@ -142,9 +139,18 @@ public class Session {
 	 * @return true if the two passwords are the same, false if the passwords are
 	 *         not the same
 	 */
-	public boolean validateLogin(String password, Account t) {
+	public boolean validateLogin(String dni, String password) throws SQLException, Exception {
 
-		return false;
+		Account account = accountManager.getUser(dni, password);
+
+		if (account != null) {
+			setAccount(account);
+
+			accountManager.updateLastLogin(account, new Date());
+
+			return true;
+		} else
+			return false;
 	}
 
 	public FreeAccount createFreeAccount(JTextField textFieldDni, JTextField textFieldNombre,

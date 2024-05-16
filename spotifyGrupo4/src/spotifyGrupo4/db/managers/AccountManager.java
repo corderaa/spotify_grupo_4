@@ -12,6 +12,7 @@ import spotifyGrupo4.db.pojo.AdminAccount;
 import spotifyGrupo4.db.pojo.FreeAccount;
 import spotifyGrupo4.db.pojo.PremiumAccount;
 import spotifyGrupo4.db.utils.DBUtils;
+import spotifyGrupo4.utils.DateConverter;
 
 public class AccountManager implements AccountInterface<Account> {
 
@@ -84,7 +85,7 @@ public class AccountManager implements AccountInterface<Account> {
 	}
 
 	@Override
-	public void updateLastLogin(Account t, Date currentDate) throws SQLException, ClassNotFoundException {
+	public void updateLastLogin(Account account, Date currentDate) throws SQLException, ClassNotFoundException {
 
 		Connection connection = null;
 
@@ -95,8 +96,8 @@ public class AccountManager implements AccountInterface<Account> {
 
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 			statement = connection.createStatement();
-			String sql = "update reto4_grupo4.account set account.last_login = '" + currentDate
-					+ "' where account.accountId = " + t.getId();
+			String sql = "update reto4_grupo4.account set account.last_login = '"
+					+ DateConverter.utilDateToSqlDate(currentDate) + "' where account.accountId = " + account.getId();
 
 			statement.executeUpdate(sql);
 

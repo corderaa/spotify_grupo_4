@@ -223,6 +223,17 @@ public class RegisterPanel extends JPanel {
 		btnClose.setBackground(new Color(204, 51, 51));
 		btnClose.setBounds(1129, 619, 89, 44);
 		add(btnClose);
+		
+		JButton btnGuardar = new JButton("GUARDAR");
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		btnGuardar.setForeground(Color.WHITE);
+		btnGuardar.setBackground(new Color(204, 51, 51));
+		btnGuardar.setBounds(70, 629, 89, 44);
+		add(btnGuardar);
 
 		btnRegistrarse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
