@@ -91,9 +91,50 @@ public class SongManager implements ContentInterface<Song>, InterfaceManager<Son
 	}
 
 	@Override
-	public void modify(Song t) {
-		// TODO Auto-generated method stub
+	public void modify(Song t) throws SQLException, Exception {
 
+	}
+
+	public void addReproduction(Song t) throws SQLException, Exception {
+
+		// La conexion con BBDD
+		Connection connection = null;
+
+		// Vamos a lanzar una sentencia SQL contra la BBDD
+		PreparedStatement preparedStatement = null;
+
+		try {
+			// El Driver que vamos a usar
+			Class.forName(DBUtils.DRIVER);
+
+			// Abrimos la conexion con BBDD
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+
+			// Montamos la SQL. Las ? se rellenan a continuacion
+			String sql = "update content set numberReproductions = ? where contentId = ?";
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, t.getReproductions() + 1);
+			preparedStatement.setInt(2, t.getContentId());
+
+			// La ejecutamos...
+			preparedStatement.executeUpdate();
+
+		} finally {
+			// Cerramos al reves de como las abrimos
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} catch (Exception e) {
+				// No hace falta
+			}
+			;
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (Exception e) {
+				// No hace falta
+			}
+		}
 	}
 
 	@Override

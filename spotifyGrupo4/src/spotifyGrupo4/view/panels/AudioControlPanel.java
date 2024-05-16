@@ -3,6 +3,7 @@ package spotifyGrupo4.view.panels;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -11,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import spotifyGrupo4.controllers.AudioController;
+import spotifyGrupo4.controllers.Session;
 import spotifyGrupo4.view.ExceptionHandler;
 
 public class AudioControlPanel extends JPanel {
@@ -62,15 +64,23 @@ public class AudioControlPanel extends JPanel {
 		lblStartStop.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (!isPlaying) {
-					lblStartStop.setIcon(new ImageIcon(STOP_ICON_URL));
-					AudioController.getInstance().playContent();
-					isPlaying = true;
-					// AudioController.getInstance().addReproduction(null);
-				} else {
-					lblStartStop.setIcon(new ImageIcon(PLAY_ICON_URL));
-					AudioController.getInstance().stopContent();
-					isPlaying = false;
+				try {
+					if (!isPlaying && null != Session.getInstance().getSelectedContent()) {
+						lblStartStop.setIcon(new ImageIcon(STOP_ICON_URL));
+						AudioController.getInstance().playContent();
+						isPlaying = true;
+
+						AudioController.getInstance().addReproduction(Session.getInstance().getSelectedContent());
+
+					} else {
+						lblStartStop.setIcon(new ImageIcon(PLAY_ICON_URL));
+						AudioController.getInstance().stopContent();
+						isPlaying = false;
+					}
+				} catch (SQLException sqle) {
+					ExceptionHandler.handleSqlException(sqle, sqle.getMessage());
+				} catch (Exception e1) {
+					ExceptionHandler.handleGenericException(e1, "Ha habido un error: " + e1.getMessage());
 				}
 			}
 		});
