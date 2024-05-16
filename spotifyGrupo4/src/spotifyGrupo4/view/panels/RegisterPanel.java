@@ -15,7 +15,6 @@ import javax.swing.SwingConstants;
 import com.toedter.calendar.JDateChooser;
 
 import spotifyGrupo4.controllers.Session;
-import spotifyGrupo4.db.managers.AccountManager;
 import spotifyGrupo4.view.ExceptionHandler;
 
 import javax.swing.JTextField;
@@ -29,9 +28,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 
 public class RegisterPanel extends JPanel {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 8940817528876999995L;
 	private JTextField textFieldNombre;
 	private JTextField textFieldSurname;

@@ -68,8 +68,9 @@ public class AdvertPanel extends JPanel {
 						changeRecordImageLbl(lblAdvertisementImage, record);
 						changeRecordTitleLbl(lblDiscTitle, record);
 						changeGroupNameLbl(lblBandName, record);
-						if (null == record.getRecordCover()) {
+						if (null == record.getRecordCover() || "" == record.getRecordCover()) {
 							record.setRecordCover(ImageConverter.imageToBlob(".//img//Sin título.png").toString());
+							JOptionPane.showMessageDialog(null, "ha habido un error cargando la imagen");
 						}
 						loadBandImage(lblAdvertisementImage, record);
 					} catch (Exception e1) {
