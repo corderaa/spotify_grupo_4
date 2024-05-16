@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.SwingConstants;
 import com.toedter.calendar.JDateChooser;
 import spotifyGrupo4.controllers.Session;
+import spotifyGrupo4.db.managers.AccountManager;
 import spotifyGrupo4.view.ExceptionHandler;
 import javax.swing.JTextField;
 import javax.swing.JButton;
