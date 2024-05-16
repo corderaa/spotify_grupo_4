@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import spotifyGrupo4.controllers.Session;
 import spotifyGrupo4.db.managers.BandManager;
 import spotifyGrupo4.db.pojo.Band;
+import spotifyGrupo4.db.pojo.Song;
 import spotifyGrupo4.view.ExceptionHandler;
 
 public class BandPanel extends PanelAbstract {
@@ -29,7 +30,6 @@ public class BandPanel extends PanelAbstract {
 		getModel().addColumn("Description");
 		getModel().addColumn("Image");
 
-
 		getBtnBack().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				getModel().setRowCount(0);
@@ -44,9 +44,9 @@ public class BandPanel extends PanelAbstract {
 		});
 		getTable().addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent e) {
-		 		
+
 				Session.getInstance().setSelectedBand(band.get(getTable().getSelectedRow()));
-				
+
 				panels.get(0).setVisible(false);
 				panels.get(1).setVisible(false);
 				panels.get(2).setVisible(false);

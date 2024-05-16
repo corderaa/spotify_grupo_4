@@ -9,30 +9,24 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import spotifyGrupo4.db.pojo.Band;
-import spotifyGrupo4.db.pojo.Content;
-import spotifyGrupo4.db.pojo.Podcaster;
 import spotifyGrupo4.db.pojo.Record;
 import spotifyGrupo4.db.pojo.Song;
 import spotifyGrupo4.db.utils.DBUtils;
-import spotifyGrupo4.utils.DateConverter;
 
 public class SongManager implements ContentInterface<Song>, InterfaceManager<Song> {
 
 	private static final String GET_ALL_SONG_WITH_CONTENT = "SELECT * FROM reto4_grupo4.song join content c using (contentId)";
-	private static final String GET_SONG_FROM_RECORDS = "SELECT * FROM reto4_grupo4.song join content c using (contentId) where recordId = ?";
+	private static final String GET_SONG_FROM_RECORDS = "SELECT * FROM reto4_grupo4.song join content c using (contentId)join record r using (recordId) where r.recordId = ?";
 
 	@Override
 	public List<Song> getAll() {
 		ArrayList<Song> ret = null;
 
 		String sql = GET_ALL_SONG_WITH_CONTENT;
-
 		Connection connection = null;
-
 		Statement statement = null;
 		ResultSet resultSet = null;
- 
+
 		try {
 			Class.forName(DBUtils.DRIVER);
 

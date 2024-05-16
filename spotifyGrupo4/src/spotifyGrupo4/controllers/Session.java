@@ -14,6 +14,7 @@ import spotifyGrupo4.db.managers.AccountManager;
 import spotifyGrupo4.db.pojo.Account;
 import spotifyGrupo4.db.pojo.Band;
 import spotifyGrupo4.db.pojo.Record;
+import spotifyGrupo4.db.pojo.Serie;
 import spotifyGrupo4.db.pojo.Content;
 import spotifyGrupo4.db.pojo.FreeAccount;
 import spotifyGrupo4.db.pojo.Podcaster;
@@ -39,6 +40,7 @@ public class Session {
 	private Record selectedRecord = null;
 	private Song selectedSong = null;
 	private Podcaster selectedPodcaster = null;
+	private Serie selectedSerie= null;
 	private Content selectedContent = null;
 
 	private AccountManager accountManager = null;
@@ -202,6 +204,14 @@ public class Session {
 
 	public void setSelectedRecord(Record selectedRecord) {
 		this.selectedRecord = selectedRecord;
+	}
+	
+	public Serie getSelectedSerie() {
+		return selectedSerie;
+	}
+
+	public void setSelectedSerie(Serie selectedSerie) {
+		this.selectedSerie = selectedSerie;
 	}
 
 	public Song getSelectedSong() {
