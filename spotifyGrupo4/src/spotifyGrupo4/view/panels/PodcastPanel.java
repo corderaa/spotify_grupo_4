@@ -25,6 +25,7 @@ public class PodcastPanel extends PanelAbstract {
 
 	private PodcastManager podcastManager = null;
 	private List<Podcast> podcasts = null;
+
 	public PodcastPanel(List<JPanel> panels) {
 		setBounds(309, 0, 953, 618);
 		setLayout(null);
@@ -49,9 +50,15 @@ public class PodcastPanel extends PanelAbstract {
 			}
 		});
 
+		getTable().addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(java.awt.event.MouseEvent e) {
+				Session.getInstance().setSelectedContent(podcasts.get(getTable().getSelectedRow()));
+			}
+
+		});
+
 		this.addComponentListener(new ComponentAdapter() {
 			public void componentShown(ComponentEvent e) {
-				List<Podcast> podcasts;
 				try {
 					podcasts = podcastManager.getPodcastFromSeries(Session.getInstance().getSelectedSerie());
 					fillPodcastTable(getModel(), podcasts);
@@ -64,21 +71,21 @@ public class PodcastPanel extends PanelAbstract {
 
 		});
 	}
-		public void fillPodcastTable(DefaultTableModel podcastPanel, List<Podcast> podcasts) {
-			try {
-				getModel().setRowCount(0);
-				if (getModel().getRowCount() == 0) {
-					for (Podcast podcast : podcasts) {
-						Object[] linea = { podcast.getTitle(), podcast.getDuration(), podcast.getReproductions(),
-								podcast.getContentType() };
 
-						podcastPanel.addRow(linea);
+	public void fillPodcastTable(DefaultTableModel podcastPanel, List<Podcast> podcasts) {
+		try {
+			getModel().setRowCount(0);
+			if (getModel().getRowCount() == 0) {
+				for (Podcast podcast : podcasts) {
+					Object[] linea = { podcast.getTitle(), podcast.getDuration(), podcast.getReproductions(),
+							podcast.getContentType() };
 
-					}
+					podcastPanel.addRow(linea);
+
 				}
-			} catch (Exception e) {
-				ExceptionHandler.handleGenericException(e, "ERROR: " + e.getMessage());
 			}
+		} catch (Exception e) {
+			ExceptionHandler.handleGenericException(e, "ERROR: " + e.getMessage());
 		}
 	}
-
+}

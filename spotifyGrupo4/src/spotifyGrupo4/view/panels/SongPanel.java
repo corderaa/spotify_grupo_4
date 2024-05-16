@@ -18,6 +18,7 @@ public class SongPanel extends PanelAbstract {
 
 	private static final long serialVersionUID = -1754009495368908597L;
 	private SongManager songManager = null;
+	private List<Song> songs = null;
 
 	public SongPanel(List<JPanel> panels) {
 
@@ -40,12 +41,19 @@ public class SongPanel extends PanelAbstract {
 				panels.get(6).setVisible(false);
 			}
 		});
+
+		getTable().addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(java.awt.event.MouseEvent e) {
+				Session.getInstance().setSelectedContent(songs.get(getTable().getSelectedRow()));
+			}
+
+		});
+
 		this.addComponentListener(new ComponentAdapter() {
 			public void componentShown(ComponentEvent e) {
-				List<Song> songs;
 				try {
 					songs = songManager.getSongsFromRecord(Session.getInstance().getSelectedRecord());
-					fillSongTable(getModel(), songs);
+					fillSongTable(getModel());
 
 				} catch (Exception e1) {
 					e1.printStackTrace();
@@ -57,7 +65,7 @@ public class SongPanel extends PanelAbstract {
 
 	}
 
-	public void fillSongTable(DefaultTableModel songPanel, List<Song> songs) {
+	public void fillSongTable(DefaultTableModel songPanel) {
 		try {
 			getModel().setRowCount(0);
 			if (getModel().getRowCount() == 0) {

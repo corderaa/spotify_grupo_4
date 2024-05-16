@@ -2,10 +2,15 @@ package spotifyGrupo4.controllers;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javazoom.jl.player.Player;
+import spotifyGrupo4.db.managers.PodcastManager;
+import spotifyGrupo4.db.managers.SongManager;
 import spotifyGrupo4.db.pojo.Content;
+import spotifyGrupo4.db.pojo.Podcast;
+import spotifyGrupo4.db.pojo.Song;
 
 public class AudioController {
 
@@ -13,6 +18,8 @@ public class AudioController {
 	private final String directoryPath = ".//music//";
 	private int currentAudioIndex = 0;
 	private Player player = null;
+	private SongManager songManager = null;
+	private PodcastManager podcastManager = null;
 
 	/**
 	 * List of content waiting to be played
@@ -20,7 +27,9 @@ public class AudioController {
 	public List<String> audioFileNames = null;
 
 	public AudioController() {
+		songManager = new SongManager();
 		audioFileNames = loadAudioFilesArray();
+		podcastManager = new PodcastManager();
 	}
 
 	public static AudioController getInstance() {
@@ -31,9 +40,15 @@ public class AudioController {
 	 * When called ads a reproduction to the content being played
 	 * 
 	 * @param content the song or podcast
+	 * @throws Exception
+	 * @throws SQLException
 	 */
-	public void addReproduction(Content content) {
-
+	public void addReproduction(Content content) throws SQLException, Exception {
+		if (Session.getInstance().getSelectedContent().getContentType().equals("single")) {
+			songManager.addReproduction((Song) content);
+		} else if (Session.getInstance().getSelectedContent().getContentType().equals("podcast")) {
+			podcastManager.addReproduction((Podcast) content);
+		}
 	}
 
 	/**
@@ -99,7 +114,6 @@ public class AudioController {
 		File[] files = directory.listFiles();
 		if (files != null) {
 			for (File file : files) {
-				System.out.println(file.getName());
 				ret = null == ret ? new ArrayList<String>() : ret;
 				ret.add(file.getName());
 			}
