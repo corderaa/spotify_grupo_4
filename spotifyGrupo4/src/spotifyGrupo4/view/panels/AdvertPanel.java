@@ -31,7 +31,7 @@ public class AdvertPanel extends JPanel {
 		setBackground(new Color(159, 203, 217));
 		setLayout(null);
 
-		JLabel lblAdvertisementImage = new JLabel("IMAGEN DE DISCO");
+		JLabel lblAdvertisementImage = new JLabel("");
 		lblAdvertisementImage.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAdvertisementImage.setBounds(187, 11, 578, 264);
 		add(lblAdvertisementImage);
@@ -65,10 +65,9 @@ public class AdvertPanel extends JPanel {
 					try {
 						changeRecordDateLbl(lblPublicationDate, record);
 						changeRecordGenreLbl(lblGenre, record);
-						changeRecordImageLbl(lblAdvertisementImage, record);
 						changeRecordTitleLbl(lblDiscTitle, record);
 						changeGroupNameLbl(lblBandName, record);
-						if (null == record.getRecordCover() || "" == record.getRecordCover()) {
+						if (null == record.getRecordCover() || record.getRecordCover().equals("")) {
 							record.setRecordCover(ImageConverter.imageToBlob(".//img//Sin título.png").toString());
 							JOptionPane.showMessageDialog(null, "ha habido un error cargando la imagen");
 						}
@@ -83,10 +82,6 @@ public class AdvertPanel extends JPanel {
 
 	private void changeRecordTitleLbl(JLabel recordTitle, spotifyGrupo4.db.pojo.Record record) {
 		recordTitle.setText(record.getTitle());
-	}
-
-	private void changeRecordImageLbl(JLabel recordInage, spotifyGrupo4.db.pojo.Record record) {
-		recordInage.setText(record.getRecordCover());
 	}
 
 	@SuppressWarnings("deprecation")

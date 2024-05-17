@@ -8,9 +8,6 @@ import java.nio.file.Paths;
 import java.util.Base64;
 
 import javax.imageio.ImageIO;
-import javax.sql.rowset.serial.SerialBlob;
-
-import com.mysql.cj.jdbc.Blob;
 
 public class ImageConverter {
 
