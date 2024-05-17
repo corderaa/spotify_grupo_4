@@ -150,6 +150,8 @@ public class ProfilePanel extends JPanel {
 		this.addComponentListener(new ComponentAdapter() {
 			public void componentShown(ComponentEvent e) {
 				fillInfo();
+				textFieldPassword1.setText("");
+				textFieldPassword2.setText("");
 			}
 		});
 
