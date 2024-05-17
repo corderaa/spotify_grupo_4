@@ -19,7 +19,7 @@ public class PodcasterManager implements ContentInterface<Podcaster>, InterfaceM
 	private static final String DELETE_PODCASTER_BY_ID = "delete from podcaster where contentCreatorId = 1";
 
 	@Override
-	public List<Podcaster> getAll() {
+	public List<Podcaster> getAll() throws SQLException, Exception {
 		ArrayList<Podcaster> ret = null;
 
 		String sql = GET_ALL_PODCASTERS;
@@ -90,7 +90,7 @@ public class PodcasterManager implements ContentInterface<Podcaster>, InterfaceM
 	}
 
 	@Override
-	public void insert(Podcaster podcaster) {
+	public void insert(Podcaster podcaster)throws SQLException, Exception {
 		Connection connection = null;
 
 		Statement statement = null;
@@ -129,7 +129,7 @@ public class PodcasterManager implements ContentInterface<Podcaster>, InterfaceM
 	}
 
 	@Override
-	public void modify(Podcaster t) {
+	public void modify(Podcaster t) throws SQLException, Exception{
 		Connection connection = null;
 
 		Statement statement = null;
@@ -170,7 +170,7 @@ public class PodcasterManager implements ContentInterface<Podcaster>, InterfaceM
 	}
 
 	@Override
-	public void delete(Podcaster t) {
+	public void delete(Podcaster t) throws SQLException, Exception{
 		Connection connection = null;
 
 		PreparedStatement preparedStatement = null;
@@ -208,7 +208,7 @@ public class PodcasterManager implements ContentInterface<Podcaster>, InterfaceM
 	}
 
 	@Override
-	public Podcaster getOne(Podcaster podcasterId) {
+	public Podcaster getOne(Podcaster podcasterId) throws SQLException, Exception{
 		Podcaster podcaster = null;
 		Connection connection = null;
 		PreparedStatement statement = null;

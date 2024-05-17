@@ -10,7 +10,6 @@ import javax.swing.table.DefaultTableModel;
 import spotifyGrupo4.controllers.Session;
 import spotifyGrupo4.db.managers.BandManager;
 import spotifyGrupo4.db.pojo.Band;
-import spotifyGrupo4.db.pojo.Song;
 import spotifyGrupo4.view.ExceptionHandler;
 
 public class BandPanel extends PanelAbstract {

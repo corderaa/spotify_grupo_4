@@ -85,7 +85,7 @@ public class SeriePanel extends PanelAbstract {
 			}
 
 		} catch (Exception e) {
-			ExceptionHandler.handleGenericException(e, "ERROR: " + e.getMessage());
+			ExceptionHandler.handleGenericException(e, "ERROR NO SERIES: " + e.getMessage());
 		}
 
 	}

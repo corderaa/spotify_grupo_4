@@ -85,7 +85,7 @@ public class PodcastPanel extends PanelAbstract {
 				}
 			}
 		} catch (Exception e) {
-			ExceptionHandler.handleGenericException(e, "ERROR: " + e.getMessage());
+			ExceptionHandler.handleGenericException(e, "ERROR NO PODCASTS: " + e.getMessage());
 		}
 	}
 }

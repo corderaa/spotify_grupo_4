@@ -87,7 +87,7 @@ public class RecordPanel extends PanelAbstract {
 			}
 
 		} catch (Exception e) {
-			ExceptionHandler.handleGenericException(e, "ERROR: " + e.getMessage());
+			ExceptionHandler.handleGenericException(e, "ERROR NO RECORDS: " + e.getMessage());
 		}
 	}
 }

@@ -78,7 +78,7 @@ public class SongPanel extends PanelAbstract {
 				}
 			}
 		} catch (Exception e) {
-			ExceptionHandler.handleGenericException(e, "ERROR: " + e.getMessage());
+			ExceptionHandler.handleGenericException(e, "ERROR NO SONGS: " + e.getMessage());
 		}
 	}
 }

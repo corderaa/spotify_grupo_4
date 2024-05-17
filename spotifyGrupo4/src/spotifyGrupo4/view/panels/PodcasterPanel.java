@@ -58,7 +58,11 @@ public class PodcasterPanel extends PanelAbstract {
 		});
 		this.addComponentListener(new ComponentAdapter() {
 			public void componentShown(ComponentEvent e) {
-				podcasters = podcasterManager.getAll();
+				try {
+					podcasters = podcasterManager.getAll();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 				fillTable(getModel(), podcasters);
 			}
 		});

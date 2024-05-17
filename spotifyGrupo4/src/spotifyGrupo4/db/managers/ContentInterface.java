@@ -17,7 +17,9 @@ public interface ContentInterface<T> {
 	 * Deletes a Row from the database
 	 * 
 	 * @param t
+	 * @throws Exception 
+	 * @throws SQLException 
 	 */
-	public void delete(T t);
+	public void delete(T t) throws SQLException, Exception;
 
 }

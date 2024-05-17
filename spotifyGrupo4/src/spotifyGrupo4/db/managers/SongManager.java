@@ -19,7 +19,7 @@ public class SongManager implements ContentInterface<Song>, InterfaceManager<Son
 	private static final String GET_SONG_FROM_RECORDS = "SELECT * FROM reto4_grupo4.song join content c using (contentId)join record r using (recordId) where r.recordId = ?";
 
 	@Override
-	public List<Song> getAll() {
+	public List<Song> getAll() throws SQLException, Exception {
 		ArrayList<Song> ret = null;
 
 		String sql = GET_ALL_SONG_WITH_CONTENT;
@@ -91,7 +91,7 @@ public class SongManager implements ContentInterface<Song>, InterfaceManager<Son
 	}
 
 	@Override
-	public void modify(Song t) throws SQLException, Exception {
+	public void modify(Song t)  {
 
 	}
 
