@@ -4,7 +4,7 @@ import java.util.List;
 
 import spotifyGrupo4.db.pojo.Content;
 
-public class ContentManager implements InterfaceManager<Content>, ContentInterface<Content> {
+public class ContentManager implements InterfaceManager<Content> {
 
 	@Override
 	public List<Content> getAll() {

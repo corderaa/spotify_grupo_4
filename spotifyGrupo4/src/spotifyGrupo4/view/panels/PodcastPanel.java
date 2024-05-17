@@ -6,17 +6,12 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.List;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import spotifyGrupo4.controllers.Session;
 import spotifyGrupo4.db.managers.PodcastManager;
-import spotifyGrupo4.db.managers.PodcasterManager;
-import spotifyGrupo4.db.managers.SongManager;
 import spotifyGrupo4.db.pojo.Podcast;
-import spotifyGrupo4.db.pojo.Song;
 import spotifyGrupo4.view.ExceptionHandler;
 
 public class PodcastPanel extends PanelAbstract {

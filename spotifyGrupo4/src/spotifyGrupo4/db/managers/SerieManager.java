@@ -8,13 +8,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import spotifyGrupo4.db.pojo.Band;
 import spotifyGrupo4.db.pojo.Podcaster;
-import spotifyGrupo4.db.pojo.Record;
 import spotifyGrupo4.db.pojo.Serie;
 import spotifyGrupo4.db.utils.DBUtils;
 
-public class SerieManager implements ContentInterface<Serie>, InterfaceManager<Serie> {
+public class SerieManager implements InterfaceManager<Serie> {
 
 	private static final String GET_SERIES_FROM_PODCASTER = "SELECT * FROM reto4_grupo4.serie s join podcaster p on podcasterId = contentCreatorId where contentCreatorId = ?";
 

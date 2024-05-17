@@ -33,6 +33,7 @@ public class AdminPanel extends JPanel {
 	private JTable tableContent;
 
 	public AdminPanel(List<JPanel> panels) {
+
 		setBounds(309, 0, 953, 618);
 		setBackground(new Color(102, 205, 170));
 		setLayout(null);
@@ -41,11 +42,11 @@ public class AdminPanel extends JPanel {
 		scrollPlaylists.setBounds(167, 50, 573, 150);
 		add(scrollPlaylists);
 
-		DefaultTableModel modelo = new DefaultTableModel();
-		modelo.addColumn("Artist");
-		modelo.addColumn("Likes");
+		DefaultTableModel model = new DefaultTableModel();
+		model.addColumn("Artist");
+		model.addColumn("Likes");
 
-		table = new JTable(modelo);
+		table = new JTable(model);
 		scrollPlaylists.setViewportView(table);
 
 		JScrollPane scrollCreatorss = new JScrollPane();
@@ -65,11 +66,11 @@ public class AdminPanel extends JPanel {
 		scrollPlaylistsContent.setBounds(167, 250, 573, 200);
 		add(scrollPlaylistsContent);
 
-		DefaultTableModel modeloCreators = new DefaultTableModel();
-		modeloCreators.addColumn("Artist");
-		modeloCreators.addColumn("Num. Reproductions");
+		DefaultTableModel creatorModel = new DefaultTableModel();
+		creatorModel.addColumn("Artist");
+		creatorModel.addColumn("Num. Reproductions");
 
-		tableContent = new JTable(modeloCreators);
+		tableContent = new JTable(creatorModel);
 		scrollPlaylistsContent.setViewportView(tableContent);
 
 		scrollCreatorss.setVisible(false);
@@ -147,7 +148,7 @@ public class AdminPanel extends JPanel {
 
 					ArrayList<Band> playlists = new AdminController().seeMostLiked();
 
-					showCreators(modelo, playlists);
+					showCreators(model, playlists);
 
 					new PlaylistController().getAllPlaylistsFromAccount(2);
 				} catch (SQLException e1) {
@@ -171,7 +172,7 @@ public class AdminPanel extends JPanel {
 
 					ArrayList<Band> playlists = new AdminController().seeMostViewed();
 
-					showCreators(modeloCreators, playlists);
+					showCreators(creatorModel, playlists);
 
 					new PlaylistController().getAllPlaylistsFromAccount(2);
 				} catch (SQLException e1) {
@@ -220,8 +221,8 @@ public class AdminPanel extends JPanel {
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				modelo.setRowCount(0);
-				modeloCreators.setRowCount(0);
+				model.setRowCount(0);
+				creatorModel.setRowCount(0);
 				modelCreators.setRowCount(0);
 
 			}
@@ -247,7 +248,7 @@ public class AdminPanel extends JPanel {
 				}
 
 			}
- 
+
 			private void showAllCreators(DefaultTableModel modelCreators, ArrayList<Band> playlists) {
 
 				modelCreators.setRowCount(0);

@@ -2,8 +2,6 @@ package spotifyGrupo4.controllers;
 
 import java.util.List;
 
-import spotifyGrupo4.db.pojo.Band;
-
 public class RecordController implements ControllerInterface<Record> {
 
 	@Override

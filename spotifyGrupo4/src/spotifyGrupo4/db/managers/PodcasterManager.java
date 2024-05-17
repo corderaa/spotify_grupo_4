@@ -13,7 +13,7 @@ import spotifyGrupo4.db.pojo.Podcaster;
 import spotifyGrupo4.db.utils.DBUtils;
 import spotifyGrupo4.utils.DateConverter;
 
-public class PodcasterManager implements ContentInterface<Podcaster>, InterfaceManager<Podcaster> {
+public class PodcasterManager implements InterfaceManager<Podcaster> {
 	private static final String GET_ONE_PODCASTER = "SELECT * FROM podcaster WHERE podcasterId = ?";;
 	private static final String GET_ALL_PODCASTERS = "select * from podcaster p join contentcreator c using (contentCreatorId)";
 	private static final String DELETE_PODCASTER_BY_ID = "delete from podcaster where contentCreatorId = 1";
@@ -102,9 +102,8 @@ public class PodcasterManager implements ContentInterface<Podcaster>, InterfaceM
 
 			statement = connection.createStatement();
 
-			String sql = "insert into podcaster (podcasterName,registrationDate,numberReproductions,image) VALUES ('"
-					+ podcaster.getName() + "', '" + podcaster.getRegistrationDate() + "', '"
-					+ podcaster.getReproduction() + "', '" + podcaster.getImage() + "')";
+			String sql = "insert into contentCreator (contentCreatorName,contentCreatorRegistrationDate,) VALUES ('"
+					+ podcaster.getName() + "', '" + podcaster.getRegistrationDate() + "')";
 
 			statement.executeUpdate(sql);
 

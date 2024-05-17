@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -84,7 +83,7 @@ public class MenuPanel extends JPanel {
 
 		btnGroups.setBackground(new Color(255, 255, 255));
 		btnGroups.setFont(new Font("Segoe UI Semilight", Font.PLAIN, 11));
-		btnGroups.setBounds(50, 210, 209, 54);
+		btnGroups.setBounds(50, 293, 209, 54);
 		add(btnGroups);
 
 		JButton btnPodcasts = new JButton("Descubre Podcast");

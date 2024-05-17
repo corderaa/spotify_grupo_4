@@ -25,12 +25,10 @@ import spotifyGrupo4.controllers.PlaylistController;
 import spotifyGrupo4.controllers.Session;
 import spotifyGrupo4.db.managers.PlayListManager;
 import spotifyGrupo4.db.pojo.Content;
-import spotifyGrupo4.db.pojo.FreeAccount;
 import spotifyGrupo4.db.pojo.Playlist;
-import spotifyGrupo4.db.pojo.PremiumAccount;
 import spotifyGrupo4.utils.FileManager;
 
-public class MisFavoritos extends JPanel {
+public class FavouritesPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTable table;
@@ -40,7 +38,7 @@ public class MisFavoritos extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public MisFavoritos(List<JPanel> panels) {
+	public FavouritesPanel(List<JPanel> panels) {
 
 		setBounds(309, 0, 953, 618);
 		setBackground(new Color(102, 205, 170));
@@ -50,22 +48,22 @@ public class MisFavoritos extends JPanel {
 		scrollPlaylists.setBounds(167, 50, 573, 150);
 		add(scrollPlaylists);
 
-		DefaultTableModel modelo = new DefaultTableModel();
-		modelo.addColumn("idPalylist");
-		modelo.addColumn("Title");
+		DefaultTableModel model = new DefaultTableModel();
+		model.addColumn("idPalylist");
+		model.addColumn("Title");
 
-		table = new JTable(modelo);
+		table = new JTable(model);
 		scrollPlaylists.setViewportView(table);
 
 		JScrollPane scrollPlaylistsContent = new JScrollPane();
 		scrollPlaylistsContent.setBounds(167, 200, 573, 200);
 		add(scrollPlaylistsContent);
 
-		DefaultTableModel modeloCanciones = new DefaultTableModel();
-		modeloCanciones.addColumn("Title");
-		modeloCanciones.addColumn("legnth");
-		modeloCanciones.addColumn("Num. Reproductions");
-		tableContent = new JTable(modeloCanciones);
+		DefaultTableModel songModel = new DefaultTableModel();
+		songModel.addColumn("Title");
+		songModel.addColumn("legnth");
+		songModel.addColumn("Num. Reproductions");
+		tableContent = new JTable(songModel);
 		scrollPlaylistsContent.setViewportView(tableContent);
 
 		popup = new JPopupMenu();
@@ -120,7 +118,7 @@ public class MisFavoritos extends JPanel {
 					int row = table.getSelectedRow();
 					int value = Integer.parseInt((table.getModel().getValueAt(row, column)).toString());
 					ArrayList<Content> content = new PlaylistController().getOneListContent(value);
-					showOnePlaylist(modeloCanciones, content);
+					showOnePlaylist(songModel, content);
 
 				} catch (NumberFormatException e1) {
 					e1.printStackTrace();
@@ -163,7 +161,7 @@ public class MisFavoritos extends JPanel {
 					ArrayList<Playlist> playlists = new PlaylistController()
 							.getAllPlaylistsFromAccount(Session.getInstance().getAccount().getId());
 
-					showPlaylist(modelo, playlists);
+					showPlaylist(model, playlists);
 
 					new PlaylistController().getAllPlaylistsFromAccount(2);
 				} catch (SQLException e1) {
@@ -205,7 +203,7 @@ public class MisFavoritos extends JPanel {
 					@SuppressWarnings("unchecked")
 					ArrayList<Playlist> playlists = (ArrayList<Playlist>) new FileManager()
 							.readObject(String.valueOf(Session.getInstance().getAccount().getId()));
-					showPlaylist(modelo, playlists);
+					showPlaylist(model, playlists);
 				} catch (Exception e1) {
 					System.out.println("Import Failed");
 					e1.printStackTrace();

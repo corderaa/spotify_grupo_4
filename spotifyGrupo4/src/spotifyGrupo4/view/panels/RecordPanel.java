@@ -10,10 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 import spotifyGrupo4.db.pojo.Record;
-import spotifyGrupo4.db.pojo.Song;
 import spotifyGrupo4.controllers.Session;
 import spotifyGrupo4.db.managers.RecordManager;
-import spotifyGrupo4.db.managers.SongManager;
 import spotifyGrupo4.view.ExceptionHandler;
 
 public class RecordPanel extends PanelAbstract {

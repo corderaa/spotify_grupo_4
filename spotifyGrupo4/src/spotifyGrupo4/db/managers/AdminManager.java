@@ -1,21 +1,12 @@
 package spotifyGrupo4.db.managers;
 
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import spotifyGrupo4.db.pojo.Band;
-import spotifyGrupo4.db.pojo.Content;
-import spotifyGrupo4.db.pojo.ContentCreator;
-import spotifyGrupo4.db.pojo.Playlist;
-import spotifyGrupo4.db.pojo.Podcast;
-import spotifyGrupo4.db.pojo.Song;
 import spotifyGrupo4.db.utils.DBUtils;
 
 public class AdminManager {

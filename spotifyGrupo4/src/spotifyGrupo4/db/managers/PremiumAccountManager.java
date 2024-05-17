@@ -185,4 +185,16 @@ public class PremiumAccountManager implements AccountInterface<PremiumAccount>, 
 		return null;
 	}
 
+	@Override
+	public void modify(PremiumAccount t, String data) throws SQLException, Exception {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void delete(PremiumAccount t) throws SQLException, Exception {
+		// TODO Auto-generated method stub
+
+	}
+
 }

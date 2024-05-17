@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import spotifyGrupo4.controllers.Session;
 import spotifyGrupo4.db.managers.AccountManager;
+import spotifyGrupo4.view.ExceptionHandler;
 
 public class LoginPanel extends JPanel {
 
@@ -180,7 +181,7 @@ public class LoginPanel extends JPanel {
 					}
 
 				} catch (Exception e1) {
-					e1.printStackTrace();
+					ExceptionHandler.handleGenericException(e1, "Usuario o contraseña incorrecta");
 				}
 
 			}

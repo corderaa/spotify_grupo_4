@@ -7,14 +7,11 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
-import javazoom.jl.converter.Converter;
 import spotifyGrupo4.controllers.AdvertController;
 import spotifyGrupo4.utils.ImageConverter;
 import spotifyGrupo4.view.ExceptionHandler;
@@ -107,10 +104,8 @@ public class AdvertPanel extends JPanel {
 			record = advertController.chooseRandomAdvert(advertController.getAll());
 		} catch (SQLException sqle) {
 			ExceptionHandler.handleSqlException(sqle, "Ha habido un problema al cargar el anuncio");
-			System.out.println(sqle.getMessage());
 		} catch (Exception e) {
 			ExceptionHandler.handleGenericException(e, "Ha habido un problema al cargar el anuncio");
-			System.out.println(e.getMessage());
 		}
 		return record;
 	}

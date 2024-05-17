@@ -10,8 +10,8 @@ public interface InterfaceManager<T> {
 	 * 
 	 * @param <T>
 	 * @return
-	 * @throws Exception 
-	 * @throws SQLException 
+	 * @throws Exception
+	 * @throws SQLException
 	 */
 	public List<T> getAll() throws SQLException, Exception;
 
@@ -19,8 +19,8 @@ public interface InterfaceManager<T> {
 	 * Inserts the object to the database
 	 * 
 	 * @param t
-	 * @throws Exception 
-	 * @throws SQLException 
+	 * @throws Exception
+	 * @throws SQLException
 	 */
 	public void insert(T t) throws SQLException, Exception;
 
@@ -28,8 +28,27 @@ public interface InterfaceManager<T> {
 	 * Search the object to the database
 	 * 
 	 * @param t
-	 * @throws Exception 
-	 * @throws SQLException 
+	 * @throws Exception
+	 * @throws SQLException
 	 */
 	public T getOne(T t) throws SQLException, Exception;
+
+	/**
+	 * Modifies table from the database
+	 * 
+	 * @param t
+	 * @throws Exception
+	 * @throws SQLException
+	 */
+	public void modify(T t, String data) throws SQLException, Exception;
+
+	/**
+	 * Deletes a Row from the database
+	 * 
+	 * @param t
+	 * @throws Exception
+	 * @throws SQLException
+	 */
+	public void delete(T t) throws SQLException, Exception;
+
 }

@@ -83,4 +83,16 @@ public class AdminAccountManager implements AccountInterface<AdminAccount>, Inte
 
 	}
 
+	@Override
+	public void modify(AdminAccount t, String data) throws SQLException, Exception {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void delete(AdminAccount t) throws SQLException, Exception {
+		// TODO Auto-generated method stub
+
+	}
+
 }

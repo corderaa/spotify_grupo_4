@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Objects;
 
 public abstract class Account {
+
 	private int id = 0;
 	private int postalCode = 0;
 	private String city = null;

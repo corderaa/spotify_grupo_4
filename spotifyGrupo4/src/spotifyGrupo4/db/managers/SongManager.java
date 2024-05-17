@@ -13,7 +13,7 @@ import spotifyGrupo4.db.pojo.Record;
 import spotifyGrupo4.db.pojo.Song;
 import spotifyGrupo4.db.utils.DBUtils;
 
-public class SongManager implements ContentInterface<Song>, InterfaceManager<Song> {
+public class SongManager implements InterfaceManager<Song> {
 
 	private static final String GET_ALL_SONG_WITH_CONTENT = "SELECT * FROM reto4_grupo4.song join content c using (contentId)";
 	private static final String GET_SONG_FROM_RECORDS = "SELECT * FROM reto4_grupo4.song join content c using (contentId)join record r using (recordId) where r.recordId = ?";

@@ -14,7 +14,7 @@ import spotifyGrupo4.db.pojo.Record;
 import spotifyGrupo4.db.utils.DBUtils;
 import spotifyGrupo4.utils.DateConverter;
 
-public class RecordManager implements ContentInterface<Record>, InterfaceManager<Record> {
+public class RecordManager implements InterfaceManager<Record> {
 	private String GET_ALL_RECORDS = "select * from record as r join band as b on r.bandId = b.contentCreatorId join contentcreator as c on b.contentCreatorId = c.contentCreatorId ";
 	private String GET_RECORDS_FROM_BANDS = "select * from record where bandId = ? ";
 

@@ -5,14 +5,13 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import spotifyGrupo4.db.pojo.Band;
-import spotifyGrupo4.db.pojo.Serie;
 import spotifyGrupo4.view.panels.AdminPanel;
 import spotifyGrupo4.view.panels.AdvertPanel;
 import spotifyGrupo4.view.panels.AudioControlPanel;
 import spotifyGrupo4.view.panels.BandPanel;
 import spotifyGrupo4.view.panels.LoginPanel;
 import spotifyGrupo4.view.panels.MenuPanel;
-import spotifyGrupo4.view.panels.MisFavoritos;
+import spotifyGrupo4.view.panels.FavouritesPanel;
 import spotifyGrupo4.view.panels.PodcastPanel;
 import spotifyGrupo4.view.panels.PodcasterPanel;
 import spotifyGrupo4.view.panels.ProfilePanel;
@@ -23,20 +22,8 @@ import spotifyGrupo4.view.panels.SongPanel;
 import spotifyGrupo4.view.panels.WelcomePanel;
 
 import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.management.loading.PrivateClassLoader;
-import javax.security.auth.login.LoginContext;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JScrollPane;
 
 public class Frame extends JFrame {
 
@@ -156,7 +143,7 @@ public class Frame extends JFrame {
 		panels.add(registerPanel);
 
 		// 13
-		MisFavoritos misFavoritos = new MisFavoritos(panels);
+		FavouritesPanel misFavoritos = new FavouritesPanel(panels);
 		misFavoritos.setVisible(false);
 		contentPanel.add(misFavoritos);
 		panels.add(misFavoritos);

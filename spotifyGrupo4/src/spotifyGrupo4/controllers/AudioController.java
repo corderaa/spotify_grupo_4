@@ -14,7 +14,6 @@ import spotifyGrupo4.db.pojo.Song;
 
 public class AudioController {
 
-	public static AudioController instance = null;
 	private final String directoryPath = ".//music//";
 	private int currentAudioIndex = 0;
 	private Player player = null;
@@ -30,10 +29,6 @@ public class AudioController {
 		songManager = new SongManager();
 		audioFileNames = loadAudioFilesArray();
 		podcastManager = new PodcastManager();
-	}
-
-	public static AudioController getInstance() {
-		return instance = null == instance ? new AudioController() : instance;
 	}
 
 	/**
@@ -147,9 +142,5 @@ public class AudioController {
 
 	public String getDirectoryPath() {
 		return directoryPath;
-	}
-
-	public static void setInstance(AudioController instance) {
-		AudioController.instance = instance;
 	}
 }

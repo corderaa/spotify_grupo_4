@@ -30,8 +30,11 @@ public class AudioControlPanel extends JPanel {
 	private JLabel lblNext = null;
 	private JLabel lblLike = null;
 	private boolean isPlaying = false;
+	private AudioController audioController = null;
 
 	public AudioControlPanel() {
+
+		audioController = new AudioController();
 
 		setBackground(new Color(51, 51, 51));
 		setBounds(309, 618, 953, 62);
@@ -69,23 +72,23 @@ public class AudioControlPanel extends JPanel {
 
 						if (!isPlaying) {
 							lblStartStop.setIcon(new ImageIcon(STOP_ICON_URL));
-							AudioController.getInstance().playContent();
+							audioController.playContent();
 							isPlaying = true;
 
-							AudioController.getInstance().addReproduction(Session.getInstance().getSelectedContent());
+							audioController.addReproduction(Session.getInstance().getSelectedContent());
 
 						} else {
 							lblStartStop.setIcon(new ImageIcon(PLAY_ICON_URL));
-							AudioController.getInstance().stopContent();
+							audioController.stopContent();
 							isPlaying = false;
 						}
 					} else {
 						JOptionPane.showMessageDialog(null, "No hay ningun contenido selecctionado");
 					}
 				} catch (SQLException sqle) {
-					ExceptionHandler.handleSqlException(sqle, sqle.getMessage());
+					ExceptionHandler.handleSqlException(sqle, "Ha habido un error al reproducir el audio");
 				} catch (Exception e1) {
-					ExceptionHandler.handleGenericException(e1, "Ha habido un error: " + e1.getMessage());
+					ExceptionHandler.handleGenericException(e1, "Ha habido un error al reproducir el audio");
 				}
 			}
 		});
@@ -96,7 +99,7 @@ public class AudioControlPanel extends JPanel {
 				if (null != Session.getInstance().getSelectedContent()) {
 
 					try {
-						AudioController.getInstance().changeNextContent();
+						audioController.changeNextContent();
 					} catch (IndexOutOfBoundsException outOfBounds) {
 						ExceptionHandler.handleIndexOutOfBoundsException(outOfBounds,
 								"Ha ocurrido un error, no se ha podido cargar la siguiente cancion/podcast");

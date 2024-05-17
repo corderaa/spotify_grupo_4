@@ -2,9 +2,6 @@ package spotifyGrupo4.controllers;
 
 import java.util.List;
 
-import spotifyGrupo4.db.pojo.FreeAccount;
-import spotifyGrupo4.db.pojo.PremiumAccount;
-
 public class RegisterController<T> implements ControllerInterface<T> {
 
 	@Override

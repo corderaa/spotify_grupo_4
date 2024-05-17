@@ -13,7 +13,7 @@ import spotifyGrupo4.db.pojo.Band;
 import spotifyGrupo4.db.utils.DBUtils;
 import spotifyGrupo4.utils.DateConverter;
 
-public class BandManager implements ContentInterface<Band>, InterfaceManager<Band> {
+public class BandManager implements InterfaceManager<Band> {
 	private final String DELETE_BAND_BY_ID = "delete from band where contentCreatorId = 1;";
 	private final String GET_ONE_BAND = "SELECT * FROM band WHERE podcasterId = ?";
 	private final String GET_ALL_BANDS = "SELECT * from band b join contentcreator c using (contentCreatorId)";

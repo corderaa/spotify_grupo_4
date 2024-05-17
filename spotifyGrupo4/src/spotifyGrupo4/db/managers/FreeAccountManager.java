@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 import java.util.List;
-import spotifyGrupo4.db.pojo.Account;
+
 import spotifyGrupo4.db.pojo.FreeAccount;
 import spotifyGrupo4.db.utils.DBUtils;
 import spotifyGrupo4.utils.DateConverter;
@@ -203,5 +203,17 @@ public class FreeAccountManager implements AccountInterface<FreeAccount>, Interf
 	public FreeAccount getOne(FreeAccount t) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void modify(FreeAccount t, String data) throws SQLException, Exception {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void delete(FreeAccount t) throws SQLException, Exception {
+		// TODO Auto-generated method stub
+
 	}
 }

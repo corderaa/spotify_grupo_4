@@ -2,8 +2,6 @@ package spotifyGrupo4.controllers;
 
 import java.sql.SQLException;
 
-import javax.swing.JTextField;
-
 import spotifyGrupo4.db.managers.FreeAccountManager;
 import spotifyGrupo4.db.managers.PremiumAccountManager;
 import spotifyGrupo4.db.pojo.Account;

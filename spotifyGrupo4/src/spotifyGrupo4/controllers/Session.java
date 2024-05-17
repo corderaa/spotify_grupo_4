@@ -50,22 +50,6 @@ public class Session {
 		premiumAccountManager = new PremiumAccountManager();
 	}
 
-	public static Session getInstance() {
-		return instance = null == instance ? new Session() : instance;
-	}
-
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
-	}
-
-	public void resetAccount() {
-		this.account = null;
-	}
-
 	public void updatePassword(Account account, JTextField password1) throws SQLException, Exception {
 		if (null != account) {
 			if (account.getAccountType().equalsIgnoreCase("Free")) {
@@ -266,6 +250,22 @@ public class Session {
 		} else {
 			return false;
 		}
+	}
+
+	public static Session getInstance() {
+		return instance = null == instance ? new Session() : instance;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	public void resetAccount() {
+		this.account = null;
 	}
 
 	public Band getSelectedBand() {

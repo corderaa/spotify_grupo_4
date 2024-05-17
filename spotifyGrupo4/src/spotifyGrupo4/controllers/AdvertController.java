@@ -21,20 +21,14 @@ public class AdvertController implements ControllerInterface<spotifyGrupo4.db.po
 
 	@Override
 	public void insert(spotifyGrupo4.db.pojo.Record t) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void update(spotifyGrupo4.db.pojo.Record t) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void delete(spotifyGrupo4.db.pojo.Record t) {
-		// TODO Auto-generated method stub
-
 	}
 
 	public spotifyGrupo4.db.pojo.Record chooseRandomAdvert(List<spotifyGrupo4.db.pojo.Record> records) {

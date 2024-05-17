@@ -1,16 +1,12 @@
- 	package spotifyGrupo4.db.pojo;
+package spotifyGrupo4.db.pojo;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class Playlist implements Serializable{
-	
-	//Para no quitar un campo que ya estaba creado,
-	//he anadido account id, que deberia en realidad susituir a account, 
+public class Playlist implements Serializable {
 
-
-
+	private static final long serialVersionUID = 1L;
 	private int playlistId = 0;
 	private Account account = null;
 	private int accountid = 0;
@@ -18,8 +14,6 @@ public class Playlist implements Serializable{
 	private List<Content> contents = null;
 	private String contentType = null;
 
-	
-	
 	public String getContentType() {
 		return contentType;
 	}
@@ -68,8 +62,6 @@ public class Playlist implements Serializable{
 	public int hashCode() {
 		return Objects.hash(account, accountid, contentType, contents, playlistId, title);
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {

@@ -9,9 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import spotifyGrupo4.db.pojo.Podcast;
-import spotifyGrupo4.db.pojo.Record;
 import spotifyGrupo4.db.pojo.Serie;
-import spotifyGrupo4.db.pojo.Song;
 import spotifyGrupo4.db.utils.DBUtils;
 
 public class PodcastManager implements InterfaceManager<Podcast> {
@@ -122,6 +120,18 @@ public class PodcastManager implements InterfaceManager<Podcast> {
 	public Podcast getOne(Podcast t) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void modify(Podcast t, String data) throws SQLException, Exception {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void delete(Podcast t) throws SQLException, Exception {
+		// TODO Auto-generated method stub
+
 	}
 
 }
