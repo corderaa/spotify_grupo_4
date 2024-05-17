@@ -114,8 +114,18 @@ public class RegisterPanel extends JPanel {
 
 		textFieldPassword = new JTextField();
 		textFieldPassword.setColumns(10);
-		textFieldPassword.setBounds(39, 442, 331, 40);
+		textFieldPassword.setBounds(39, 445, 165, 40);
 		subpanel.add(textFieldPassword);
+
+		JLabel lblContraseña2 = new JLabel("Contraseña2:");
+		lblContraseña2.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
+		lblContraseña2.setBounds(205, 414, 179, 20);
+		subpanel.add(lblContraseña2);
+
+		JTextField textFieldPassword2 = new JTextField();
+		textFieldPassword2.setColumns(10);
+		textFieldPassword2.setBounds(205, 445, 165, 40);
+		subpanel.add(textFieldPassword2);
 
 		JLabel lblfechaNacimiento = new JLabel("Fecha de nacimiento:\r\n");
 		lblfechaNacimiento.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
@@ -217,41 +227,39 @@ public class RegisterPanel extends JPanel {
 				panels.get(10).setVisible(false);
 				panels.get(11).setVisible(false);
 				panels.get(12).setVisible(false);
+
+				Session.getInstance().clearTextFields(textFieldCVV, textFieldCVV, textFieldCVV, textFieldCVV,
+						dateChooser, textFieldPostalCode, textFieldCity, textFieldCountry, textFieldPassword2,
+						textFieldPassword2, chckbxFree, chckbxPremium, textFieldCreditCard, dateChooserCreditCard,
+						textFieldCVV);
+
 			}
 		});
 		btnClose.setForeground(Color.WHITE);
 		btnClose.setBackground(new Color(204, 51, 51));
 		btnClose.setBounds(1129, 619, 89, 44);
 		add(btnClose);
-		
-		JButton btnGuardar = new JButton("GUARDAR");
-		btnGuardar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		btnGuardar.setForeground(Color.WHITE);
-		btnGuardar.setBackground(new Color(204, 51, 51));
-		btnGuardar.setBounds(70, 629, 89, 44);
-		add(btnGuardar);
 
 		btnRegistrarse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				try {
 
-					if (Session.getInstance().verifyRegister(textFieldPostalCode, textFieldCity)) {
+					if (Session.getInstance().verifyRegister(textFieldPostalCode, textFieldCity, textFieldPassword,
+							textFieldPassword2, textFieldCountry)) {
 
 						Session.getInstance().insertNewFreeAccount(Session.getInstance().createFreeAccount(textFieldDni,
 								textFieldNombre, textFieldMiddleName, textFieldSurname, dateChooser,
 								textFieldPostalCode, textFieldCity, textFieldCountry, textFieldPassword, chckbxFree));
-						Session.getInstance()
-								.setAccount(new AccountManager().getByLogin(Session.getInstance().getAccount()));
+						Session.getInstance().setAccount(
+								new AccountManager().getByLogin(Session.getInstance().getAccount().getDni()));
 
-						Session.getInstance().insertNewPremiumAccount(Session.getInstance().createPremiumAccount(
-								chckbxPremium, textFieldCreditCard, dateChooserCreditCard, textFieldCVV));
-						Session.getInstance()
-								.setAccount(new AccountManager().getByLogin(Session.getInstance().getAccount()));
+						if (chckbxPremium.isSelected()) {
+							Session.getInstance().insertNewPremiumAccount(Session.getInstance().createPremiumAccount(
+									chckbxPremium, textFieldCreditCard, dateChooserCreditCard, textFieldCVV));
+							Session.getInstance().setAccount(
+									new AccountManager().getByLogin(Session.getInstance().getAccount().getDni()));
+						}
 
 						panels.get(0).setVisible(false);
 						panels.get(1).setVisible(false);
@@ -275,7 +283,7 @@ public class RegisterPanel extends JPanel {
 				} catch (SQLException sqle) {
 					ExceptionHandler.handleSqlException(sqle, "Algun dato esta incorrecto");
 				} catch (Exception e1) {
-					ExceptionHandler.handleGenericException(e1, "Error");
+					ExceptionHandler.handleGenericException(e1, "Error generico");
 				}
 
 			}
@@ -326,6 +334,10 @@ public class RegisterPanel extends JPanel {
 				lblCreditCVV.setEnabled(false);
 				textFieldCVV.setEnabled(false);
 
+				Session.getInstance().clearTextFields(textFieldDni, textFieldNombre, textFieldMiddleName,
+						textFieldSurname, dateChooser, textFieldPostalCode, textFieldCity, textFieldCountry,
+						textFieldPassword, textFieldPassword2, chckbxFree, chckbxPremium, textFieldCreditCard,
+						dateChooserCreditCard, textFieldCVV);
 			}
 		});
 

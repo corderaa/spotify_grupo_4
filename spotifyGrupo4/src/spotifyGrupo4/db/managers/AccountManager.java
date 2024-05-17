@@ -17,7 +17,7 @@ import spotifyGrupo4.utils.DateConverter;
 public class AccountManager implements AccountInterface<Account> {
 
 	@Override
-	public Account getByLogin(Account account) throws SQLException, Exception {
+	public Account getByLogin(String dni) throws SQLException, Exception {
 
 		Account ret = null;
 
@@ -35,7 +35,7 @@ public class AccountManager implements AccountInterface<Account> {
 			String sql = "SELECT * FROM account WHERE accountdni = ? ";
 
 			statement = connection.prepareStatement(sql);
-			statement.setString(1, account.getDni());
+			statement.setString(1, dni);
 
 			resultSet = statement.executeQuery();
 
@@ -57,16 +57,13 @@ public class AccountManager implements AccountInterface<Account> {
 				ret.setMiddleName(resultSet.getString("accountmiddleName"));
 				ret.setSurName(resultSet.getString("accountsurname"));
 				ret.setBirthDate(resultSet.getDate("accountbirthDate"));
+				ret.setIsBloqued(resultSet.getBoolean("isBlocked"));
 				ret.setPostalCode(resultSet.getInt("accountpostCode"));
 				ret.setCity(resultSet.getString("accountcity"));
 				ret.setCountry(resultSet.getString("accountcountry"));
 				ret.setPassword(resultSet.getString("accountPassword"));
 
 			}
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
 		} finally {
 			try {
 				if (statement != null)
@@ -119,12 +116,6 @@ public class AccountManager implements AccountInterface<Account> {
 	}
 
 	@Override
-	public void updateIsBloqued(Account t, Boolean bloqued) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void updatePassword(Account t, String password) throws SQLException, Exception {
 
 		Connection connection = null;
@@ -166,7 +157,7 @@ public class AccountManager implements AccountInterface<Account> {
 	 * @return
 	 */
 
-	public Account getUser(String dni, String password) {
+	public Account getUser(String dni, String password) throws SQLException, Exception {
 
 		Account ret = null;
 
@@ -213,10 +204,7 @@ public class AccountManager implements AccountInterface<Account> {
 				ret.setPassword(resultSet.getString("accountPassword"));
 
 			}
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
+
 		} finally {
 			try {
 				if (statement != null)
@@ -231,6 +219,39 @@ public class AccountManager implements AccountInterface<Account> {
 		}
 
 		return ret;
+	}
+
+	@Override
+	public void updateIsBloqued(String dni) throws SQLException, Exception {
+		Connection connection = null;
+
+		Statement statement = null;
+
+		try {
+			Class.forName(DBUtils.DRIVER);
+
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			statement = connection.createStatement();
+			String sql = "update reto4_grupo4.account set account.isblocked = " + 1 + " where account.accountDni = '"
+					+ dni + "'";
+
+			statement.executeUpdate(sql);
+
+		} finally {
+			try {
+				if (statement != null)
+					statement.close();
+			} catch (Exception e) {
+			}
+			;
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (Exception e) {
+			}
+			;
+		}
+
 	}
 
 }

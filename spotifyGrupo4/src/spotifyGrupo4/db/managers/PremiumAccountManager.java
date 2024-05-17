@@ -57,7 +57,6 @@ public class PremiumAccountManager implements AccountInterface<PremiumAccount>, 
 		}
 	}
 
-	@Override
 	public PremiumAccount getByLogin(Account account) throws SQLException, Exception {
 		PremiumAccount ret = null;
 
@@ -137,7 +136,7 @@ public class PremiumAccountManager implements AccountInterface<PremiumAccount>, 
 	}
 
 	@Override
-	public void updateIsBloqued(PremiumAccount t, Boolean bloqued) {
+	public void updateIsBloqued(String dni) {
 		// TODO Auto-generated method stub
 
 	}
@@ -176,6 +175,12 @@ public class PremiumAccountManager implements AccountInterface<PremiumAccount>, 
 
 	@Override
 	public PremiumAccount getOne(PremiumAccount t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PremiumAccount getByLogin(String dni) throws SQLException, Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

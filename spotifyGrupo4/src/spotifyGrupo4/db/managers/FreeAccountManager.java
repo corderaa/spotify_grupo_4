@@ -58,11 +58,11 @@ public class FreeAccountManager implements AccountInterface<FreeAccount>, Interf
 	}
 
 	@Override
-	public FreeAccount getByLogin(Account account) throws SQLException, Exception {
+	public FreeAccount getByLogin(String dni) throws SQLException, Exception {
 
 		FreeAccount ret = null;
 
-		String sql = "select * from account where accountId = " + account.getId();
+		String sql = "select * from account where accountId = " + dni;
 
 		Connection connection = null;
 
@@ -158,7 +158,7 @@ public class FreeAccountManager implements AccountInterface<FreeAccount>, Interf
 	}
 
 	@Override
-	public void updateIsBloqued(FreeAccount t, Boolean bloqued) {
+	public void updateIsBloqued(String dni) {
 		// TODO Auto-generated method stub
 
 	}
@@ -204,5 +204,4 @@ public class FreeAccountManager implements AccountInterface<FreeAccount>, Interf
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

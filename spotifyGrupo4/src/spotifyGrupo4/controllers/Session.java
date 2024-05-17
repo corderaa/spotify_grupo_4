@@ -69,11 +69,11 @@ public class Session {
 	public void updatePassword(Account account, JTextField password1) throws SQLException, Exception {
 		if (null != account) {
 			if (account.getAccountType().equalsIgnoreCase("Free")) {
-				accountManager.updatePassword(accountManager.getByLogin(account), password1.getText());
+				accountManager.updatePassword(accountManager.getByLogin(account.getDni()), password1.getText());
 			} else if (account.getAccountType().equalsIgnoreCase("Premium")) {
-				accountManager.updatePassword(accountManager.getByLogin(account), password1.getText());
+				accountManager.updatePassword(accountManager.getByLogin(account.getDni()), password1.getText());
 			} else if (account.getAccountType().equalsIgnoreCase("admin")) {
-				accountManager.updatePassword(accountManager.getByLogin(account), password1.getText());
+				accountManager.updatePassword(accountManager.getByLogin(account.getDni()), password1.getText());
 			}
 		}
 	}
@@ -84,6 +84,14 @@ public class Session {
 
 	public void insertNewPremiumAccount(PremiumAccount premiumAccount) throws SQLException, Exception {
 		premiumAccountManager.insert(premiumAccount);
+	}
+
+	public boolean isLoginValid(JTextField dni) throws SQLException, Exception {
+
+		if (accountManager.getByLogin(dni.getText()) != null) {
+			return true;
+		} else
+			return false;
 	}
 
 	public boolean isPasswordValid(JTextField password1, JTextField password2) {
@@ -128,6 +136,32 @@ public class Session {
 		}
 
 		return count > 0 ? true : false;
+	}
+
+	public void clearTextFields(JTextField textFieldDni, JTextField textFieldNombre, JTextField textFieldMiddleName,
+			JTextField textFieldSurname, JDateChooser dateChooser, JTextField textFieldPostalCode,
+			JTextField textFieldCity, JTextField textFieldCountry, JTextField textFieldPassword,
+			JTextField textFieldPassword2, JCheckBox chckbxFree, JCheckBox chckbxPremium,
+			JTextField textFieldCreditCard, JDateChooser dateChooserCreditCard, JTextField textFieldCVV) {
+
+		textFieldDni.setText("");
+		textFieldNombre.setText("");
+		textFieldMiddleName.setText("");
+		textFieldSurname.setText("");
+		dateChooser.setDate(null);
+		textFieldPostalCode.setText("");
+		textFieldCity.setText("");
+		textFieldCountry.setText("");
+		textFieldPassword.setText("");
+		textFieldPassword2.setText("");
+		chckbxFree.setSelected(false);
+		chckbxPremium.setSelected(false);
+		textFieldCreditCard.setText("");
+		dateChooserCreditCard.setDate(null);
+		textFieldCVV.setText("");
+		chckbxFree.setSelected(true);
+		chckbxPremium.setSelected(false);
+
 	}
 
 	/**
@@ -213,8 +247,21 @@ public class Session {
 		return cityList.contains(city);
 	}
 
-	public boolean verifyRegister(JTextField PostalCode, JTextField City) {
-		if (postalCodeVerify(PostalCode) && cityVerify(City)) {
+	private boolean countryVerify(JTextField Country) {
+
+		String country = Country.getText().trim();
+
+		List<String> countryList = new ArrayList<>();
+		countryList.add("spain");
+
+		return countryList.contains(country);
+
+	}
+
+	public boolean verifyRegister(JTextField PostalCode, JTextField City, JTextField Password, JTextField Password2,
+			JTextField Country) {
+		if (postalCodeVerify(PostalCode) && cityVerify(City) && isPasswordValid(Password, Password2)
+				&& countryVerify(Country)) {
 			return true;
 		} else {
 			return false;

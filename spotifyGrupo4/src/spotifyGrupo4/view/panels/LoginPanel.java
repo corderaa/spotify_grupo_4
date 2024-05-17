@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
 import spotifyGrupo4.controllers.Session;
 import spotifyGrupo4.db.managers.AccountManager;
 
@@ -28,8 +27,12 @@ public class LoginPanel extends JPanel {
 	private JButton btnClose = null;
 	private JButton btnRegister = null;
 	private JPanel panelFormBackground = null;
+	private int loginAttemps = 0;
+	private AccountManager accountManager = null;
 
 	public LoginPanel(List<JPanel> panels) {
+
+		accountManager = new AccountManager();
 
 		setBackground(new Color(159, 203, 217));
 		setBounds(100, 100, 1278, 719);
@@ -132,37 +135,51 @@ public class LoginPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				try {
+					if (Session.getInstance().isLoginValid(textFieldDni)) {
+						if (loginAttemps < 3 || accountManager.getByLogin(textFieldDni.getText()).getIsBloqued()) {
+							if (Session.getInstance().validateLogin(textFieldDni.getText(),
+									textFieldPassword.getText())) {
 
-					if (Session.getInstance().validateLogin(textFieldDni.getText(), textFieldPassword.getText())) {
+								JOptionPane.showMessageDialog(null, "Bienvenido:" + textFieldDni.getText());
 
-						JOptionPane.showMessageDialog(null, "Bienvenido:" + textFieldDni.getText());
+								Session.getInstance().setAccount(new AccountManager().getUser(textFieldDni.getText(),
+										textFieldPassword.getText()));
 
-						Session.getInstance().setAccount(
-								new AccountManager().getUser(textFieldDni.getText(), textFieldPassword.getText()));
+								clearTextFields(textFieldDni, textFieldPassword);
 
-						clearTextFields(textFieldDni, textFieldPassword);
+								panels.get(0).setVisible(false);
+								panels.get(1).setVisible(false);
+								panels.get(2).setVisible(true);
+								panels.get(3).setVisible(false);
+								panels.get(4).setVisible(false);
+								panels.get(5).setVisible(false);
+								panels.get(6).setVisible(false);
+								panels.get(7).setVisible(false);
+								panels.get(8).setVisible(true);
+								panels.get(9).setVisible(true);
+								panels.get(10).setVisible(false);
+								panels.get(11).setVisible(false);
+								panels.get(12).setVisible(false);
 
-						panels.get(0).setVisible(false);
-						panels.get(1).setVisible(false);
-						panels.get(2).setVisible(true);
-						panels.get(3).setVisible(false);
-						panels.get(4).setVisible(false);
-						panels.get(5).setVisible(false);
-						panels.get(6).setVisible(false);
-						panels.get(7).setVisible(false);
-						panels.get(8).setVisible(true);
-						panels.get(9).setVisible(true);
-						panels.get(10).setVisible(false);
-						panels.get(11).setVisible(false);
-						panels.get(12).setVisible(false);
+							} else {
+								JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta");
+								textFieldPassword.setText(null);
+
+								loginAttemps++;
+							}
+						} else {
+							loginAttemps = 0;
+							accountManager.updateIsBloqued(textFieldDni.getText());
+							JOptionPane.showMessageDialog(null, "Usuario bloqueado");
+						}
 
 					} else {
 						JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta");
 						textFieldPassword.setText(null);
-
+						textFieldDni.setText(null);
 					}
+
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
