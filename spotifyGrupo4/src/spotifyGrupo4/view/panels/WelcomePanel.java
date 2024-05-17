@@ -9,6 +9,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
 
 public class WelcomePanel extends JPanel {
 
@@ -52,6 +53,7 @@ public class WelcomePanel extends JPanel {
 		lblNewLabel_fondo.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
 		lblNewLabel_fondo.setBounds(401, 395, 473, 51);
 		add(lblNewLabel_fondo);
+		
 		
 		addMouseListener(new MouseAdapter() {
 			@Override
