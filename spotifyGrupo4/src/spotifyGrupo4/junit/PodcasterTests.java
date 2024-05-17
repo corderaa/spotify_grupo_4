@@ -27,9 +27,7 @@ class PodcasterTests {
 				assertNotEquals(band, podcaster);
 			}
 		} catch (SQLException sqle) {
-			sqle.printStackTrace();
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 
@@ -43,14 +41,14 @@ class PodcasterTests {
 			Podcaster podcasterTest = new Podcaster();
 			podcasterTest.setId(podcasterId);
 			podcasterTest.setName(podcasterName);
+			podcasterTest.setDescription("");
+			podcasterTest.setReproduction(0);
 			podcasterTest.setRegistrationDate(DateConverter.utilDateToSqlDate(podcasterRegistrationDate));
 
 			new PodcasterManager().insert(podcasterTest);
 			assertSame(podcasterRegistrationDate, podcasterTest);
 		} catch (SQLException sqle) {
-			sqle.printStackTrace();
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 
@@ -71,9 +69,7 @@ class PodcasterTests {
 			assertNull(new PodcasterManager().getOne(podcasterTest));
 
 		} catch (SQLException sqle) {
-			sqle.printStackTrace();
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 
@@ -95,9 +91,7 @@ class PodcasterTests {
 			assertNotEquals(new PodcasterManager().getOne(podcasterTest).getName(), podcasterName);
 
 		} catch (SQLException sqle) {
-			sqle.printStackTrace();
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 }

@@ -61,10 +61,6 @@ public class PodcasterManager implements InterfaceManager<Podcaster> {
 
 				ret.add(podcaster);
 			}
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
 		} finally {
 			try {
 				if (resultSet != null)
@@ -102,15 +98,11 @@ public class PodcasterManager implements InterfaceManager<Podcaster> {
 
 			statement = connection.createStatement();
 
-			String sql = "insert into contentCreator (contentCreatorName,contentCreatorRegistrationDate,) VALUES ('"
+			String sql = "insert into contentCreator (contentCreatorName,contentCreatorRegistrationDate) VALUES ('"
 					+ podcaster.getName() + "', '" + podcaster.getRegistrationDate() + "')";
 
 			statement.executeUpdate(sql);
 
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
 		} finally {
 			try {
 				if (statement != null)
@@ -145,10 +137,6 @@ public class PodcasterManager implements InterfaceManager<Podcaster> {
 
 			statement.executeUpdate(sql);
 
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
 		} finally {
 			try {
 				if (statement != null)
@@ -185,10 +173,6 @@ public class PodcasterManager implements InterfaceManager<Podcaster> {
 
 			preparedStatement.executeUpdate();
 
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
 		} finally {
 			try {
 				if (preparedStatement != null)
@@ -228,10 +212,6 @@ public class PodcasterManager implements InterfaceManager<Podcaster> {
 				podcaster.setReproduction(resultSet.getInt("reproduction"));
 				podcaster.setImage(resultSet.getString("image"));
 			}
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
 		} finally {
 			try {
 				if (resultSet != null)

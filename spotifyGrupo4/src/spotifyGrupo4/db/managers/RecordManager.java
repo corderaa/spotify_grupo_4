@@ -155,11 +155,6 @@ public class RecordManager implements InterfaceManager<Record> {
 				record.setNumberReproductions(resultSet.getInt("numberReproductions"));
 				ret.add(record);
 			}
-
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
 		} finally {
 			try {
 				if (resultSet != null)

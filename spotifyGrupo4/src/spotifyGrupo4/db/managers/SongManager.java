@@ -56,10 +56,6 @@ public class SongManager implements InterfaceManager<Song> {
 
 				ret.add(song);
 			}
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
 		} finally {
 			try {
 				if (resultSet != null)
@@ -177,10 +173,6 @@ public class SongManager implements InterfaceManager<Song> {
 				ret.add(song);
 			}
 
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
 		} finally {
 			try {
 				if (resultSet != null)
