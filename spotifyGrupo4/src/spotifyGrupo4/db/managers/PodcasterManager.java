@@ -90,7 +90,7 @@ public class PodcasterManager implements ContentInterface<Podcaster>, InterfaceM
 	}
 
 	@Override
-	public void insert(Podcaster podcaster)throws SQLException, Exception {
+	public void insert(Podcaster podcaster) throws SQLException, Exception {
 		Connection connection = null;
 
 		Statement statement = null;
@@ -129,7 +129,7 @@ public class PodcasterManager implements ContentInterface<Podcaster>, InterfaceM
 	}
 
 	@Override
-	public void modify(Podcaster t) throws SQLException, Exception{
+	public void modify(Podcaster t, String name) throws SQLException, Exception {
 		Connection connection = null;
 
 		Statement statement = null;
@@ -140,7 +140,7 @@ public class PodcasterManager implements ContentInterface<Podcaster>, InterfaceM
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 			statement = connection.createStatement();
 
-			String sql = "update podcaster set podcastername = '" + t.getName() + "',registrationDate = '"
+			String sql = "update podcaster set podcastername = '" + name + "',registrationDate = '"
 					+ t.getRegistrationDate() + "',contentCreatorReproductionNumber = '" + t.getReproduction()
 					+ "' ,  = '" + t.getImage() + "', = image '" + "' where id = " + t.getId();
 
@@ -170,7 +170,7 @@ public class PodcasterManager implements ContentInterface<Podcaster>, InterfaceM
 	}
 
 	@Override
-	public void delete(Podcaster t) throws SQLException, Exception{
+	public void delete(Podcaster t) throws SQLException, Exception {
 		Connection connection = null;
 
 		PreparedStatement preparedStatement = null;
@@ -208,7 +208,7 @@ public class PodcasterManager implements ContentInterface<Podcaster>, InterfaceM
 	}
 
 	@Override
-	public Podcaster getOne(Podcaster podcasterId) throws SQLException, Exception{
+	public Podcaster getOne(Podcaster podcasterId) throws SQLException, Exception {
 		Podcaster podcaster = null;
 		Connection connection = null;
 		PreparedStatement statement = null;

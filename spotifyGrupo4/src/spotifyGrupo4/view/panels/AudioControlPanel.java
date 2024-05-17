@@ -65,17 +65,22 @@ public class AudioControlPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					if (!isPlaying && null != Session.getInstance().getSelectedContent()) {
-						lblStartStop.setIcon(new ImageIcon(STOP_ICON_URL));
-						AudioController.getInstance().playContent();
-						isPlaying = true;
+					if (null != Session.getInstance().getSelectedContent()) {
 
-						AudioController.getInstance().addReproduction(Session.getInstance().getSelectedContent());
+						if (!isPlaying) {
+							lblStartStop.setIcon(new ImageIcon(STOP_ICON_URL));
+							AudioController.getInstance().playContent();
+							isPlaying = true;
 
+							AudioController.getInstance().addReproduction(Session.getInstance().getSelectedContent());
+
+						} else {
+							lblStartStop.setIcon(new ImageIcon(PLAY_ICON_URL));
+							AudioController.getInstance().stopContent();
+							isPlaying = false;
+						}
 					} else {
-						lblStartStop.setIcon(new ImageIcon(PLAY_ICON_URL));
-						AudioController.getInstance().stopContent();
-						isPlaying = false;
+						JOptionPane.showMessageDialog(null, "No hay ningun contenido selecctionado");
 					}
 				} catch (SQLException sqle) {
 					ExceptionHandler.handleSqlException(sqle, sqle.getMessage());
@@ -88,14 +93,17 @@ public class AudioControlPanel extends JPanel {
 		lblNext.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {
-					AudioController.getInstance().changeNextContent();
-				} catch (IndexOutOfBoundsException outOfBounds) {
-					ExceptionHandler.handleIndexOutOfBoundsException(outOfBounds,
-							"Ha ocurrido un error, no se ha podido cargar la siguiente cancion/podcast");
-				} catch (Exception e2) {
-					ExceptionHandler.handleGenericException(e2,
-							"Ha ocurrido un error, no se ha podido cargar la siguiente cancion/podcast");
+				if (null != Session.getInstance().getSelectedContent()) {
+
+					try {
+						AudioController.getInstance().changeNextContent();
+					} catch (IndexOutOfBoundsException outOfBounds) {
+						ExceptionHandler.handleIndexOutOfBoundsException(outOfBounds,
+								"Ha ocurrido un error, no se ha podido cargar la siguiente cancion/podcast");
+					} catch (Exception e2) {
+						ExceptionHandler.handleGenericException(e2,
+								"Ha ocurrido un error, no se ha podido cargar la siguiente cancion/podcast");
+					}
 				}
 
 			}
@@ -104,16 +112,18 @@ public class AudioControlPanel extends JPanel {
 		lblPrevius.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {
-					// AudioController.getInstance().changePreviusContent();
-				} catch (IndexOutOfBoundsException outOfBounds) {
-					ExceptionHandler.handleIndexOutOfBoundsException(outOfBounds,
-							"Ha ocurrido un error, no se ha podido cargar la siguiente cancion/podcast");
-				} catch (Exception e2) {
-					ExceptionHandler.handleGenericException(e2,
-							"Ha ocurrido un error, no se ha podido cargar la siguiente cancion/podcast");
-				}
+				if (null != Session.getInstance().getSelectedContent()) {
+					try {
+						// AudioController.getInstance().changePreviusContent();
+					} catch (IndexOutOfBoundsException outOfBounds) {
+						ExceptionHandler.handleIndexOutOfBoundsException(outOfBounds,
+								"Ha ocurrido un error, no se ha podido cargar la siguiente cancion/podcast");
+					} catch (Exception e2) {
+						ExceptionHandler.handleGenericException(e2,
+								"Ha ocurrido un error, no se ha podido cargar la siguiente cancion/podcast");
+					}
 
+				}
 			}
 		});
 

@@ -2,8 +2,10 @@ package spotifyGrupo4.junit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.sql.SQLException;
 import java.util.Date;
@@ -37,7 +39,7 @@ class PodcasterTests {
 
 	@Test
 	void insertPodcasterTest() {
-		int podcasterId = 10;
+		int podcasterId = 1;
 		String podcasterName = "test";
 		Date podcasterRegistrationDate = new Date();
 
@@ -48,9 +50,7 @@ class PodcasterTests {
 			podcasterTest.setRegistrationDate(DateConverter.utilDateToSqlDate(podcasterRegistrationDate));
 
 			new PodcasterManager().insert(podcasterTest);
-
-			assertEquals(new PodcasterManager().getOne(podcasterTest), podcasterTest);
-
+			assertSame(podcasterRegistrationDate, podcasterTest);
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		} catch (Exception e) {
