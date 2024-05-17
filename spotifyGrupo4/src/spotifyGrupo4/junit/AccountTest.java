@@ -24,7 +24,7 @@ class AccountTest {
 		String accountname = "test";
 		Date lastLitenTimeDate = new Date();
 
-		try {
+		try { 
 			FreeAccount accountTest = new FreeAccount();
 			accountTest.setId(accountId);
 			accountTest.setName(accountname);
