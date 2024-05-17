@@ -6,6 +6,7 @@ import javax.swing.border.EmptyBorder;
 
 import spotifyGrupo4.db.pojo.Band;
 import spotifyGrupo4.db.pojo.Serie;
+import spotifyGrupo4.view.panels.AdminPanel;
 import spotifyGrupo4.view.panels.AdvertPanel;
 import spotifyGrupo4.view.panels.AudioControlPanel;
 import spotifyGrupo4.view.panels.BandPanel;
@@ -44,6 +45,7 @@ public class Frame extends JFrame {
 
 	private List<JPanel> panels = null;
 	ArrayList<Band> selectedBand = null;
+
 	/**
 	 * Launch the application.
 	 */
@@ -152,14 +154,18 @@ public class Frame extends JFrame {
 		registerPanel.setVisible(false);
 		contentPanel.add(registerPanel);
 		panels.add(registerPanel);
-		
-		// 12
+
+		// 13
 		MisFavoritos misFavoritos = new MisFavoritos(panels);
-		
-		//13
 		misFavoritos.setVisible(false);
 		contentPanel.add(misFavoritos);
 		panels.add(misFavoritos);
+
+		// 14
+		AdminPanel adminPanel = new AdminPanel(panels);
+		adminPanel.setVisible(false);
+		contentPanel.add(adminPanel);
+		panels.add(adminPanel);
 
 	}
 }
