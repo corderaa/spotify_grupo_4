@@ -106,7 +106,7 @@ public class BandManager implements ContentInterface<Band>, InterfaceManager<Ban
 					+ "contentCreatorReproductionNumber,contentCreatorDescription,contentCreatorName, contentCreatorImage) VALUES ('"
 					+ band.getMembers() + "', '" + band.getCreationDate() + "', '" + band.getReproduction() + "', '"
 					+ band.getDescription() + "', '" + band.getName() + "', '" + band.getImage() + "')";
- 
+
 			statement.executeUpdate(sql);
 
 		} catch (SQLException sqle) {
@@ -130,7 +130,7 @@ public class BandManager implements ContentInterface<Band>, InterfaceManager<Ban
 	}
 
 	@Override
-	public void modify(Band t) {
+	public void modify(Band t, String data) {
 		Connection connection = null;
 
 		Statement statement = null;
@@ -170,7 +170,6 @@ public class BandManager implements ContentInterface<Band>, InterfaceManager<Ban
 		}
 
 	}
-	
 
 	@Override
 	public void delete(Band t) {
@@ -212,7 +211,7 @@ public class BandManager implements ContentInterface<Band>, InterfaceManager<Ban
 
 	@Override
 	public Band getOne(Band podcasterId) {
-		
+
 		Band band = null;
 		Connection connection = null;
 		PreparedStatement statement = null;

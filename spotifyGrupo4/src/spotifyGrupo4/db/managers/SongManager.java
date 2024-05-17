@@ -91,7 +91,7 @@ public class SongManager implements ContentInterface<Song>, InterfaceManager<Son
 	}
 
 	@Override
-	public void modify(Song t)  {
+	public void modify(Song t, String data) {
 
 	}
 

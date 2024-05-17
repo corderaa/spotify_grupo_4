@@ -111,7 +111,7 @@ public class RecordManager implements ContentInterface<Record>, InterfaceManager
 	}
 
 	@Override
-	public void modify(Record t) {
+	public void modify(Record t, String data) {
 		// TODO Auto-generated method stub
 
 	}

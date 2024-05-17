@@ -19,7 +19,7 @@ public class ContentManager implements InterfaceManager<Content>, ContentInterfa
 	}
 
 	@Override
-	public void modify(Content t) {
+	public void modify(Content t, String data) {
 		// TODO Auto-generated method stub
 
 	}

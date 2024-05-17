@@ -78,7 +78,7 @@ public class SerieManager implements ContentInterface<Serie>, InterfaceManager<S
 	}
 
 	@Override
-	public void modify(Serie t) {
+	public void modify(Serie t, String data) {
 		// TODO Auto-generated method stub
 
 	}
